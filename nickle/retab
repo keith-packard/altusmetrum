@@ -1,0 +1,58 @@
+#!/usr/bin/nickle
+
+string[*][*]	lines;
+int[*]		widths;
+
+string[*] get_one(file in) {
+	string	l = File::fgets(in);
+	return String::wordsplit(l, "\t");
+}
+
+string[*][*] get_all(file in) {
+	string[...][*] l = {};
+	while (!File::end(in))
+		l[dim(l)] = get_one(in);
+	return l;
+}
+
+int[*] find_widths(string[*][*] lines) {
+	int[...]	w = {};
+	for (int r = 0; r < dim(lines); r++) {
+		for (int c = 0; c < dim(lines[r]); c++) {
+			int	len = String::length(lines[r][c]);
+			if (c >= dim(w))
+				w[c] = len;
+			else
+				w[c] = max(w[c], len);
+		}
+	}
+	return w;
+}
+
+void print_one(string s, int w) {
+	int	l = String::length(s);
+	printf ("%s ", s);
+	while (l < w) {
+		putchar(' ');
+		l++;
+	}
+}
+
+void print_line(string[*] line) {
+	for (int c = 0; c < dim(line); c++)
+		print_one(line[c], widths[c]);
+	putchar('\n');
+}
+
+void print_all() {
+	for (int r = 0; r < dim(lines); r++)
+		print_line(lines[r]);
+}
+
+void doit () {
+	lines = get_all(stdin);
+	widths = find_widths(lines);
+	print_all();
+}
+
+doit();
