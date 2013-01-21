@@ -1,0 +1,59 @@
+Eleazar Zuniga <ezuniga@taoglas.com> says in email of 28 Nov 2011 that we 
+should be able to use any of the pin or SMT patches other than the 35mm ones,
+as long as we have ground plane under the patch itself that's as large as the
+patch or bigger.  I'm not sure I believe that, but adding an 0402 site to 
+ground for a tuning cap ala what the chip antenna docs call for might be a
+reasonable thing to try?
+
+GP.1575.12.4.A.02
+	12x12x4 mm, pin plus adhesive
+	gain towards zenith -0.5 dBic
+
+GP.1575.15.4.B.02
+	15x15x4 mm, pin plus adhesive
+	1.0 dBic at zenith
+
+GP.1575.18.2.A.02
+	18x18x2 mm, pin plus adhesive
+	gain towards zenith -0.5 dBic
+
+GP.1575.18.4.A.02
+	18x18x4 mm, pin plus adhesive
+	gain towards zenith +3.5 dBic
+	$4.13 at q100				*** 50% the mass of 25mm
+
+GP.1575.25.2.A.02
+	25x25x2 mm, pin plus adhesive
+	+2.0 dBic gain at zenith
+
+GP.1575.25.4.A.02
+	25x25x4 mm, pin plus adhesive
+	gain towards zenith +3.5 dBic
+	$4.05 at q100
+
+surface-mount versions
+
+SGP.1575.12.4.A.02
+	12x12x4.5 mm
+	-2.0 dBic at zenith, 4dB axial ratio, 6Mhz bandwidth
+
+SGP.1575.15.4.A.02
+	15x15x4.5 mm
+	+1.0 dBic at zenith, 3dB axial ratio, 6Mhz bandwidth
+
+SGP.1575.18.4.C.02
+	18x18x4.5 mm
+	+1.0 dBic at zenith, 4dB axial ratio, 5Mhz bandwidth
+	$4.94 at q100
+
+SGP.1575.25.4.C.02
+	25x25x4.5 mm
+	+2.0 dBic at zenith, 3dB axial ratio, 5Mhz bandwidth
+
+
+From all of this, GP.1575.18.4.A.02 would seem to be the clear winner.  Just
+over 50% the mass of the 25mm version, same gain, only a few pennies more...
+and much cheaper than any of the SMT versions with better specs.  I also think
+that soldering in the pin is likely to be a great mechanical retention 
+solution.
+
