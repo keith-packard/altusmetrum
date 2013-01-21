@@ -1,0 +1,79 @@
+/*
+ * Copyright © 2012 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+real pad_expose = 0.1;
+real pad_width = 0.50 + pad_expose;
+real pad_height = 0.30;
+real pad_spacing = 0.50;
+
+real package_width = 3;
+real package_height = 2;
+
+real pad_x_off = package_width / 2 - (pad_width - pad_expose) / 2 + pad_expose;
+
+real num_pad = 4;	/* per side */
+
+element_start("uson-8");
+
+real pad_off(int n) {
+	return pad_spacing * (n - (num_pad - 1) / 2);
+}
+
+real corner(int dx, int dy) {
+	real	x = dx * package_width / 2;
+	real	y = dy * package_height / 2;
+	real	len = 0.4;
+
+	line(x, y, x - dx * len, y);
+	line(x, y, x, y - dy * len);
+}
+
+corner(-1, -1);
+corner(1, -1);
+corner(-1, 1);
+corner(1, 1);
+
+real dot_off = -.3;
+
+line(-package_width/2 + dot_off, -package_height/2 + dot_off,
+     -package_width/2 + dot_off, -package_height/2 + dot_off);
+
+for (pad = 0; pad < num_pad; pad++) {
+	/* left side (1-4) */
+
+	pad_mm(-pad_x_off,
+	       pad_off(pad),
+	       pad_width,
+	       pad_height,
+	       sprintf("%d", pad + 1),
+	       sprintf("%d", pad + 1));
+	
+	/* right side (5-8) */
+
+	pad_mm(pad_x_off,
+	       -pad_off(pad),
+	       pad_width,
+	       pad_height,
+	       sprintf("%d", pad + 5),
+	       sprintf("%d", pad + 5));
+	
+}
+
+element_end();
