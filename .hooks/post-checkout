@@ -1,3 +1,4 @@
 #!/bin/sh
 
-cd packages && make
+TOP=`git rev-parse --git-dir`/..
+cd "$TOP"/packages >/dev/null && make -q || make
