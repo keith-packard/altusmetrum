@@ -1,0 +1,25 @@
+; empty the library path and populate it with only our own symbols
+
+(reset-component-library)
+
+(letrec ((parent "../altusmetrum/symbols")
+	 (dport (opendir parent))
+	 (do-dirs (lambda (parent dport)
+		    (let ((fname (readdir dport)))
+		      (if (not (eof-object? fname))
+			  (begin
+			   (if (not (string-prefix? "." fname))
+			       (letrec ((subdir (string-append parent "/" fname)))
+				       (component-library subdir)
+				       )
+			     )
+			   (do-dirs parent dport)
+			   )
+			)
+		      )
+		    )
+		  )
+	 )
+	(do-dirs parent dport)
+	(closedir dport)
+	)
