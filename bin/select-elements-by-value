@@ -1,0 +1,36 @@
+#!/usr/bin/perl
+# -*- perl -*-
+
+# In pcb-menu.res, add somewhere:
+#
+#    {"grep" a={"G" "<Key>g"} ExecuteFile(/tmp/pcb.grep)}
+
+$reg = shift;
+open(B, "board.bom");
+
+$first = 1;
+
+open(G, ">/tmp/pcb.grep");
+print G "Unselect(All)\n";
+
+while (<B>) {
+    chomp;
+    ($refdes, $value, $footprint, $device, $voltage, $manufacturer, $manufacturer_part_number, $vendor, $vendor_part_number, $qty) = split(':', $_);
+    
+    if ($first || /$reg/i) {
+	print "\033[34m" if $first;
+	printf("%-7s %-24s %-18s %s\n", $value, $manufacturer_part_number, $vendor_part_number, $refdes);
+	print "\033[0m" if $first;
+	if (!$first) {
+	    for $r (split(',', $refdes)) {
+		print G "Select(ElementByName,$r)\n";
+		$count ++;
+	    }
+	}
+    $first = 0;
+    }
+}
+
+print "\n\033[32m$count parts\033[0m\n";
+
+close G;
