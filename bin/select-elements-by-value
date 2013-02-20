@@ -5,6 +5,8 @@
 #
 #    {"grep" a={"G" "<Key>g"} ExecuteFile(/tmp/pcb.grep)}
 
+# board.bom must be created using the bom2 backend
+
 $reg = shift;
 open(B, "board.bom");
 
