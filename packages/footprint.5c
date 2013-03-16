@@ -82,8 +82,8 @@ namespace Footprint {
 			mm2mils100(thickness),
 			mm2mils100(clearance),
 			mm2mils100(mask));
-		printf (" \"%s\" \"%s\" \"square%s%s\"]\n",
-			name, num, options == "" ? "" : ",", options);
+		printf (" \"%s\" \"%s\" \"%s\"]\n",
+			name, num, options);
 	}
 
 	public void pad_mm_clear_options(real center_x,
@@ -127,8 +127,8 @@ namespace Footprint {
 			mm2mils100(thickness),
 			mm2mils100(clearance),
 			mm2mils100(mask));
-		printf (" \"%s\" \"%s\" \"square%s%s\"]\n",
-			name, num, options == "" ? "" : ",", options);
+		printf (" \"%s\" \"%s\" \"%s\"]\n",
+			name, num, options);
 	}
 
 	public void pad_mm_clear(real center_x,
@@ -146,7 +146,7 @@ namespace Footprint {
 				     clearance,
 				     name,
 				     num,
-				     "");
+				     "square");
 	}
 
 	public void pad_mm(real center_x,
@@ -186,6 +186,25 @@ namespace Footprint {
 		       
 	}
 
+	public void pin_mm_clear_mask_options(real x, real y,
+					      real drill, real copper, real clearance, real mask,
+					      string name, string number, string options)
+	{
+		real thickness = drill + copper * 2;
+		printf("    Pin[");
+		printf(" %6d %6d",
+		       mm2mils100(x),
+		       mm2mils100(y));
+		printf(" %6d %6d %6d %6d",
+		       mm2mils100(thickness),
+		       mm2mils100(clearance),
+		       mm2mils100(mask),
+		       mm2mils100(drill));
+		printf (" \"%s\" \"%s\"",
+			name, number);
+		printf (" \"%s\"]\n", options);
+		       
+	}
 	public void pin_mm_clear_mask(real x, real y,
 				      real drill, real copper, real clearance, real mask,
 				      string name, string number)
