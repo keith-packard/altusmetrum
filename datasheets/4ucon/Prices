@@ -1,0 +1,53 @@
+from http://www.4uconnector.com/ on 2013.03.13
+
+micro USB
+
+  20013 is $129.8551 per reel of 1000 parts, $0.13/ea
+
+  compare with Mouser 798-ZX62-B-5PA11 
+	0.653 q100
+	0.373 q1000
+	
+
+u.fl
+
+  18588 is $511.3043 per reel of 2500 pieces, $0.21/ea
+
+  compare with Mouser 538-73412-0110
+	0.36  q100
+	0.255 q2000
+
+
+micromatch
+
+  4-pin cable side
+	09225 is 0.1789 with 5000 piece minimum
+
+  4-pin pcb side
+	09243 is 0.1394 with 5000 piece minimum
+
+  8-pin cable side
+	09227 is 0.2119 with 5000 piece minimum
+	20116 is 0.2045 with 1000 piece minimum
+
+  8-pin pcb side
+	09245 is 0.2044 with 5000 piece minimum
+
+screw terminal strips	aka "2.54 terminal block rising clamp type"
+
+  2-pin	
+	20086 is 0.1461/ea moq 1000
+  3-pin
+	20084 is 0.2191/ea moq 1000
+  4-pin
+	20087 is 0.2926/ea moq 1000
+		compare with DK A98335-ND, aka 282834-4
+		1.09090 q100, 0.77919 q1000
+  6-pin
+	20088 is 0.4387/ea moq 1000
+		compare with DK A98337-ND, aka 282834-6
+		2.02500 q100, 1.46815 q1000
+		
+		compare with Mouser 571-282834-6 (out of stock)
+		1.27 q100, 1.10 q1000
+
