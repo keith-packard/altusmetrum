@@ -1,0 +1,144 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+process_clearance = 0.25;
+
+real package_width = 5;
+real package_height = 5;
+real pad_spacing = 0.5;		/* P */
+real pad_height = 0.85;		/* C */
+real pad_width = 0.27;		/* D */
+real pad_center_x = 5.25 / 2;	/* Gx/2 */
+real pad_center_y = 5.25 / 2;	/* Gy/2 */
+
+real center_width = 3.75;	/* SLx */
+real center_height = 3.75;	/* SLy */
+
+real center_drill = 0.30;
+real center_mask = 0.60 / 2;
+
+real center_space = 1.1;
+
+int num_pad = 8;	/* per side */
+
+real pad_off(int n) {
+	return pad_spacing * (n - (num_pad - 1) / 2);
+}
+
+element_start("hvqfn33");
+
+for (pad = 0; pad < num_pad; pad++) {
+	/* left side (1-8) */
+
+	pad_mm(-pad_center_x,
+	       pad_off(pad),
+	       pad_height,
+	       pad_width,
+	       sprintf("%d", pad + 1),
+	       sprintf("%d", pad + 1));
+
+	/* bottom (9-16) */
+
+	pad_mm(pad_off(pad),
+	       pad_center_y,
+	       pad_width,
+	       pad_height,
+	       sprintf("%d", pad + 9),
+	       sprintf("%d", pad + 9));
+
+	/* right (17-24) */
+
+	pad_mm(pad_center_x,
+	       -pad_off(pad),
+	       pad_height,
+	       pad_width,
+	       sprintf("%d", pad + 17),
+	       sprintf("%d", pad + 17));
+
+	/* top (25-32) */
+
+	pad_mm(-pad_off(pad),
+	       -pad_center_y,
+	       pad_width,
+	       pad_height,
+	       sprintf("%d", pad + 25),
+	       sprintf("%d", pad + 25));
+}
+
+/* center */
+
+pad_mm_clear_mask_options(0, 0, center_width, center_height, process_clearance, 0,
+			  "33", "33", "square,nopaste");
+
+
+real clear_top = center_space * 0.5 + center_mask;
+real clear_bottom = center_height / 2;
+real clear_height = clear_bottom - clear_top;
+real clear_y = (clear_top + clear_bottom) / 2;
+
+for (y = -1; y <= 1; y+= 2) {
+	pad_mm_clear_mask_options(0, y * clear_y, center_width, clear_height,
+				  0, clear_height, "33", "33", "square,nopaste");
+
+	pad_mm_clear_mask_options(y * clear_y, 0, clear_height, center_height,
+				  0, clear_height, "33", "33", "square,nopaste");
+}
+
+real hole_pos = 0.5 * center_space;
+real strip_top = -hole_pos + center_mask;
+real strip_bot = hole_pos - center_mask;
+real strip_size = strip_bot - strip_top;
+
+pad_mm_clear_mask_options(0, 0, center_width, strip_size,
+			  0, strip_size, "33", "33", "square,nopaste");
+
+pad_mm_clear_mask_options(0, 0, strip_size, center_height,
+			  0, strip_size, "33", "33", "square,nopaste");
+
+/* center solder spots */
+
+for (y = -1; y <= 1; y += 1) {
+	for (x = -1; x <= 1; x += 1) {
+		pad_mm_clear_mask_options(x * center_space, y * center_space,
+					  center_mask*2, center_mask*2, 0, center_mask * 2, "33", "33", "");
+	}
+}
+
+/* center holes */
+
+for (y = -0.5; y <= 0.5; y += 1) {
+	for (x = -0.5; x <= 0.5; x += 1) {
+		pin_mm_clear_mask_options(x * center_space, y * center_space,
+					  center_drill, center_mask/2, 0, 0, "33", "33",
+					  "square,via");
+	}
+}
+
+/* outline */
+
+rect(-package_width/2, -package_height/2, package_width, package_height);
+
+dot_off = 0.3;
+dot_x = -package_width/2 - dot_off;
+dot_y = -package_height/2 - dot_off;
+
+line(dot_x, dot_y, dot_x, dot_y);
+
+element_end();
