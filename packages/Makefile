@@ -5,7 +5,8 @@ FOOTPRINTS= \
 	uson-8.fp \
 	wson6x5.fp \
 	hvqfn33.fp \
-	ZX62-B-5PA.fp
+	ZX62-B-5PA.fp \
+	TDK_PS12.fp
 
 .5c.fp:
 	nickle $*.5c > $@
