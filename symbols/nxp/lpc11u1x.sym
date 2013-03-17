@@ -367,3 +367,13 @@ pinnumber=26
 T 7000 4500 5 10 0 0 0 0 1
 pinseq=26
 }
+T -5 0 8 10 0 1 0 0 1
+footprint=hvqfn33
+T -5 0 8 10 0 1 0 0 1
+vendor=digikey
+T 495 13100 8 10 1 1 0 0 1
+refdes=U?
+T 495 13100 8 10 0 1 0 0 1
+loadstatus=smt
+T -5 0 8 10 0 1 0 0 1
+vendor_part_number=568-8581-ND
