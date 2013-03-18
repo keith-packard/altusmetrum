@@ -28,7 +28,7 @@ FOOTPRINTS= \
 BUILDDIRS=$(DIRS:%=build-%)
 CLEANDIRS=$(DIRS:%=clean-%)
 
-all: $(BUILDDIRS) $(FOOTPRINTS)
+all: $(BUILDDIRS) $(FOOTPRINTS) .gitignore
 $(DIRS): $(BUILDDIRS) 
 $(BUILDDIRS): 
 	$(MAKE) -C $(@:build-%=%)
@@ -42,3 +42,7 @@ clean: $(CLEANDIRS)
 .PHONY: subdirs $(DIRS)
 .PHONY: subdirs $(BUILDDIRS)
 .PHONY: subdirs $(CLEANDIRS)
+
+.gitignore: Makefile
+	for i in $@ $(FOOTPRINTS); do echo $$i; done > $@
+
