@@ -1,0 +1,9 @@
+#!/bin/sh
+
+for i in 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+do
+	FILE="53261"$i"71"
+	./picoblade-smt-ra.py $i > $FILE.fp
+	FILE="53047"$i"10"
+	./picoblade-th-v.py $i > $FILE.fp
+done

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+for i in 04 06 08 10 12 14 16 18 20 22 24 26
+do
+	FILE="9032590"$i
+	./picoflex-th-v.py $i > $FILE.fp
+done

@@ -2,6 +2,7 @@
 
 DIRS= \
 	jst \
+	molex \
 	pinheader \
 	tyco
 
