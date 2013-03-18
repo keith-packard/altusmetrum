@@ -17,4 +17,10 @@ FOOTPRINTS= \
 .py.fp:
 	python $*.py > $@
 
-all: $(FOOTPRINTS)
+all: $(FOOTPRINTS) .gitignore
+
+clean:
+	rm -f $(FOOTPRINTS)
+
+.gitignore: Makefile
+	for i in $@ $(FOOTPRINTS); do echo $$i; done > $@
