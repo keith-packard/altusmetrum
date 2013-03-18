@@ -1,0 +1,12 @@
+#!/bin/sh
+
+for i in 4 6 8 10 12 14 16 18 20
+do
+	TENS=$(( i / 10 ))
+	ONES=$(( i % 10 ))
+	FILE=$TENS"-215079-"$ONES
+	./micromatch-th-v.py $i > $FILE.fp
+	FILE=$TENS"-338068-"$ONES
+	./micromatch-th-v.py $i latch > $FILE.fp
+done
+./micromatch-th-v.py 24 > 2-215079-24.fp
