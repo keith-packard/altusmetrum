@@ -1,6 +1,7 @@
 .SUFFIXES: .5c .py .fp
 
 DIRS= \
+	jst \
 	pinheader \
 	tyco
 
