@@ -1,0 +1,52 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "../footprint.5c"
+import Footprint;
+
+package_width = 3;		/* B */
+package_height = 1.93;		/* C */
+
+cathode_width = 2.20;		/* X1 */
+cathode_height = 1.4;		/* Y2 */
+anode_width = 0.9;		/* X2 */
+anode_height = 1.4;		/* Y1 */
+
+spacing = 1.0;			/* G */
+
+total_width = cathode_width + spacing + anode_width;
+
+cathode_center_x = (total_width / 2 - cathode_width / 2);
+anode_center_x = -(total_width / 2 - anode_width / 2);
+
+element_start("powerdi123");
+
+pad_mm(cathode_center_x, 0, cathode_width, cathode_height, "cathode", "2");
+
+pad_mm(anode_center_x, 0, anode_width, anode_height, "anode", "1");
+
+rect(-package_width/2, -package_height/2, package_width, package_height);
+
+line_x = total_width /2 + cathode_height / 3;
+line_height = package_height;
+line_width = package_height / 4;
+
+line(line_x - line_width, -line_height/2, line_x, -line_height/2);
+line(line_x, -line_height/2, line_x, line_height/2);
+line(line_x, line_height/2, line_x - line_width, line_height/2);
+
+element_end();
