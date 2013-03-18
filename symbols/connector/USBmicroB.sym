@@ -59,5 +59,3 @@ pinnumber=5
 T 0 400 5 10 0 0 0 0 1
 pinseq=0
 }
-T 355 395 8 10 0 1 0 0 1
-footprint=ZX62-B-5PA
