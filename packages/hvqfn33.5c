@@ -126,7 +126,7 @@ for (y = -1; y <= 1; y += 1) {
 for (y = -0.5; y <= 0.5; y += 1) {
 	for (x = -0.5; x <= 0.5; x += 1) {
 		pin_mm_clear_mask_options(x * center_space, y * center_space,
-					  center_drill, center_mask/2, 0, 0, "33", "33",
+					  center_drill, center_mask, 0, 0, "33", "33",
 					  "square,via");
 	}
 }

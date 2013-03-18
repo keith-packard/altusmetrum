@@ -209,7 +209,7 @@ namespace Footprint {
 				      real drill, real copper, real clearance, real mask,
 				      string name, string number)
 	{
-		real thickness = drill + copper * 2;
+		real thickness = copper;
 		printf("    Pin[");
 		printf(" %6d %6d",
 		       mm2mils100(x),
