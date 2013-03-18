@@ -1,0 +1,375 @@
+v 20110115 2
+P 0 3400 400 3400 1 0 0
+{
+T 100 3500 5 10 1 1 0 0 1
+pinnumber=9
+T 500 3400 3 10 1 1 0 0 1
+pinlabel=SO/GPIO1
+T -400 3500 5 10 0 1 0 0 1
+pinseq=9
+T 0 3400 5 10 0 1 0 0 1
+pintype=io
+}
+P 0 3000 400 3000 1 0 0
+{
+T 100 3100 5 10 1 1 0 0 1
+pinnumber=10
+T 500 3000 3 10 1 1 0 0 1
+pinlabel=GPIO0
+T -400 3100 5 10 0 1 0 0 1
+pinseq=10
+T 0 3000 5 10 0 1 0 0 1
+pintype=io
+}
+P 0 600 400 600 1 0 0
+{
+T 305 645 5 10 1 1 0 6 1
+pinnumber=16
+T 455 595 3 10 1 1 0 0 1
+pinlabel=NC
+T 0 600 5 10 0 1 180 0 1
+pinseq=16
+T 0 600 5 10 0 1 180 0 1
+pintype=io
+}
+P 0 1000 400 1000 1 0 0
+{
+T 305 1045 5 10 1 1 0 6 1
+pinnumber=15
+T 455 995 3 10 1 1 0 0 1
+pinlabel=AVDD_RF
+T 0 1000 5 10 0 1 180 0 1
+pinseq=15
+T 0 1000 5 10 0 1 180 0 1
+pintype=pwr
+}
+P 3600 1800 3200 1800 1 0 0
+{
+T 3300 1900 5 10 1 1 0 0 1
+pinnumber=20
+T 2500 1800 3 10 1 1 0 0 1
+pinlabel=LNA_N
+T 3600 1800 5 10 0 1 0 0 1
+pinseq=20
+T 3600 1800 5 10 0 1 0 0 1
+pintype=io
+}
+P 3600 1400 3200 1400 1 0 0
+{
+T 2525 1400 3 10 1 1 0 0 1
+pinlabel=LNA_P
+T 3600 1400 5 10 0 1 0 0 1
+pinseq=19
+T 3300 1500 5 10 1 1 0 0 1
+pinnumber=19
+T 3600 1400 5 10 0 1 0 0 1
+pintype=io
+}
+P 3600 1000 3200 1000 1 0 0
+{
+T 3300 1100 5 10 1 1 0 0 1
+pinnumber=18
+T 2325 1000 3 10 1 1 0 0 1
+pinlabel=TRX_SW
+T 3600 1000 5 10 0 1 0 0 1
+pinseq=18
+T 3600 1000 5 10 0 1 0 0 1
+pintype=io
+}
+P 3600 600 3200 600 1 0 0
+{
+T 3300 700 5 10 1 1 0 0 1
+pinnumber=17
+T 2825 600 3 10 1 1 0 0 1
+pinlabel=PA
+T 3600 600 5 10 0 1 0 0 1
+pinseq=17
+T 3600 600 5 10 0 1 0 0 1
+pintype=io
+}
+P 3600 3400 3200 3400 1 0 0
+{
+T 3300 3500 5 10 1 1 0 0 1
+pinnumber=24
+T 2625 3400 3 10 1 1 0 0 1
+pinlabel=LPF1
+T 3600 3400 5 10 0 1 0 0 1
+pinseq=24
+T 3600 3400 5 10 0 1 0 0 1
+pintype=io
+}
+P 3600 3000 3200 3000 1 0 0
+{
+T 3300 3100 5 10 1 1 0 0 1
+pinnumber=23
+T 2600 3000 3 10 1 1 0 0 1
+pinlabel=LPF0
+T 3600 3000 5 10 0 1 0 0 1
+pinseq=23
+T 3600 3000 5 10 0 1 0 0 1
+pintype=io
+}
+P 3600 2600 3200 2600 1 0 0
+{
+T 3300 2700 5 10 1 1 0 0 1
+pinnumber=22
+T 1750 2600 3 10 1 1 0 0 1
+pinlabel=AVDD_SYNTH1
+T 3600 2600 5 10 0 1 0 0 1
+pinseq=22
+T 3600 2600 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 3600 2200 3200 2200 1 0 0
+{
+T 3300 2300 5 10 1 1 0 0 1
+pinnumber=21
+T 2100 2200 3 10 1 1 0 0 1
+pinlabel=DCPL_VCO
+T 3600 2200 5 10 0 1 0 0 1
+pinseq=21
+T 3600 2200 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 0 1400 400 1400 1 0 0
+{
+T 305 1445 5 10 1 1 0 6 1
+pinnumber=14
+T 455 1395 3 10 1 1 0 0 1
+pinlabel=RBIAS
+T -400 1500 5 10 0 1 0 0 1
+pinseq=14
+T 0 1400 5 10 0 1 0 0 1
+pintype=io
+}
+P 0 3800 400 3800 1 0 0
+{
+T 100 3900 5 10 1 1 0 0 1
+pinnumber=8
+T 500 3800 3 10 1 1 0 0 1
+pinlabel=SCLK
+T 100 3900 5 10 1 1 0 0 1
+pinseq=8
+T 0 3800 5 10 0 1 0 0 1
+pintype=in
+}
+P 0 6600 400 6600 1 0 0
+{
+T 100 6700 5 10 1 1 0 0 1
+pinnumber=1
+T 500 6600 3 10 1 1 0 0 1
+pinlabel=VDD_GUARD
+T -400 6700 5 10 0 1 0 0 1
+pinseq=1
+T 0 6600 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 0 6200 400 6200 1 0 0
+{
+T 100 6300 5 10 1 1 0 0 1
+pinnumber=2
+T 500 6200 3 10 1 1 0 0 1
+pinlabel=RESET_N
+T -400 6300 5 10 0 1 0 0 1
+pinseq=2
+T 0 6200 5 10 0 1 0 0 1
+pintype=in
+}
+P 0 5800 400 5800 1 0 0
+{
+T 100 5900 5 10 1 1 0 0 1
+pinnumber=3
+T 500 5800 3 10 1 1 0 0 1
+pinlabel=GPIO3
+T -400 5900 5 10 0 1 0 0 1
+pinseq=3
+T 0 5800 5 10 0 1 0 0 1
+pintype=io
+}
+P 0 5400 400 5400 1 0 0
+{
+T 100 5500 5 10 1 1 0 0 1
+pinnumber=4
+T 500 5400 3 10 1 1 0 0 1
+pinlabel=GPIO2
+T -400 5500 5 10 0 1 0 0 1
+pinseq=4
+T 0 5400 5 10 0 1 0 0 1
+pintype=io
+}
+P 0 5000 400 5000 1 0 0
+{
+T 100 5100 5 10 1 1 0 0 1
+pinnumber=5
+T 500 5000 3 10 1 1 0 0 1
+pinlabel=DVDD
+T -400 5100 5 10 0 1 0 0 1
+pinseq=5
+T 0 5000 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 0 4600 400 4600 1 0 0
+{
+T 100 4700 5 10 1 1 0 0 1
+pinnumber=6
+T 500 4600 3 10 1 1 0 0 1
+pinlabel=DCPL
+T -400 4700 5 10 0 1 0 0 1
+pinseq=6
+T 0 4600 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 0 4200 400 4200 1 0 0
+{
+T 100 4300 5 10 1 1 0 0 1
+pinnumber=7
+T 500 4200 3 10 1 1 0 0 1
+pinlabel=SI
+T -400 4300 5 10 0 1 0 0 1
+pinseq=7
+T 0 4200 5 10 0 1 0 0 1
+pintype=in
+}
+P 0 2600 400 2600 1 0 0
+{
+T 100 2700 5 10 1 1 0 0 1
+pinnumber=11
+T 500 2600 3 10 1 1 0 0 1
+pinlabel=CS_N
+T -500 2500 5 10 0 1 0 0 1
+pinseq=11
+T 0 2600 5 10 0 1 0 0 1
+pintype=in
+}
+P 0 2200 400 2200 1 0 0
+{
+T 100 2300 5 10 1 1 0 0 1
+pinnumber=12
+T 500 2200 3 10 1 1 0 0 1
+pinlabel=DVDD
+T -400 2300 5 10 0 1 0 0 1
+pinseq=12
+T 0 2200 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 0 1800 400 1800 1 0 0
+{
+T 305 1845 5 10 1 1 0 6 1
+pinnumber=13
+T 455 1795 3 10 1 1 0 0 1
+pinlabel=AVDD_IF
+T -400 1900 5 10 0 1 0 0 1
+pinseq=13
+T 0 1800 5 10 0 1 0 0 1
+pintype=pwr
+}
+B 400 0 2800 6900 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 5400 1600 8 10 0 0 0 0 1
+description=TI CC1120 High Performance RF Transceiver
+T 400 7000 8 10 1 1 0 0 1
+refdes=U?
+T 5400 2500 8 10 0 0 0 0 1
+numslots=1
+T 2500 7000 9 10 1 0 0 0 1
+CC1120
+T 5400 2800 8 10 0 0 0 0 1
+slot=1
+P 3600 5000 3200 5000 1 0 0
+{
+T 3300 5100 5 10 1 1 0 0 1
+pinnumber=28
+T 2000 5000 3 10 1 1 0 0 1
+pinlabel=AVDD_XOSC
+T 3600 5000 5 10 0 1 0 0 1
+pinseq=28
+T 3600 5000 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 3600 4600 3200 4600 1 0 0
+{
+T 1775 4600 3 10 1 1 0 0 1
+pinlabel=AVDD_SYNTH2
+T 3600 4600 5 10 0 1 0 0 1
+pinseq=27
+T 3300 4700 5 10 1 1 0 0 1
+pinnumber=27
+T 3600 4600 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 3600 4200 3200 4200 1 0 0
+{
+T 3300 4300 5 10 1 1 0 0 1
+pinnumber=26
+T 1675 4200 3 10 1 1 0 0 1
+pinlabel=DCPL_PFD_CHP
+T 3600 4200 5 10 0 1 0 0 1
+pinseq=26
+T 3600 4200 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 3600 3800 3200 3800 1 0 0
+{
+T 3300 3900 5 10 1 1 0 0 1
+pinnumber=25
+T 1675 3800 3 10 1 1 0 0 1
+pinlabel=AVDD_PFD_CHP
+T 3600 3800 5 10 0 1 0 0 1
+pinseq=25
+T 3600 3800 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 3600 6600 3200 6600 1 0 0
+{
+T 3300 6700 5 10 1 1 0 0 1
+pinnumber=32
+T 2125 6600 3 10 1 1 0 0 1
+pinlabel=EXT_XOSC
+T 3600 6600 5 10 0 1 0 0 1
+pinseq=32
+T 3600 6600 5 10 0 1 0 0 1
+pintype=in
+}
+P 3600 6200 3200 6200 1 0 0
+{
+T 3300 6300 5 10 1 1 0 0 1
+pinnumber=31
+T 2250 6200 3 10 1 1 0 0 1
+pinlabel=XOSC_Q2
+T 3600 6200 5 10 0 1 0 0 1
+pinseq=31
+T 3600 6200 5 10 0 1 0 0 1
+pintype=io
+}
+P 3600 5800 3200 5800 1 0 0
+{
+T 3300 5900 5 10 1 1 0 0 1
+pinnumber=30
+T 2250 5800 3 10 1 1 0 0 1
+pinlabel=XOSC_Q1
+T 3600 5800 5 10 0 1 0 0 1
+pinseq=30
+T 3600 5800 5 10 0 1 0 0 1
+pintype=io
+}
+P 3600 5400 3200 5400 1 0 0
+{
+T 3300 5500 5 10 1 1 0 0 1
+pinnumber=29
+T 2000 5400 3 10 1 1 0 0 1
+pinlabel=DCPL_XOSC
+T 3600 5400 5 10 0 1 0 0 1
+pinseq=29
+T 3600 5400 5 10 0 1 0 0 1
+pintype=pwr
+}
+P 3600 200 3200 200 1 0 0
+{
+T 3300 300 5 10 1 1 0 0 1
+pinnumber=33
+T 2625 200 3 10 1 1 0 0 1
+pinlabel=GND
+T 3600 200 5 10 0 1 0 0 1
+pinseq=32
+T 3600 200 5 10 0 1 0 0 1
+pintype=in
+}
