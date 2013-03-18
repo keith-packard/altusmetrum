@@ -1,5 +1,9 @@
 .SUFFIXES: .5c .py .fp
 
+DIRS= \
+	pinheader \
+	tyco
+
 FOOTPRINTS= \
 	MS5607.fp \
 	uson-8.fp \
@@ -14,4 +18,20 @@ FOOTPRINTS= \
 .py.fp:
 	python $*.py > $@
 
-all: $(FOOTPRINTS)
+BUILDDIRS=$(DIRS:%=build-%)
+CLEANDIRS=$(DIRS:%=clean-%)
+
+all: $(BUILDDIRS) $(FOOTPRINTS)
+$(DIRS): $(BUILDDIRS) 
+$(BUILDDIRS): 
+	$(MAKE) -C $(@:build-%=%)
+
+$(CLEANDIRS):
+	$(MAKE) -C $(@:clean-%=%) clean
+
+clean: $(CLEANDIRS)
+	rm -f $(FOOTPRINTS)
+
+.PHONY: subdirs $(DIRS)
+.PHONY: subdirs $(BUILDDIRS)
+.PHONY: subdirs $(CLEANDIRS)
