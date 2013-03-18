@@ -21,7 +21,6 @@ FOOTPRINTS= \
 	lqfp64.fp \
 	lqfp100.fp \
 	LPCC16.fp \
-	0605.fp \
 	MPU6000.fp \
 	UBLOX-MAX.fp \
 	TI-QFN32.fp \
