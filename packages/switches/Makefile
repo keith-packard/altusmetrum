@@ -1,9 +1,7 @@
 .SUFFIXES: .5c .py .fp
 
 FOOTPRINTS = \
-	0605.fp \
-	powerdi123.fp \
-	topled.fp
+	cus-12.fp
 
 .5c.fp:
 	nickle $*.5c > $@

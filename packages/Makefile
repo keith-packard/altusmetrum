@@ -5,6 +5,7 @@ DIRS= \
 	jst \
 	molex \
 	pinheader \
+	switches \
 	tyco
 
 FOOTPRINTS= \
@@ -25,7 +26,8 @@ FOOTPRINTS= \
 	UBLOX-MAX.fp \
 	TI-QFN32.fp \
 	NDK32.fp \
-	sma-edge.fp
+	sma-edge.fp \
+	MO-220.fp
 
 .5c.fp:
 	nickle $*.5c > $@
