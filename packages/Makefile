@@ -16,7 +16,8 @@ FOOTPRINTS= \
 	AN3111.fp \
 	lqfp48.fp \
 	lqfp64.fp \
-	lqfp100.fp 
+	lqfp100.fp \
+	LPCC16.fp 
 
 .5c.fp:
 	nickle $*.5c > $@
