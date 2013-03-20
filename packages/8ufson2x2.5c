@@ -32,7 +32,7 @@ real package_height = 2;
 
 real num_pad = 4;	/* per side */
 
-element_start("dfn8");
+element_start("8ufson2x2");
 
 real pad_off(int n) {
 	return pad_spacing * (n - (num_pad - 1) / 2);
