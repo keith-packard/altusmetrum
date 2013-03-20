@@ -1,0 +1,91 @@
+/*
+ * Copyright © 2012 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "../footprint.5c"
+import Footprint;
+
+real hole_spacing = 3;
+real hole_diameter = 0.9;
+real hole_x = hole_spacing / 2;
+real hole_y = 0;
+real pad_height = 1.5;
+real pad_width = 0.7;
+real hold_width = 1;
+real hold_height = 0.8;
+real hold_y = -1;
+real hold_x = 6.3 / 2 + 1/2;
+real package_width = 6.7;
+real package_height = 2.6;
+real outline_x = package_width / 2;
+real outline_y = package_height / 2;
+
+real switch_travel = 1.5;
+real switch_width = 1.3;
+real switch_height = 1.5;
+real switch_x = switch_travel / 2 - switch_width / 2;
+real switch_y = package_height / 2;
+
+/* to center */
+real pad_1_x = -2.25;
+real pad_2_x = 0.75;
+real pad_3_x = 2.25;
+
+/* to top */
+real pad_y = 2.5;
+
+element_start("cus-12");
+
+/* pad 1 */
+pad_mm (pad_1_x, -(pad_y - pad_height / 2),
+	pad_width, pad_height,
+	"1", "1");
+
+/* pad 2 */
+pad_mm (pad_2_x, -(pad_y - pad_height / 2),
+	pad_width, pad_height,
+	"2", "2");
+
+pad_mm (pad_3_x, -(pad_y - pad_height / 2),
+	pad_width, pad_height,
+	"3", "3");
+
+pad_mm (-hold_x, -hold_y,
+	hold_width, hold_height,
+	"GND", "GND");
+
+pad_mm (hold_x, -hold_y,
+	hold_width, hold_height,
+	"GND", "GND");
+
+pad_mm (-hold_x, hold_y,
+	hold_width, hold_height,
+	"GND", "GND");
+
+pad_mm (hold_x, hold_y,
+	hold_width, hold_height,
+	"GND", "GND");
+
+pin_mm (-hole_x, hole_y, hole_diameter,
+	0.17, "GND", "GND");
+
+pin_mm (hole_x, hole_y, hole_diameter,
+	0.17, "GND", "GND");
+
+rect (-outline_x, -outline_y, outline_x * 2, outline_y * 2);
+rect (switch_x, switch_y, switch_width, switch_height);
+element_end();
+
