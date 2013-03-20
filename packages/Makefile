@@ -16,6 +16,7 @@ FOOTPRINTS= \
 	ZX62-B-5PA.fp \
 	TDK_PS12.fp \
 	ABM3B.fp \
+	ABM8.fp \
 	1212-8.fp \
 	AN3111.fp \
 	lqfp48.fp \
