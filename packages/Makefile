@@ -27,7 +27,8 @@ FOOTPRINTS= \
 	TI-QFN32.fp \
 	NDK32.fp \
 	sma-edge.fp \
-	MO-220.fp
+	MO-220.fp \
+	dfn8.fp
 
 .5c.fp:
 	nickle $*.5c > $@
