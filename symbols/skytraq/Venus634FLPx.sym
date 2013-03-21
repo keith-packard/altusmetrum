@@ -1,0 +1,382 @@
+v 20081231 1
+B 400 400 6200 6500 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 495 6995 8 10 1 1 0 0 1
+refdes=U?
+T 2895 6595 8 10 1 1 0 0 1
+device=Venus634FLPx
+T -5105 95 8 10 0 1 0 0 1
+footprint=Venus634FLPx
+P 100 1700 400 1700 1 0 0
+{
+T 100 1700 5 10 0 0 0 0 1
+pintype=unknown
+T 455 1695 5 10 1 1 0 0 1
+pinlabel=RSTN
+T 305 1745 5 10 1 1 0 6 1
+pinnumber=1
+T 100 1700 5 10 0 0 0 0 1
+pinseq=0
+}
+P 100 6500 400 6500 1 0 0
+{
+T 100 6500 5 10 0 0 0 0 1
+pintype=unknown
+T 455 6495 5 10 1 1 0 0 1
+pinlabel=VCC33I
+T 305 6545 5 10 1 1 0 6 1
+pinnumber=2
+T 100 6500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 6900 3300 6600 3300 1 0 0
+{
+T 6900 3300 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 3295 5 10 1 1 0 6 1
+pinlabel=PIO12
+T 6695 3345 5 10 1 1 0 0 1
+pinnumber=4
+T 6900 3300 5 10 0 0 0 6 1
+pinseq=0
+}
+P 6900 3700 6600 3700 1 0 0
+{
+T 6900 3700 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 3695 5 10 1 1 0 6 1
+pinlabel=GPIO2
+T 6695 3745 5 10 1 1 0 0 1
+pinnumber=5
+T 6900 3700 5 10 0 0 0 6 1
+pinseq=0
+}
+P 6900 4100 6600 4100 1 0 0
+{
+T 6900 4100 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 4095 5 10 1 1 0 6 1
+pinlabel=GPIO1
+T 6695 4145 5 10 1 1 0 0 1
+pinnumber=6
+T 6900 4100 5 10 0 0 0 6 1
+pinseq=0
+}
+P 6900 4500 6600 4500 1 0 0
+{
+T 6900 4500 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 4495 5 10 1 1 0 6 1
+pinlabel=LED/GPIO0
+T 6695 4545 5 10 1 1 0 0 1
+pinnumber=7
+T 6900 4500 5 10 0 0 0 6 1
+pinseq=0
+}
+P 6900 2100 6600 2100 1 0 0
+{
+T 6900 2100 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 2095 5 10 1 1 0 6 1
+pinlabel=GPIO24
+T 6695 2145 5 10 1 1 0 0 1
+pinnumber=8
+T 6900 2100 5 10 0 0 0 6 1
+pinseq=0
+}
+P 100 1300 400 1300 1 0 0
+{
+T 100 1300 5 10 0 0 0 0 1
+pintype=unknown
+T 455 1295 5 10 1 1 0 0 1
+pinlabel=BOOT_SEL
+T 305 1345 5 10 1 1 0 6 1
+pinnumber=9
+T 100 1300 5 10 0 0 0 0 1
+pinseq=0
+}
+P 900 100 900 400 1 0 0
+{
+T 900 100 5 10 0 0 90 0 1
+pintype=unknown
+T 900 455 5 10 1 1 90 0 1
+pinlabel=GND
+T 850 305 5 10 1 1 90 6 1
+pinnumber=10
+T 900 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 1300 100 1300 400 1 0 0
+{
+T 1300 100 5 10 0 0 90 0 1
+pintype=unknown
+T 1300 455 5 10 1 1 90 0 1
+pinlabel=GND
+T 1250 305 5 10 1 1 90 6 1
+pinnumber=11
+T 1300 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 6900 2500 6600 2500 1 0 0
+{
+T 6900 2500 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 2495 5 10 1 1 0 6 1
+pinlabel=GPIO20
+T 6695 2545 5 10 1 1 0 0 1
+pinnumber=14
+T 6900 2500 5 10 0 0 0 6 1
+pinseq=0
+}
+P 1700 100 1700 400 1 0 0
+{
+T 1700 100 5 10 0 0 90 0 1
+pintype=unknown
+T 1700 455 5 10 1 1 90 0 1
+pinlabel=GND
+T 1650 305 5 10 1 1 90 6 1
+pinnumber=15
+T 1700 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 6900 1700 6600 1700 1 0 0
+{
+T 6900 1700 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 1695 5 10 1 1 0 6 1
+pinlabel=V12O_RTC
+T 6695 1745 5 10 1 1 0 0 1
+pinnumber=17
+T 6900 1700 5 10 0 0 0 6 1
+pinseq=0
+}
+P 100 5700 400 5700 1 0 0
+{
+T 100 5700 5 10 0 0 0 0 1
+pintype=unknown
+T 455 5695 5 10 1 1 0 0 1
+pinlabel=VBAT
+T 305 5745 5 10 1 1 0 6 1
+pinnumber=18
+T 100 5700 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2100 100 2100 400 1 0 0
+{
+T 2100 100 5 10 0 0 90 0 1
+pintype=unknown
+T 2100 455 5 10 1 1 90 0 1
+pinlabel=GND
+T 2050 305 5 10 1 1 90 6 1
+pinnumber=19
+T 2100 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 2900 100 2900 400 1 0 0
+{
+T 2900 100 5 10 0 0 90 0 1
+pintype=unknown
+T 2900 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 2850 305 5 10 1 1 90 6 1
+pinnumber=21
+T 2900 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 3300 100 3300 400 1 0 0
+{
+T 3300 100 5 10 0 0 90 0 1
+pintype=unknown
+T 3300 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 3250 305 5 10 1 1 90 6 1
+pinnumber=22
+T 3300 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 3700 100 3700 400 1 0 0
+{
+T 3700 100 5 10 0 0 90 0 1
+pintype=unknown
+T 3700 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 3650 305 5 10 1 1 90 6 1
+pinnumber=24
+T 3700 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 4100 100 4100 400 1 0 0
+{
+T 4100 100 5 10 0 0 90 0 1
+pintype=unknown
+T 4100 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 4050 305 5 10 1 1 90 6 1
+pinnumber=25
+T 4100 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 4500 100 4500 400 1 0 0
+{
+T 4500 100 5 10 0 0 90 0 1
+pintype=unknown
+T 4500 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 4450 305 5 10 1 1 90 6 1
+pinnumber=27
+T 4500 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 4900 100 4900 400 1 0 0
+{
+T 4900 100 5 10 0 0 90 0 1
+pintype=unknown
+T 4900 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 4850 305 5 10 1 1 90 6 1
+pinnumber=28
+T 4900 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 5300 100 5300 400 1 0 0
+{
+T 5300 100 5 10 0 0 90 0 1
+pintype=unknown
+T 5300 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 5250 305 5 10 1 1 90 6 1
+pinnumber=29
+T 5300 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 5700 100 5700 400 1 0 0
+{
+T 5700 100 5 10 0 0 90 0 1
+pintype=unknown
+T 5700 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 5650 305 5 10 1 1 90 6 1
+pinnumber=31
+T 5700 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 6900 6500 6600 6500 1 0 0
+{
+T 6900 6500 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 6495 5 10 1 1 0 6 1
+pinlabel=RFIN
+T 6695 6545 5 10 1 1 0 0 1
+pinnumber=32
+T 6900 6500 5 10 0 0 0 6 1
+pinseq=0
+}
+P 6100 100 6100 400 1 0 0
+{
+T 6100 100 5 10 0 0 90 0 1
+pintype=unknown
+T 6100 455 5 10 1 1 90 0 1
+pinlabel=GND_RF
+T 6050 305 5 10 1 1 90 6 1
+pinnumber=33
+T 6100 100 5 10 0 0 90 0 1
+pinseq=0
+}
+P 100 6100 400 6100 1 0 0
+{
+T 100 6100 5 10 0 0 0 0 1
+pintype=unknown
+T 455 6095 5 10 1 1 0 0 1
+pinlabel=REG_ENA
+T 305 6145 5 10 1 1 0 6 1
+pinnumber=36
+T 100 6100 5 10 0 0 0 0 1
+pinseq=0
+}
+P 6900 2900 6600 2900 1 0 0
+{
+T 6900 2900 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 2895 5 10 1 1 0 6 1
+pinlabel=PIO14
+T 6695 2945 5 10 1 1 0 0 1
+pinnumber=37
+T 6900 2900 5 10 0 0 0 6 1
+pinseq=0
+}
+P 100 3700 400 3700 1 0 0
+{
+T 100 3700 5 10 0 0 0 0 1
+pintype=unknown
+T 455 3695 5 10 1 1 0 0 1
+pinlabel=MOSI/PIO9
+T 305 3745 5 10 1 1 0 6 1
+pinnumber=38
+T 100 3700 5 10 0 0 0 0 1
+pinseq=0
+}
+P 100 3300 400 3300 1 0 0
+{
+T 100 3300 5 10 0 0 0 0 1
+pintype=unknown
+T 455 3295 5 10 1 1 0 0 1
+pinlabel=MISO/PIO8
+T 305 3345 5 10 1 1 0 6 1
+pinnumber=39
+T 100 3300 5 10 0 0 0 0 1
+pinseq=0
+}
+P 6900 5300 6600 5300 1 0 0
+{
+T 6900 5300 5 10 0 0 0 6 1
+pintype=unknown
+T 6545 5295 5 10 1 1 0 6 1
+pinlabel=P1PPS
+T 6695 5345 5 10 1 1 0 0 1
+pinnumber=40
+T 6900 5300 5 10 0 0 0 6 1
+pinseq=0
+}
+P 100 2900 400 2900 1 0 0
+{
+T 100 2900 5 10 0 0 0 0 1
+pintype=unknown
+T 455 2895 5 10 1 1 0 0 1
+pinlabel=SPI_CLK/PIOO7
+T 305 2945 5 10 1 1 0 6 1
+pinnumber=41
+T 100 2900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 100 4900 400 4900 1 0 0
+{
+T 100 4900 5 10 0 0 0 0 1
+pintype=unknown
+T 455 4895 5 10 1 1 0 0 1
+pinlabel=RXD0
+T 305 4945 5 10 1 1 0 6 1
+pinnumber=42
+T 100 4900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 100 2500 400 2500 1 0 0
+{
+T 100 2500 5 10 0 0 0 0 1
+pintype=unknown
+T 455 2495 5 10 1 1 0 0 1
+pinlabel=SPI_CSN0/PIO6
+T 305 2545 5 10 1 1 0 6 1
+pinnumber=43
+T 100 2500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 100 4500 400 4500 1 0 0
+{
+T 100 4500 5 10 0 0 0 0 1
+pintype=unknown
+T 455 4495 5 10 1 1 0 0 1
+pinlabel=TXD0
+T 305 4545 5 10 1 1 0 6 1
+pinnumber=44
+T 100 4500 5 10 0 0 0 0 1
+pinseq=0
+}
