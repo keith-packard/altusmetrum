@@ -51,6 +51,8 @@ $(BUILDDIRS):
 $(CLEANDIRS):
 	$(MAKE) -C $(@:clean-%=%) clean
 
+$(FOOTPRINTS): footprint.5c
+
 clean: $(CLEANDIRS)
 	rm -f $(FOOTPRINTS)
 
