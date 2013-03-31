@@ -115,7 +115,7 @@ namespace Footprint {
 			y2 = center_y + (height - width) / 2;
 		}
 
-		real mask = thickness + clearance / 2;
+		real mask = thickness + process_clearance / 2;
 
 		printf ("    Pad[");
 		printf (" %6d %6d %6d %6d",
