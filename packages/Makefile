@@ -26,6 +26,7 @@ FOOTPRINTS= \
 	MPU6000.fp \
 	UBLOX-MAX.fp \
 	TI-QFN32.fp \
+	TI-QFN32-new.fp \
 	NDK32.fp \
 	sma-edge.fp \
 	MO-220.fp \
