@@ -26,43 +26,48 @@ print '# use-license: unlimited'
 print 'Element[0x0 "0605" "" "" 0 0 0 0 0 100 0x0]'
 print "("
 print '   Pad[',\
- 	mm2mils100(PinWidth/2), \
-	mm2mils100(PinWidth/2), \
- 	mm2mils100(PinWidth/2), \
-	mm2mils100(PinHeight - PinWidth/2), \
+ 	mm2mils100(-(PinWidth/2+WSpacing/2)), \
+	mm2mils100(-(PinHeight+HSpacing/2-PinWidth/2)), \
+ 	mm2mils100(-(PinWidth/2+WSpacing/2)), \
+	mm2mils100(-(HSpacing/2+PinWidth/2)), \
 	mm2mils100(PinWidth), \
 	mm2mils100(WSpacing - PinWidth), \
   	mm2mils100(PinWidth)+600, \
 	'"pin2" "2" 0x0100]'
 
 print '   Pad[',\
- 	mm2mils100(PinWidth + WSpacing + PinWidth/2), \
-	mm2mils100(PinWidth/2), \
- 	mm2mils100(PinWidth + WSpacing + PinWidth/2), \
-	mm2mils100(PinHeight - PinWidth/2), \
+ 	mm2mils100(PinWidth/2+WSpacing/2), \
+	mm2mils100(-(PinHeight+HSpacing/2-PinWidth/2)), \
+ 	mm2mils100(PinWidth/2+WSpacing/2), \
+	mm2mils100(-(HSpacing/2+PinWidth/2)), \
 	mm2mils100(PinWidth), \
 	mm2mils100(WSpacing - PinWidth), \
   	mm2mils100(PinWidth)+600, \
 	'"pin1" "1" 0x0100]'
 
 print '   Pad[',\
- 	mm2mils100(PinWidth/2), \
-	mm2mils100(PinHeight + HSpacing + PinWidth/2), \
- 	mm2mils100(PinWidth/2), \
-	mm2mils100(PinHeight + HSpacing + PinHeight - PinWidth/2), \
+ 	mm2mils100(-(PinWidth/2+WSpacing/2)), \
+	mm2mils100(PinHeight+HSpacing/2-PinWidth/2), \
+ 	mm2mils100(-(PinWidth/2+WSpacing/2)), \
+	mm2mils100(HSpacing/2+PinWidth/2), \
 	mm2mils100(PinWidth), \
 	mm2mils100(WSpacing - PinWidth), \
   	mm2mils100(PinWidth)+600, \
 	'"pin4" "4" 0x0100]'
 
 print '   Pad[',\
- 	mm2mils100(PinWidth + WSpacing + PinWidth/2), \
-	mm2mils100(PinHeight + HSpacing + PinWidth/2), \
- 	mm2mils100(PinWidth + WSpacing + PinWidth/2), \
-	mm2mils100(PinHeight + HSpacing + PinHeight - PinWidth/2), \
+ 	mm2mils100(PinWidth/2+WSpacing/2), \
+	mm2mils100(PinHeight+HSpacing/2-PinWidth/2), \
+ 	mm2mils100(PinWidth/2+WSpacing/2), \
+	mm2mils100(HSpacing/2+PinWidth/2), \
 	mm2mils100(PinWidth), \
 	mm2mils100(WSpacing - PinWidth), \
   	mm2mils100(PinWidth)+600, \
 	'"pin3" "3" 0x0100]'
+
+print '   ElementArc[',\
+	0, \
+	mm2mils100(PinHeight + PinWidth), \
+	'500 500 0 360 1000 ]'
 
 print ")"
