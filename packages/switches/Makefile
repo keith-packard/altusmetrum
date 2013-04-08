@@ -11,6 +11,8 @@ FOOTPRINTS = \
 
 all: $(FOOTPRINTS) .gitignore
 
+$(FOOTPRINTS): ../footprint.5c
+
 clean:
 	rm -f $(FOOTPRINTS)
 
