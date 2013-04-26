@@ -26,6 +26,7 @@ FOOTPRINTS= \
 	MPU6000.fp \
 	UBLOX-MAX.fp \
 	TI-QFN32.fp \
+	TI-QFN36.fp \
 	TI-QFN32-new.fp \
 	NDK32.fp \
 	sma-edge.fp \
@@ -34,7 +35,10 @@ FOOTPRINTS= \
 	ti-qfn20.fp \
 	qfn-16.fp \
 	ap.10g.fp \
-	BTM182.fp
+	BTM182.fp \
+	PNswitchDPDT.fp \
+	NHD-C0216.fp \
+	KSCJ.fp
 
 .5c.fp:
 	nickle $*.5c > $@
