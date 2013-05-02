@@ -38,7 +38,9 @@ FOOTPRINTS= \
 	BTM182.fp \
 	PNswitchDPDT.fp \
 	NHD-C0216.fp \
-	KSCJ.fp
+	KSCJ.fp \
+	ADXL78.fp \
+	MOT1317.fp
 
 .5c.fp:
 	nickle $*.5c > $@
