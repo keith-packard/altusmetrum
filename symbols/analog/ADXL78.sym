@@ -1,0 +1,63 @@
+v 20110115 2
+P 0 1700 300 1700 1 0 0
+{
+T 0 1700 5 10 0 0 0 0 1
+pintype=unknown
+T 355 1695 5 10 1 1 0 0 1
+pinlabel=VDD
+T 205 1745 5 10 1 1 0 6 1
+pinnumber=7
+T 0 1700 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2300 1700 2000 1700 1 0 0
+{
+T 2300 1700 5 10 0 0 0 0 1
+pintype=unknown
+T 1945 1695 5 10 1 1 0 6 1
+pinlabel=VOUT
+T 2095 1745 5 10 1 1 0 0 1
+pinnumber=6
+T 2300 1700 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1500 0 1500 300 1 0 0
+{
+T 1500 0 5 10 0 0 0 0 1
+pintype=unknown
+T 1645 500 5 10 1 1 180 0 1
+pinlabel=VSS
+T 1595 250 5 10 1 1 180 6 1
+pinnumber=3
+T 1500 0 5 10 0 0 0 0 1
+pinseq=0
+}
+B 300 300 1700 1900 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 795 1995 8 10 1 1 0 0 1
+device=ADXL78
+T 295 2295 8 10 1 1 0 0 1
+refdes=U?
+T -5 -5 8 10 0 1 0 0 1
+footprint=ADXL78
+P 0 500 300 500 1 0 0
+{
+T 0 500 5 10 0 0 0 0 1
+pintype=unknown
+T 355 495 5 10 1 1 0 0 1
+pinlabel=ST
+T 205 545 5 10 1 1 0 6 1
+pinnumber=4
+T 0 500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 1300 300 1300 1 0 0
+{
+T 0 1300 5 10 0 0 0 0 1
+pintype=unknown
+T 355 1295 5 10 1 1 0 0 1
+pinlabel=VDD2
+T 205 1345 5 10 1 1 0 6 1
+pinnumber=8
+T 0 1300 5 10 0 0 0 0 1
+pinseq=0
+}
