@@ -1,0 +1,92 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+/*
+ * These values come from the Carsem MLP spec */
+real pad_outside = 0.20;
+real pad_inside = 0.05;
+real pad_side = 0.025;	/* for pad pitch > 0.65mm */
+
+real pad_width = 0.30;
+real pad_height = 0.60;
+real pad_spacing = 0.80;
+
+real package_width = 4;
+real package_height = 3;
+
+real pad_y_off = package_height / 2;
+
+real num_pad = 4;	/* per side */
+
+element_start("mlp8");
+
+real pad_off_x(int n) {
+	return pad_spacing * (n - (num_pad - 1) / 2);
+}
+
+real corner(int dx, int dy) {
+	real	x = dx * package_width / 2;
+	real	y = dy * package_height / 2;
+	real	len = 0.4;
+
+	line(x, y, x - dx * len, y);
+	line(x, y, x, y - dy * len);
+}
+
+real pad_top(real x, real y, int n) {
+	real	w_pad = pad_width + pad_side * 2;
+	real	h_pad = pad_height + pad_outside + pad_inside;
+	real	x_pad = x;
+	real	y_pad = y - pad_outside + h_pad/2;
+
+	pad_mm(x_pad, y_pad, w_pad, h_pad, sprintf("%d", n), sprintf("%d", n));
+}
+
+real pad_bottom(real x, real y, int n) {
+	real	w_pad = pad_width + pad_side * 2;
+	real	h_pad = pad_height + pad_outside + pad_inside;
+	real	x_pad = x;
+	real	y_pad = y - pad_height - pad_inside + h_pad/2;
+
+	pad_mm(x_pad, y_pad, w_pad, h_pad, sprintf("%d", n), sprintf("%d", n));
+}
+
+corner(-1, -1);
+corner(1, -1);
+corner(-1, 1);
+corner(1, 1);
+
+real dot_off = -.3;
+
+line(-package_width/2 + dot_off, -package_height/2 + dot_off,
+     -package_width/2 + dot_off, -package_height/2 + dot_off);
+
+for (pad = 0; pad < num_pad; pad++) {
+	/* top (1-4) */
+
+	pad_top (pad_off_x(pad), -package_height / 2, pad + 1);
+
+	/* bottom (8-5) */
+
+	pad_bottom (pad_off_x(pad), package_height / 2, 8 - pad);
+}
+
+
+element_end();
