@@ -68,6 +68,10 @@
    (lambda (package)
       (gnetlist:get-package-attribute package "vendor")))
 
+(define get-loadstatus
+   (lambda (package)
+      (gnetlist:get-package-attribute package "loadstatus")))
+  
 (define get-vendor-part-number
    (lambda (package)
       (gnetlist:get-package-attribute package "vendor_part_number")))
@@ -80,7 +84,7 @@
   (if (null? packages)
       '()
       (let ((package (car packages)))
-	(if (string=? (get-vendor package) vendor)
+	(if (and (not (string=? (get-loadstatus package) "noload")) (string=? (get-vendor package) vendor))
 	    (if (string=? (get-device package) "include")
 		(get-parts-table-bom (cdr packages) vendor)
 		(cons (list package
