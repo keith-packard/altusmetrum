@@ -1,0 +1,65 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c";
+import Footprint;
+
+real pad_width = 0.25;		/* mm */
+real pad_height = 0.325; 	/* mm */
+real pad_x_space = 0.50;	/* space between pad centers mm */
+real pad_y_space = 0.575/2;	/* space between pad centers mm */
+real pad_gap = 0.25;		/* space between pads mm */
+real package_width = 1.40;	/* mm */
+real package_height = 1.00;	/* mm */
+
+element_start("saw");
+
+pad_mm(0, 0,
+       pad_width, pad_height,
+       "1", "1");
+
+pad_mm(pad_x_space * 1, pad_y_space,
+       pad_width, pad_height,
+       "2", "2");
+
+pad_mm(pad_x_space * 1, -pad_y_space,
+       pad_width, pad_height,
+       "5", "5");
+
+pad_mm(pad_x_space * 2, pad_y_space,
+       pad_width, pad_height,
+       "3", "3");
+
+pad_mm(pad_x_space * 2, -pad_y_space,
+       pad_width, pad_height,
+       "4", "4");
+
+real pads_width = 3 * pad_width + 2 * pad_gap;
+real pads_height = 2 * pad_height + pad_gap;
+
+real extra_x = package_width - pads_width;
+real extra_y = package_height - pads_height;
+
+real package_x = 0 - pad_width / 2 - extra_x / 2;
+real package_y = 0 - pad_gap / 2 - pad_height - extra_y / 2;
+
+rect(package_x, package_y, package_width, package_height);
+
+element_end();
+
+
+

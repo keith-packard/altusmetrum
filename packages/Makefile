@@ -41,7 +41,8 @@ FOOTPRINTS= \
 	KSCJ.fp \
 	ADXL78.fp \
 	MOT1317.fp \
-	mlp8-4x3.fp
+	mlp8-4x3.fp \
+	saw.fp
 
 .5c.fp:
 	nickle $*.5c > $@
