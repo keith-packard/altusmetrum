@@ -186,6 +186,28 @@ namespace Footprint {
 		       
 	}
 
+	public void pin_mm_clear_options(real x, real y, real drill, real copper, real clearance,
+					 string name,
+					 string number,
+					 string options)
+	{
+		real thickness = drill + copper * 2;
+		real mask = thickness + clearance / 2;
+		printf("    Pin[");
+		printf(" %6d %6d",
+		       mm2mils100(x),
+		       mm2mils100(y));
+		printf(" %6d %6d %6d %6d",
+		       mm2mils100(thickness),
+		       mm2mils100(clearance),
+		       mm2mils100(mask),
+		       mm2mils100(drill));
+		printf (" \"%s\" \"%s\"",
+			name, number);
+		printf (" \"%s\"]\n", options);
+		       
+	}
+
 	public void pin_mm_clear_mask_options(real x, real y,
 					      real drill, real copper, real clearance, real mask,
 					      string name, string number, string options)
@@ -231,6 +253,15 @@ namespace Footprint {
 	{
 		pin_mm_clear(x, y, drill, copper, process_clearance,
 			     name, number);
+	}
+
+	public void pin_mm_options(real x, real y, real drill, real copper,
+				   string name,
+				   string number,
+				   string options)
+	{
+		pin_mm_clear_options(x, y, drill, copper, process_clearance,
+				     name, number, options);
 	}
 
 	public void line (real x1, real y1, real x2, real y2)

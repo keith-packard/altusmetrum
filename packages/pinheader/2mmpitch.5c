@@ -1,0 +1,46 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "../footprint.5c";
+import Footprint;
+
+real pin_spacing = 2;
+real pin_hole = 0.8;
+real pin_copper = 0.25;
+
+pins = atoi(argv[1]);
+if (pins < 2) {
+	File::fprintf (stderr, "must have at least two pins\n");
+	exit(1);
+}
+
+printf ("# author: Keith Packard\n");
+printf ("# email: keithp@keithp.com\n");
+printf ("# dist-license: GPL 2\n");
+printf ("# use-license: unlimited\n");
+
+element_start(sprintf ("2mm%dpin", pins));
+
+for (int pin = 0; pin < pins; pin++)
+	pin_mm_options(pin * pin_spacing, 0, pin_hole, pin_copper,
+		       sprintf ("%d", pin + 1),
+		       sprintf ("%d", pin + 1),
+		       pin == 0 ? "square" : "");
+element_end();
+
+
+
