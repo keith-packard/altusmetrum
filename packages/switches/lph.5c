@@ -29,9 +29,9 @@ element_start("lph");
 
 for (int y = 0; y < 2; y++) 
 	for (int x = 0; x < 2; x++) {
-		int	pin = (x + y * 2) + 1;
+		int	pin = y + 1;
 		string	pin_name = sprintf ("%d", pin);
-		string	options = pin == 1 ? "square" : "";
+		string	options = "";
 		pin_mm_options (x * hole_space_x - hole_space_x/2, y * hole_space_y - hole_space_y/2, hole_diameter,
 				hole_copper, pin_name, pin_name, options);
 	}
