@@ -1,0 +1,38 @@
+load "../footprint.5c"
+import Footprint;
+
+real	total_width=1;
+real	total_height=2.1;
+real	body_width = 0.5;
+real	lens_height=1.7;
+real	pad_height=1.5;
+real	pad_space_y = 1.0;
+real	pad_width=1.0;
+real	lens_width = 0.5;
+real	pad_center_x = 0;
+real	pad_center_y = pad_space_y / 2 + pad_height / 2;
+real	arc_y = lens_height / 2 - lens_width;
+real	arc_x = -body_width/2;
+
+element_start("0603-sideled");
+
+pad_mm(0, -pad_center_y, pad_width, pad_height, "1", "1");
+pad_mm(0, pad_center_y, pad_width, pad_height, "2", "2");
+
+real	line_left = pad_center_x + 0.5;
+real	line_right = pad_center_x + pad_width / 2 + .3;
+real	line_top = 0 - pad_height / 2 - .3;
+
+arc(arc_x, -arc_y, lens_width, lens_width, -90, 90);
+line(arc_x - lens_width, -arc_y, arc_x - lens_width, arc_y);
+arc(arc_x, arc_y, lens_width, lens_width, 0, 90);
+line(-body_width / 2, arc_y + lens_width, -body_width / 2, total_height / 2);
+line(-body_width / 2, total_height / 2,
+     body_width / 2, total_height / 2);
+line(body_width / 2, total_height / 2,
+     body_width / 2, -total_height / 2);
+line(body_width / 2, -total_height / 2,
+     -body_width / 2, -total_height / 2);
+line(-body_width / 2, -total_height / 2,
+     -body_width / 2, -arc_y - lens_width);
+element_end();
