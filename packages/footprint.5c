@@ -282,4 +282,14 @@ namespace Footprint {
 		line(x+w,y+h,x,y+h);
 		line(x,y+h,x,y);
 	}
+
+	public void arc (real center_x, real center_y,
+			 real radius_x, real radius_y,
+			 real start_angle, real delta_angle)
+	{
+		printf ("    ElementArc[ %6d %6d %6d %6d %3d %3d %d]\n",
+			mm2mils100(center_x), mm2mils100(center_y),
+			mm2mils100(radius_x), mm2mils100(radius_y),
+			start_angle, delta_angle, line_thickness);
+	}
 }

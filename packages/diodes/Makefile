@@ -4,7 +4,8 @@ FOOTPRINTS = \
 	0605.fp \
 	powerdi123.fp \
 	topled.fp \
-	2125.fp
+	2125.fp \
+	0603-sideled.fp
 
 .5c.fp:
 	nickle $*.5c > $@
