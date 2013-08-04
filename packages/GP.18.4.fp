@@ -17,7 +17,7 @@
 
 Element(0x00000000 "GP.18.4" "A0" "" 0 0 -8mm -8mm 0 100 0x00000000)
 (
-	Pin(0mm 1mm 0.95mm 2.05mm 2.75mm 0.95mm "1" "1" 0x04000001)
+	Pin(0mm 1mm 2.50mm 0.50mm 3.00mm 0.95mm "1" "1" 0x00000001)
 	ElementLine ( -9mm -9mm  7mm -9mm 15)
 	ElementLine (  7mm -9mm  9mm -7mm 15)
 	ElementLine (  9mm -7mm  9mm  9mm 15)
