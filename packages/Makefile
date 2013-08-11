@@ -42,6 +42,7 @@ FOOTPRINTS= \
 	ADXL78.fp \
 	MOT1317.fp \
 	mlp8-4x3.fp \
+	ufqfpn48.fp \
 	saw.fp
 
 .5c.fp:
