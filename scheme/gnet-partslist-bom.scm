@@ -66,19 +66,19 @@
 
 (define get-vendor
    (lambda (package)
-      (gnetlist:get-package-attribute package "vendor")))
+      (string-trim-both (gnetlist:get-package-attribute package "vendor"))))
 
 (define get-loadstatus
    (lambda (package)
-      (gnetlist:get-package-attribute package "loadstatus")))
+      (string-trim-both (gnetlist:get-package-attribute package "loadstatus"))))
   
 (define get-vendor-part-number
    (lambda (package)
-      (gnetlist:get-package-attribute package "vendor_part_number")))
+      (string-trim-both (gnetlist:get-package-attribute package "vendor_part_number"))))
 
 (define get-footprint
    (lambda (package)
-      (gnetlist:get-package-attribute package "footprint")))
+      (string-trim-both (gnetlist:get-package-attribute package "footprint"))))
 
 (define (get-parts-table-bom packages vendor)
   (if (null? packages)
@@ -97,12 +97,12 @@
 	    (get-parts-table-bom (cdr packages) vendor)))))
 
 (define (get-opt-helper option list)
-  (if list
+  (if (not (null? list))
       (let ((param (car list)))
-	(if (string-prefix? option (car param))
+	(if (and param (string-prefix? option (car param)))
 	    (string-drop (car param) (string-length option))
 	    (get-opt-helper option (cdr list))))
-      nil)
+      #f)
   )
 
 (define (get-opt option default)
@@ -114,9 +114,14 @@
 (define (get-vendor-match)
   (get-opt "vendor" "digikey"))
 
+(define (set-quantity)
+  (let ((quant (get-opt "quantity" "1")))
+    (set! multiplier (string->number quant))))
+
 (define (partslist-bom output-filename)
   (let ((port (open-output-file output-filename))
 	(parts-table (marge-sort-with-multikey (get-parts-table-bom packages (get-vendor-match)) '(1 2 3 0))))
     (set! parts-table (count-same-parts parts-table))
+    (set-quantity)
     (partslist-bom:write-partslist parts-table port)
     (close-output-port port)))
