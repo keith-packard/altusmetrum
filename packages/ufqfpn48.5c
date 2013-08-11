@@ -21,7 +21,7 @@ import Footprint;
 real pad_width = 0.55;
 real pad_height = 0.30;
 real pad_spacing = 0.50;
-real pad_clearance = 10 / 1000 * 25.4;	
+real pad_clearance = 12 / 1000 * 25.4;	
 
 real pad_x_off = 6.20 / 2;
 real pad_y_off = 6.20 / 2;
