@@ -1,0 +1,49 @@
+#!/usr/bin/nickle
+
+string[] read_line(file f) {
+	string line = File::fgets(f);
+
+	return String::parse_csv(line);
+}
+
+void
+print_line(file f, string[] bits) {
+	for (int i = 0; i < dim(bits); i++) {
+		string end = i == dim(bits) - 1 ? "\n" : ",";
+		printf ("%s%s", bits[i], end);
+	}
+}
+
+typedef struct {
+	string	pattern;
+	int	count;
+} fix_t;
+
+fix_t[] fixes = {
+	{ .pattern = "RESISTOR", .count = 250 },
+	{ .pattern = "CAPACITOR", .count = 100 },
+	{ .pattern = "INDUCTOR", .count = 100 },
+	{ .pattern = "LED", .count = 100 },
+};
+
+string[]
+fix_em(string[] elts) {
+	for (int f = 0; f < dim(fixes); f++) {
+		if (String::index(elts[2], fixes[f].pattern) >= 0) {
+			elts[0] = sprintf ("%d", fixes[f].count);
+			break;
+		}
+	}
+	return elts;
+}
+
+void
+main() {
+	while (!File::end(stdin)) {
+		string[] elts = read_line(stdin);
+		elts = fix_em(elts);
+		print_line(stdout, elts);
+	}
+}
+
+main();
