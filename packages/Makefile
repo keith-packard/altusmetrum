@@ -42,7 +42,9 @@ FOOTPRINTS= \
 	ADXL78.fp \
 	MOT1317.fp \
 	mlp8-4x3.fp \
-	saw.fp
+	saw.fp \
+	cubesatshield.fp \
+	linear-s8.fp
 
 .5c.fp:
 	nickle $*.5c > $@
