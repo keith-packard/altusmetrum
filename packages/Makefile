@@ -45,7 +45,8 @@ FOOTPRINTS= \
 	ufqfpn48.fp \
 	saw.fp \
 	tfsoj-8.fp \
-	bc4aa.fp
+	bc4aa.fp \
+	PJ-037A.fp
 
 .5c.fp:
 	nickle $*.5c > $@
