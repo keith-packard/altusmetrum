@@ -45,6 +45,12 @@ FOOTPRINTS= \
 	saw.fp \
 	cubesatshield.fp \
 	linear-s8.fp
+	ufqfpn48.fp \
+	saw.fp \
+	tfsoj-8.fp \
+	bc4aa.fp \
+	cubesatshield.fp \
+	linear-s8.fp
 
 .5c.fp:
 	nickle $*.5c > $@

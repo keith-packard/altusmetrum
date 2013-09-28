@@ -21,7 +21,7 @@ import Footprint;
 real pad_width = 0.55;
 real pad_height = 0.30;
 real pad_spacing = 0.50;
-real pad_clearance = 10 / 1000 * 25.4;	
+real pad_clearance = 12 / 1000 * 25.4;	
 
 real pad_x_off = 6.20 / 2;
 real pad_y_off = 6.20 / 2;
@@ -115,29 +115,29 @@ bool via_block(int x, int y) {
 }
 
 real via_hole = 15/1000 * 25.4;		/* 15 mil drill */
-real via_copper = 3.5/1000 * 25.4; 	/* 7 mil anulus */
+real via_copper = 7/1000 * 25.4; 	/* 7 mil anulus */
 
 for (int pad_y = 0; pad_y < pad_blocks; pad_y++) {
 	for (int pad_x = 0; pad_x < pad_blocks; pad_x++)
 		if (via_block(pad_x, pad_y)) {
 			pin_mm_clear_mask(block_x(pad_x), block_y(pad_y),
-					  via_hole, via_copper * 2, pad_clearance, 0,
+					  via_hole, via_hole + 2 * via_copper, pad_clearance, 0,
 					  "GND", "GND");
 			pad_mm_clear_mask_options(block_x(pad_x), block_y(pad_y),
 						  block_width, block_height,
 						  pad_clearance, 0,
-						  "GND", "GND","nopaste");
+						  "GND", "GND","square,nopaste");
 		} else {
 			/* full square of metal */
 			pad_mm_clear_options(block_x(pad_x), block_y(pad_y),
 					     block_width, block_height,
 					     0,
-					     "GND", "GND","nopaste");
+					     "GND", "GND","square,nopaste");
 			/* 1/4 full of solder paste */
 			pad_mm_clear_options(block_x(pad_x), block_y(pad_y),
 					     block_width/2, block_height/2,
 					     0,
-					     "GND", "GND","");
+					     "GND", "GND","square");
 		}
 }
 

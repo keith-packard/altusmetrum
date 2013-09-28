@@ -1,0 +1,45 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+width = 57.2;
+
+hole_dist = 55;
+hole_diameter = 2.9;
+case_pad = 3;
+
+pin_from_hole_y = 8.1 - 3.3;
+pin_sep = 16.60;
+pin_diameter = 1.17;
+pin_dx = 26.1;
+
+height = 61.3;
+
+element_start("bc4aa");
+
+rect (-width/2, -height/2, width, height);
+
+/* mounting holes */
+pin_mm(0, hole_dist/2, hole_diameter, 0.35, "mounting", "0");
+pin_mm(0, -hole_dist/2, hole_diameter, 0.35, "mounting", "0");
+
+pin_mm_options(pin_dx, hole_dist/2 - pin_from_hole_y, pin_diameter, 0.5, "1", "1", "square");
+pin_mm(pin_dx, hole_dist/2 - pin_from_hole_y - pin_sep, pin_diameter, 0.5, "2", "2");
+
+element_end();

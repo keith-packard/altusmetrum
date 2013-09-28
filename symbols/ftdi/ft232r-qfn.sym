@@ -1,0 +1,296 @@
+v 20121123 2
+B 400 400 3500 6200 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+P 4400 6400 3900 6400 1 0 0
+{
+T 4400 6400 5 10 0 0 0 0 1
+pintype=out
+T 3845 6395 5 10 1 1 0 6 1
+pinlabel=TXD
+T 3995 6445 5 10 1 1 0 0 1
+pinnumber=30
+T 4400 6400 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 5900 3900 5900 1 0 0
+{
+T 4400 5900 5 10 0 0 0 0 1
+pintype=in
+T 3845 5895 5 10 1 1 0 6 1
+pinlabel=RXD
+T 3995 5945 5 10 1 1 0 0 1
+pinnumber=2
+T 4400 5900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 5400 3900 5400 1 0 0
+{
+T 4400 5400 5 10 0 0 0 0 1
+pintype=io
+T 3845 5395 5 10 1 1 0 6 1
+pinlabel=RTS
+T 3995 5445 5 10 1 1 0 0 1
+pinnumber=32
+T 4400 5400 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 4900 3900 4900 1 0 0
+{
+T 4400 4900 5 10 0 0 0 0 1
+pintype=io
+T 3845 4895 5 10 1 1 0 6 1
+pinlabel=CTS
+T 3995 4945 5 10 1 1 0 0 1
+pinnumber=8
+T 4400 4900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 2400 3900 2400 1 0 0
+{
+T 4400 2400 5 10 0 0 0 0 1
+pintype=io
+T 3845 2395 5 10 1 1 0 6 1
+pinlabel=CBUS0
+T 3995 2445 5 10 1 1 0 0 1
+pinnumber=22
+T 4400 2400 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 1900 3900 1900 1 0 0
+{
+T 4400 1900 5 10 0 0 0 0 1
+pintype=io
+T 3845 1895 5 10 1 1 0 6 1
+pinlabel=CBUS1
+T 3995 1945 5 10 1 1 0 0 1
+pinnumber=21
+T 4400 1900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 1400 3900 1400 1 0 0
+{
+T 4400 1400 5 10 0 0 0 0 1
+pintype=io
+T 3845 1395 5 10 1 1 0 6 1
+pinlabel=CBUS2
+T 3995 1445 5 10 1 1 0 0 1
+pinnumber=10
+T 4400 1400 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 900 3900 900 1 0 0
+{
+T 4400 900 5 10 0 0 0 0 1
+pintype=io
+T 3845 895 5 10 1 1 0 6 1
+pinlabel=CBUS3
+T 3995 945 5 10 1 1 0 0 1
+pinnumber=11
+T 4400 900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1900 0 1900 400 1 0 0
+{
+T 1900 0 5 10 0 0 0 0 1
+pintype=pwr
+T 1900 505 5 10 1 1 90 0 1
+pinlabel=GND
+T 1850 305 5 10 1 1 90 6 1
+pinnumber=17
+T 1900 0 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1400 0 1400 400 1 0 0
+{
+T 1400 0 5 10 0 0 0 0 1
+pintype=pwr
+T 1400 505 5 10 1 1 90 0 1
+pinlabel=GND
+T 1350 305 5 10 1 1 90 6 1
+pinnumber=4
+T 1400 0 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 1400 400 1400 1 0 0
+{
+T 0 1400 5 10 0 0 0 0 1
+pintype=pwr
+T 455 1395 5 10 1 1 0 0 1
+pinlabel=3V3OUT
+T 305 1445 5 10 1 1 0 6 1
+pinnumber=16
+T 0 1400 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 5300 400 5300 1 0 0
+{
+T 0 5300 5 10 0 0 0 0 1
+pintype=io
+T 455 5295 5 10 1 1 0 0 1
+pinlabel=USBD-
+T 305 5345 5 10 1 1 0 6 1
+pinnumber=15
+T 0 5300 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 4800 400 4800 1 0 0
+{
+T 0 4800 5 10 0 0 0 0 1
+pintype=io
+T 455 4795 5 10 1 1 0 0 1
+pinlabel=USBD+
+T 305 4845 5 10 1 1 0 6 1
+pinnumber=14
+T 0 4800 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 2900 400 2900 1 0 0
+{
+T 0 2900 5 10 0 0 0 0 1
+pintype=io
+T 455 2895 5 10 1 1 0 0 1
+pinlabel=RESET
+T 305 2945 5 10 1 1 0 6 1
+pinnumber=18
+T 0 2900 5 10 0 0 0 0 1
+pinseq=0
+}
+T 395 6695 8 10 1 1 0 0 1
+refdes=U?
+T 16495 54595 8 10 0 1 0 0 1
+device=IC
+T 1695 4795 8 10 1 1 0 0 1
+value=FT232RQ
+T 18195 49795 8 10 0 1 0 0 1
+footprint=ssop-16
+P 4400 4400 3900 4400 1 0 0
+{
+T 4400 4400 5 10 0 0 0 0 1
+pintype=unknown
+T 3845 4395 5 10 1 1 0 6 1
+pinlabel=DTR
+T 3995 4445 5 10 1 1 0 0 1
+pinnumber=31
+T 4400 4400 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 3900 3900 3900 1 0 0
+{
+T 4400 3900 5 10 0 0 0 0 1
+pintype=unknown
+T 3845 3895 5 10 1 1 0 6 1
+pinlabel=DSR
+T 3995 3945 5 10 1 1 0 0 1
+pinnumber=6
+T 4400 3900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 3400 3900 3400 1 0 0
+{
+T 4400 3400 5 10 0 0 0 0 1
+pintype=unknown
+T 3845 3395 5 10 1 1 0 6 1
+pinlabel=DCD
+T 3995 3445 5 10 1 1 0 0 1
+pinnumber=7
+T 4400 3400 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 2900 3900 2900 1 0 0
+{
+T 4400 2900 5 10 0 0 0 0 1
+pintype=unknown
+T 3845 2895 5 10 1 1 0 6 1
+pinlabel=RI
+T 3995 2945 5 10 1 1 0 0 1
+pinnumber=3
+T 4400 2900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2400 0 2400 400 1 0 0
+{
+T 2400 0 5 10 0 0 0 0 1
+pintype=unknown
+T 2400 455 5 10 1 1 90 0 1
+pinlabel=GND
+T 2350 305 5 10 1 1 90 6 1
+pinnumber=20
+T 2400 0 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2900 0 2900 400 1 0 0
+{
+T 2900 0 5 10 0 0 0 0 1
+pintype=unknown
+T 2900 455 5 10 1 1 90 0 1
+pinlabel=TEST
+T 2850 305 5 10 1 1 90 6 1
+pinnumber=26
+T 2900 0 5 10 0 0 0 0 1
+pinseq=0
+}
+P 900 0 900 400 1 0 0
+{
+T 900 0 5 10 0 0 0 0 1
+pintype=unknown
+T 900 455 5 10 1 1 90 0 1
+pinlabel=AGND
+T 850 305 5 10 1 1 90 6 1
+pinnumber=24
+T 900 0 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 2400 400 2400 1 0 0
+{
+T 0 2400 5 10 0 0 0 0 1
+pintype=unknown
+T 455 2395 5 10 1 1 0 0 1
+pinlabel=OSCI
+T 305 2445 5 10 1 1 0 6 1
+pinnumber=27
+T 0 2400 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 1900 400 1900 1 0 0
+{
+T 0 1900 5 10 0 0 0 0 1
+pintype=unknown
+T 455 1895 5 10 1 1 0 0 1
+pinlabel=OSCO
+T 305 1945 5 10 1 1 0 6 1
+pinnumber=28
+T 0 1900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 5800 400 5800 1 0 0
+{
+T 0 5800 5 10 0 0 0 0 1
+pintype=unknown
+T 455 5795 5 10 1 1 0 0 1
+pinlabel=VCC
+T 305 5845 5 10 1 1 0 6 1
+pinnumber=19
+T 0 5800 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 6300 400 6300 1 0 0
+{
+T 0 6300 5 10 0 0 0 0 1
+pintype=unknown
+T 455 6295 5 10 1 1 0 0 1
+pinlabel=VCCIO
+T 305 6345 5 10 1 1 0 6 1
+pinnumber=1
+T 0 6300 5 10 0 0 0 0 1
+pinseq=0
+}
+P 4400 500 3900 500 1 0 0
+{
+T 4400 500 5 10 0 0 0 0 1
+pintype=unknown
+T 3845 495 5 10 1 1 0 6 1
+pinlabel=CBUS4
+T 3995 545 5 10 1 1 0 0 1
+pinnumber=9
+T 4400 500 5 10 0 0 0 0 1
+pinseq=0
+}
