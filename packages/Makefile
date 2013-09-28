@@ -44,7 +44,7 @@ FOOTPRINTS= \
 	mlp8-4x3.fp \
 	saw.fp \
 	cubesatshield.fp \
-	linear-s8.fp
+	linear-s8.fp \
 	ufqfpn48.fp \
 	saw.fp \
 	tfsoj-8.fp \
