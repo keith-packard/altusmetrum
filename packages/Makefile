@@ -52,7 +52,8 @@ FOOTPRINTS= \
 	cubesatshield.fp \
 	linear-s8.fp \
 	PJ-037A.fp \
-	cx1vsm.fp
+	cx1vsm.fp \
+	pklcs1212.fp
 
 .5c.fp:
 	nickle $*.5c > $@
