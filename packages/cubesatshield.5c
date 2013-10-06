@@ -92,5 +92,3 @@ pad_mm(edge_width / 2, (shield_width - corner_inset) / 2,
 
 element_end();
 
-
-
