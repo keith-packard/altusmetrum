@@ -62,6 +62,11 @@ pad_mm(-edge_width / 2, (-shield_width + corner_inset) / 2,
        pad_width, corner_inset + pad_width,
        "1", "1");
 
+pad_mm_arbitrary(-shield_width/2 + corner_inset, -edge_width / 2,
+		 -edge_width / 2, -shield_width/2 + corner_inset,
+		 pad_width, 
+		"1", "1", "");
+
 /* NE corner */
 pad_mm((shield_width - corner_inset) / 2, -edge_width /2,
        corner_inset + pad_width, pad_width,
@@ -70,6 +75,11 @@ pad_mm((shield_width - corner_inset) / 2, -edge_width /2,
 pad_mm(edge_width / 2, (-shield_width + corner_inset) / 2, 
        pad_width, corner_inset + pad_width,
        "1", "1");
+
+pad_mm_arbitrary(shield_width/2 - corner_inset, -edge_width / 2,
+		 edge_width / 2, -shield_width/2 + corner_inset,
+		 pad_width, 
+		"1", "1", "");
 
 /* SW corner */
 pad_mm((-shield_width + corner_inset) / 2, edge_width /2,
@@ -80,6 +90,11 @@ pad_mm(-edge_width / 2, (shield_width - corner_inset) / 2,
        pad_width, corner_inset + pad_width,
        "1", "1");
 
+pad_mm_arbitrary(-shield_width/2 + corner_inset, edge_width / 2,
+		 -edge_width / 2, shield_width/2 - corner_inset,
+		 pad_width, 
+		"1", "1", "");
+
 /* SE corner */
 pad_mm((shield_width - corner_inset) / 2, edge_width /2,
        corner_inset + pad_width, pad_width,
@@ -89,6 +104,10 @@ pad_mm(edge_width / 2, (shield_width - corner_inset) / 2,
        pad_width, corner_inset + pad_width,
        "1", "1");
 
+pad_mm_arbitrary(shield_width/2 - corner_inset, edge_width / 2,
+		 edge_width / 2, shield_width/2 - corner_inset,
+		 pad_width, 
+		"1", "1", "");
 
 element_end();
 
