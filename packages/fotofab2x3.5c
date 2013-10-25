@@ -22,7 +22,7 @@
 load "footprint.5c";
 import Footprint;
 
-real pad_width = 2.00;		/* mm */
+real pad_width = 1.00;		/* mm */
 real shield_width = 76.20;
 real shield_height = 50.80;
 
