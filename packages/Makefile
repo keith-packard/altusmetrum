@@ -53,7 +53,9 @@ FOOTPRINTS= \
 	linear-s8.fp \
 	PJ-037A.fp \
 	cx1vsm.fp \
-	pklcs1212.fp
+	pklcs1212.fp \
+	CR32.fp \
+	FTDI-QFN32.fp
 
 .5c.fp:
 	nickle $*.5c > $@
