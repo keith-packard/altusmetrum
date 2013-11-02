@@ -18,8 +18,8 @@
 load "footprint.5c"
 import Footprint;
 
-real pad_width = 0.25;
-real pad_height = 0.50;
+real pad_width = 0.28;
+real pad_height = 0.56;
 real pad_spacing = 0.5;
 
 real pad_y_off = 2.1 / 2 - pad_height/2;
