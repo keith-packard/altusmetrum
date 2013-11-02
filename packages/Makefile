@@ -43,13 +43,12 @@ FOOTPRINTS= \
 	MOT1317.fp \
 	mlp8-4x3.fp \
 	saw.fp \
-	cubesatshield.fp \
+	fotofab2x3.fp \
 	linear-s8.fp \
 	ufqfpn48.fp \
 	saw.fp \
 	tfsoj-8.fp \
 	bc4aa.fp \
-	cubesatshield.fp \
 	linear-s8.fp \
 	PJ-037A.fp \
 	cx1vsm.fp \
