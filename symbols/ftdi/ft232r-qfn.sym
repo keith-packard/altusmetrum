@@ -161,7 +161,7 @@ device=IC
 T 1695 4795 8 10 1 1 0 0 1
 value=FT232RQ
 T 18195 49795 8 10 0 1 0 0 1
-footprint=ssop-16
+footprint=FTDI-QFN32
 P 4400 4400 3900 4400 1 0 0
 {
 T 4400 4400 5 10 0 0 0 0 1
