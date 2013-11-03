@@ -8,7 +8,10 @@ DIRS= \
 	switches \
 	tyco
 
+SOIC=soic-16.fp
+
 FOOTPRINTS= \
+	$(SOIC) \
 	s-pwson-n8.fp \
 	MS5607.fp \
 	uson-8.fp \
@@ -86,3 +89,5 @@ clean: $(CLEANDIRS)
 .gitignore: Makefile
 	for i in $@ $(FOOTPRINTS); do echo $$i; done > $@
 
+soic-16.fp: soic.5c
+	nickle soic.5c 16 > $@
