@@ -9,6 +9,7 @@ DIRS= \
 	tyco
 
 FOOTPRINTS= \
+	s-pwson-n8.fp \
 	MS5607.fp \
 	uson-8.fp \
 	wson6x5.fp \
