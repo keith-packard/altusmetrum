@@ -164,33 +164,50 @@ namespace Footprint {
 			     name,
 			     num);
 	}
+	public void pad_mm_options(real center_x,
+				   real center_y,
+				   real width,
+				   real height,
+				   string name,
+				   string num,
+				   string options)
+	{
+		pad_mm_clear_options(center_x,
+				     center_y,
+				     width,
+				     height,
+				     process_clearance,
+				     name,
+				     num,
+				     options);
+	}
 
-public void pad_mm_arbitrary(   real x1,
-                                real y1,
-                                real x2,
-                                real y2,
-                                real thickness,
-                                string name,
-                                string num,
-                                string options)
-{
-        real clearance = process_clearance;
+	public void pad_mm_arbitrary(   real x1,
+					real y1,
+					real x2,
+					real y2,
+					real thickness,
+					string name,
+					string num,
+					string options)
+	{
+		real clearance = process_clearance;
 
-        real mask = thickness + clearance / 2;
+		real mask = thickness + clearance / 2;
 
-        printf ("    Pad[");
-                printf (" %6d %6d %6d %6d",
-                        mm2mils100(x1),
-                        mm2mils100(y1),
-                        mm2mils100(x2),
-                        mm2mils100(y2));
-                printf (" %6d %6d %6d",
-                        mm2mils100(thickness),
-                        mm2mils100(clearance),
-                        mm2mils100(mask));
-                printf (" \"%s\" \"%s\" \"%s\"]\n",
-                        name, num, options);
-}
+		printf ("    Pad[");
+		printf (" %6d %6d %6d %6d",
+			mm2mils100(x1),
+			mm2mils100(y1),
+			mm2mils100(x2),
+			mm2mils100(y2));
+		printf (" %6d %6d %6d",
+			mm2mils100(thickness),
+			mm2mils100(clearance),
+			mm2mils100(mask));
+		printf (" \"%s\" \"%s\" \"%s\"]\n",
+			name, num, options);
+	}
 
 	public void pin_mm_clear(real x, real y, real drill, real copper, real clearance,
 			string name,
