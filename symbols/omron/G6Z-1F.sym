@@ -1,0 +1,121 @@
+v 20130925 2
+B 300 300 2200 1200 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T -5 -3605 8 10 0 1 0 0 1
+footprint=SOIJ8
+T 295 1595 8 10 1 1 0 0 1
+refdes=RLY?
+P 2800 800 2500 800 1 0 0
+{
+T 2800 800 5 10 0 0 0 6 1
+pintype=unknown
+T 2445 745 5 10 1 1 0 6 1
+pinlabel=COMMON
+T 2800 800 5 10 0 0 0 6 1
+pinseq=0
+T 2600 900 5 10 1 1 0 0 1
+pinnumber=4
+}
+P 2800 400 2500 400 1 0 0
+{
+T 2800 400 5 10 0 0 0 6 1
+pintype=unknown
+T 2445 395 5 10 1 1 0 6 1
+pinlabel=B
+T 2800 400 5 10 0 0 0 6 1
+pinseq=0
+T 2550 500 5 10 1 1 0 0 1
+pinnumber=14
+}
+P 2800 1200 2500 1200 1 0 0
+{
+T 2800 1200 5 10 0 0 0 6 1
+pintype=unknown
+T 2445 1095 5 10 1 1 0 6 1
+pinlabel=A
+T 2800 1200 5 10 0 0 0 6 1
+pinseq=0
+T 2600 1300 5 10 1 1 0 0 1
+pinnumber=8
+}
+P 0 1200 300 1200 1 0 0
+{
+T 0 1200 5 10 0 0 0 0 1
+pintype=unknown
+T 0 1200 5 10 0 0 0 0 1
+pinseq=0
+T 400 1000 5 10 1 1 0 0 1
+pinlabel=+
+T 100 1300 5 10 1 1 0 0 1
+pinnumber=7
+}
+P 0 400 300 400 1 0 0
+{
+T 0 400 5 10 0 0 0 0 1
+pintype=unknown
+T 0 400 5 10 0 0 0 0 1
+pinseq=0
+T 400 500 5 10 1 1 0 0 1
+pinlabel=-
+T 100 500 5 10 1 1 0 0 1
+pinnumber=1
+}
+T 400 750 9 10 1 0 0 0 1
+COIL
+P 1200 0 1200 300 1 0 0
+{
+T 1200 0 5 10 0 0 90 0 1
+pintype=unknown
+T 1200 0 5 10 0 0 90 0 1
+pinseq=0
+T 1050 100 5 10 1 1 0 0 1
+pinnumber=9
+}
+P 1600 0 1600 300 1 0 0
+{
+T 1600 0 5 10 0 0 90 0 1
+pintype=unknown
+T 1600 0 5 10 0 0 90 0 1
+pinseq=0
+T 1350 100 5 10 1 1 0 0 1
+pinnumber=10
+}
+P 2000 0 2000 300 1 0 0
+{
+T 2000 0 5 10 0 0 90 0 1
+pintype=unknown
+T 2000 0 5 10 0 0 90 0 1
+pinseq=0
+T 1750 100 5 10 1 1 0 0 1
+pinnumber=12
+}
+P 2400 0 2400 300 1 0 0
+{
+T 2400 0 5 10 0 0 90 0 1
+pintype=unknown
+T 2400 0 5 10 0 0 90 0 1
+pinseq=0
+T 2150 100 5 10 1 1 0 0 1
+pinnumber=13
+}
+T 650 1300 9 12 1 0 0 0 1
+Omron G6Z-1F
+T 1050 350 9 10 1 0 0 0 1
+RF GND
+P 400 0 400 300 1 0 0
+{
+T 400 0 5 10 0 0 90 0 1
+pintype=unknown
+T 400 0 5 10 0 0 90 0 1
+pinseq=0
+T 250 100 5 10 1 1 0 0 1
+pinnumber=3
+}
+P 800 0 800 300 1 0 0
+{
+T 800 0 5 10 0 0 90 0 1
+pintype=unknown
+T 800 0 5 10 0 0 90 0 1
+pinseq=0
+T 650 100 5 10 1 1 0 0 1
+pinnumber=5
+}
