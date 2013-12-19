@@ -23,6 +23,4 @@ Element(0x00000000 "GP.18.4" "A0" "" 0 0 -8mm -8mm 0 100 0x00000000)
 	ElementLine (  9mm -7mm  9mm  9mm 15)
 	ElementLine (  9mm  9mm -9mm  9mm 15)
 	ElementLine ( -9mm  9mm -9mm -9mm 15)
-
-	Pad(0mm 1mm 0mm 1mm 2.5mm 3mm 2.75mm "1" "1" 0x80)
-	)
+)

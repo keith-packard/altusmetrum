@@ -58,7 +58,9 @@ FOOTPRINTS= \
 	cx1vsm.fp \
 	pklcs1212.fp \
 	CR32.fp \
-	FTDI-QFN32.fp
+	FTDI-QFN32.fp \
+	g6z1f.fp \
+	g6z1fe.fp
 
 .5c.fp:
 	nickle $*.5c > $@
