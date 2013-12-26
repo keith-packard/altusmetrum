@@ -60,7 +60,8 @@ FOOTPRINTS= \
 	CR32.fp \
 	FTDI-QFN32.fp \
 	g6z1f.fp \
-	g6z1fe.fp
+	g6z1fe.fp \
+	DIODE-SMA.fp
 
 .5c.fp:
 	nickle $*.5c > $@
