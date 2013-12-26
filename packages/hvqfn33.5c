@@ -31,7 +31,7 @@ real pad_center_y = 5.25 / 2;	/* Gy/2 */
 real center_width = 3.75;	/* SLx */
 real center_height = 3.75;	/* SLy */
 
-real center_drill = 0.30;
+real center_drill = 0.015 * 25.4;
 real center_mask = 0.60 / 2;
 
 real center_space = 1.1;
@@ -126,7 +126,7 @@ for (y = -1; y <= 1; y += 1) {
 for (y = -0.5; y <= 0.5; y += 1) {
 	for (x = -0.5; x <= 0.5; x += 1) {
 		pin_mm_clear_mask_options(x * center_space, y * center_space,
-					  center_drill, center_mask, 0, 0, "33", "33",
+					  center_drill, center_mask, 0.012 * 25.4, 0, "33", "33",
 					  "square,via");
 	}
 }
