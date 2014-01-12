@@ -62,7 +62,8 @@ FOOTPRINTS= \
 	g6z1f.fp \
 	g6z1fe.fp \
 	W3011A.fp \
-	DIODE-SMA.fp
+	DIODE-SMA.fp \
+	2512.fp
 
 .5c.fp:
 	nickle $*.5c > $@
