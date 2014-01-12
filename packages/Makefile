@@ -61,6 +61,7 @@ FOOTPRINTS= \
 	FTDI-QFN32.fp \
 	g6z1f.fp \
 	g6z1fe.fp \
+	W3011A.fp \
 	DIODE-SMA.fp
 
 .5c.fp:
