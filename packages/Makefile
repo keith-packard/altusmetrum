@@ -64,7 +64,8 @@ FOOTPRINTS= \
 	W3011A.fp \
 	DIODE-SMA.fp \
 	2512.fp \
-	lipo-15x24.fp
+	lipo-15x24.fp \
+	wire-ant.fp
 
 .5c.fp:
 	nickle $*.5c > $@
