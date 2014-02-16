@@ -63,7 +63,8 @@ FOOTPRINTS= \
 	g6z1fe.fp \
 	W3011A.fp \
 	DIODE-SMA.fp \
-	2512.fp
+	2512.fp \
+	lipo-15x24.fp
 
 .5c.fp:
 	nickle $*.5c > $@
@@ -96,3 +97,6 @@ clean: $(CLEANDIRS)
 
 soic-16.fp: soic.5c
 	nickle soic.5c 16 > $@
+
+lipo-15x24.fp: lipo-pad.5c
+	nickle lipo-pad.5c 15 24 > $@

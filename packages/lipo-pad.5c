@@ -1,0 +1,47 @@
+/*
+ * Copyright © 2014 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c";
+import Footprint;
+
+/* Battery geometry */
+if (dim(argv) < 3) {
+	File::fprintf(stderr, "Usage: %s <height> <width>\n", argv[0]);
+	exit(1);
+}
+
+File::sscanf(argv[1], "%f", &(real battery_width));
+File::sscanf(argv[2], "%f", &(real battery_height));
+
+/* Size of solder pad */
+real tab_height = 4.0;
+real tab_width = 4.0;
+
+/* inset from edge of battery to tab solder pad */
+real tab_off = 1.0;
+
+/* Spacing between solder pads */
+real tab_space = 7.0;
+
+element_start(sprintf("lipo-%fx%f", battery_width, battery_height));
+
+pad_mm (-tab_space/2, 0, tab_width, tab_height, "-", "2");
+pad_mm (tab_space/2, 0, tab_width, tab_height, "+", "1");
+
+rect (-battery_width/2, -tab_height/2 - tab_off, battery_width, battery_height);
+
+element_end();
