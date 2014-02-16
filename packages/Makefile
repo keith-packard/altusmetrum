@@ -65,7 +65,8 @@ FOOTPRINTS= \
 	DIODE-SMA.fp \
 	2512.fp \
 	lipo-15x24.fp \
-	wire-ant.fp
+	wire-ant.fp \
+	PCM12SMTR.fp
 
 .5c.fp:
 	nickle $*.5c > $@
