@@ -109,9 +109,9 @@ print '   Pin[',\
 
 print '   ElementLine[',\
        mm2mils100(-TabSpacing/2), \
-       mm2mils100(-EdgeOffset), \
+       mm2mils100(-EdgeOffset)+500, \
        mm2mils100(TabSpacing/2), \
-       mm2mils100(-EdgeOffset), \
+       mm2mils100(-EdgeOffset)+500, \
        '1000 ]'
 
 print ")"

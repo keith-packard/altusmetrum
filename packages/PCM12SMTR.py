@@ -39,7 +39,7 @@ print '   Pad[',\
  	mm2mils100(WSpacing/2 + PadWidth - PadHeight/2), \
 	mm2mils100(-HSpacing/2 - PadHeight/2), \
 	mm2mils100(PadHeight), \
-	mm2mils100(WSpacing - PadWidth), \
+	mm2mils100(0), \
   	mm2mils100(PadWidth)+600, \
 	'"mnt" "M" 0x0100]'
 
@@ -49,7 +49,7 @@ print '   Pad[',\
  	mm2mils100(WSpacing/2 + PadWidth - PadHeight/2), \
 	mm2mils100(HSpacing/2 + PadHeight/2), \
 	mm2mils100(PadHeight), \
-	mm2mils100(WSpacing - PadWidth), \
+	mm2mils100(0), \
   	mm2mils100(PadWidth)+600, \
 	'"mnt" "M" 0x0100]'
 
@@ -59,7 +59,7 @@ print '   Pad[',\
  	mm2mils100(-WSpacing/2 - PadWidth + PadHeight/2), \
 	mm2mils100(HSpacing/2 + PadHeight/2), \
 	mm2mils100(PadHeight), \
-	mm2mils100(WSpacing - PadWidth), \
+	mm2mils100(0), \
   	mm2mils100(PadWidth)+600, \
 	'"mnt" "M" 0x0100]'
 
@@ -69,7 +69,7 @@ print '   Pad[',\
  	mm2mils100(-WSpacing/2 - PadWidth + PadHeight/2), \
 	mm2mils100(-HSpacing/2 - PadHeight/2), \
 	mm2mils100(PadHeight), \
-	mm2mils100(WSpacing - PadWidth), \
+	mm2mils100(0), \
   	mm2mils100(PadWidth)+600, \
 	'"mnt" "M" 0x0100]'
 
@@ -97,7 +97,7 @@ print '   Pad[',\
  	mm2mils100(Pin2Offset - Pin12), \
 	mm2mils100(- PinBase - PinHeight + (PinWidth/2)), \
 	mm2mils100(PinWidth), \
-	mm2mils100(.1524), \
+	mm2mils100(0), \
   	mm2mils100(PinWidth + .1524), \
 	'"pin1" "1" 0x0100]'
 
@@ -107,7 +107,7 @@ print '   Pad[',\
  	mm2mils100(Pin2Offset), \
 	mm2mils100(- PinBase - PinHeight + (PinWidth/2)), \
 	mm2mils100(PinWidth), \
-	mm2mils100(.1524), \
+	mm2mils100(0), \
   	mm2mils100(PinWidth + .1524), \
 	'"pin2" "2" 0x0100]'
 
@@ -117,7 +117,7 @@ print '   Pad[',\
  	mm2mils100(Pin2Offset + Pin23), \
 	mm2mils100(- PinBase - PinHeight + (PinWidth/2)), \
 	mm2mils100(PinWidth), \
-	mm2mils100(.1524), \
+	mm2mils100(0), \
   	mm2mils100(PinWidth + .1524), \
 	'"pin3" "3" 0x0100]'
 
