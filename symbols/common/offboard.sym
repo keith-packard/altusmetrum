@@ -1,0 +1,19 @@
+v 20130925 2
+P 0 50 100 50 1 0 0
+{
+T 0 50 5 10 0 0 0 0 1
+pintype=unknown
+T 355 45 5 10 0 1 0 0 1
+pinlabel=unknown
+T 205 95 5 10 0 1 0 6 1
+pinnumber=1
+T 0 50 5 10 0 0 0 0 1
+pinseq=0
+}
+V 149 51 50 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T -5 -49 8 10 0 1 0 0 1
+device=OffBoard
+T 195 -49 8 10 0 1 0 0 1
+refdes=OB?
+T -5 -49 8 10 0 1 0 0 1
+loadstatus=noload
