@@ -1,22 +1,28 @@
 #!/usr/bin/python
 # Copyright 2014 by Bdale Garbee <bdale@gag.com>.  GPLv2
 #
-# Program to emit PCB footprint for Keystone model 931 USB A male connector
+# Program to emit PCB footprint for Keystone model 931 USB A male connector,
+# should also work fine for 4ucon 10017 / 10019, and Acon C-UAR70-00-00
 #
 
-# dimensions in mm from Keystone datasheet
+# dimensions in mm homogenized from Keystone, 4ucon, and Acon  datasheets
+
+				# note that in practice we may not want
+				# holes for the tabs in a USB key form factor,
+				# in which case just delete the features in
+				# the PCB layout and make board width right
 TabDiam = 2.50
 TabSpacing = 11.70
 
 PinDiam = 1.10
-PinSpacing = 4.60
+PinSpacing = 4.50		# keystone wants 4.6 here .. really?
 
-PadHeight = 1.99
-PadWidth = 1.10
+PadHeight = 2.0			# keystone says 1.99 but is 0.1 closer
+PadWidth = 1.20			# keystone says 1.1 but wider will work
 Pad14 = 7.0
 Pad23 = 2.0
-PadRowOffset = 2.50
-EdgeOffset = 2.90
+PadRowOffset = 2.60
+EdgeOffset = 2.70		# keystone says 2.9, but shorter should be ok
 
 import sys
 
