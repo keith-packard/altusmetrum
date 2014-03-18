@@ -21,7 +21,8 @@ BoxXbase = 4.79
 
 LineWidth = 600
 
-MinAnnular = 700
+# freedfm.com round-off error bites us if we make this 700...
+MinAnnular = 725
 MinClearance = 600
 MaskDelta = 300
 
@@ -73,7 +74,7 @@ for col in range ((pins+1)/2):
 	    mm2mils100(spacing), \
   	    mm2mils100(PinDiam)+(MinAnnular*2), \
 	    (MinClearance*2), \
-  	    mm2mils100(PinDiam)+(MaskDelta*2), \
+  	    mm2mils100(PinDiam)+(MinAnnular*2)+(MaskDelta*2), \
 	    mm2mils100(PinDiam), \
 	    '"pin%i"' % pinnum, '"%i"' % pinnum, Flags, ']'
 
@@ -83,7 +84,7 @@ print '   Pin[', \
     mm2mils100(RowSpacing-MntY), \
     mm2mils100(MntDiam)+(MinAnnular*2), \
     (MinClearance*2), \
-    mm2mils100(MntDiam)+(MaskDelta*2), \
+    mm2mils100(MntDiam)+(MinAnnular*2)+(MaskDelta*2), \
     mm2mils100(MntDiam), \
     '"mnt" "0"', '0x0001', ']'
 
