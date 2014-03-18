@@ -32,6 +32,11 @@ BoxWidth = 7.9
 EdgeHeight = 4.8
 EdgeWidth = 2 * (WingInner + WingWidth)
 
+# freedfm.com round-off error bites us if we make this 700...
+MinAnnular = 725
+MinClearance = 600
+MaskDelta = 300
+
 import sys
 
 # we're going to use the 1/100 of a mil fundamental unit form
@@ -51,8 +56,8 @@ print '   Pad[', \
  	mm2mils100(0), \
 	mm2mils100(PinHeight - PinWidth/2), \
 	mm2mils100(PinWidth), \
-	mm2mils100(PinSpacing - PinWidth), \
-  	mm2mils100(PinWidth + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(PinWidth)+(MaskDelta*2), \
 	'"D+" "3" 0x0100]'
 
 print '   Pad[', \
@@ -61,8 +66,8 @@ print '   Pad[', \
  	mm2mils100(-PinSpacing), \
 	mm2mils100(PinHeight - PinWidth/2), \
 	mm2mils100(PinWidth), \
-	mm2mils100(PinSpacing - PinWidth), \
-  	mm2mils100(PinWidth + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(PinWidth)+(MaskDelta*2), \
 	'"D-" "2" 0x0100]'
 
 print '   Pad[', \
@@ -71,8 +76,8 @@ print '   Pad[', \
  	mm2mils100(PinSpacing), \
 	mm2mils100(PinHeight - PinWidth/2), \
 	mm2mils100(PinWidth), \
-	mm2mils100(PinSpacing - PinWidth), \
-  	mm2mils100(PinWidth + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(PinWidth)+(MaskDelta*2), \
 	'"HS" "4" 0x0100]'
 
 print '   Pad[', \
@@ -81,8 +86,8 @@ print '   Pad[', \
  	mm2mils100(-PinSpacing*2), \
 	mm2mils100(PinHeight - PinWidth/2), \
 	mm2mils100(PinWidth), \
-	mm2mils100(PinSpacing - PinWidth), \
-  	mm2mils100(PinWidth + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(PinWidth)+(MaskDelta*2), \
 	'"VBUS" "1" 0x0100]'
 
 print '   Pad[', \
@@ -91,8 +96,8 @@ print '   Pad[', \
  	mm2mils100(PinSpacing*2), \
 	mm2mils100(PinHeight - PinWidth/2), \
 	mm2mils100(PinWidth), \
-	mm2mils100(PinSpacing - PinWidth), \
-  	mm2mils100(PinWidth + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(PinWidth)+(MaskDelta*2), \
 	'"GND" "5" 0x0100]'
 
 # the two ground / mounting tabs in line with signal pins
@@ -103,8 +108,8 @@ print '   Pad[', \
 	mm2mils100(TabInner + TabWidth - TabHeight/2), \
 	mm2mils100(TabHeight/2), \
 	mm2mils100(TabHeight), \
-	mm2mils100(PinSpacing - PinWidth), \
-	mm2mils100(TabHeight + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(TabHeight)+(MaskDelta*2), \
 	'"tab1" "G" 0x0100]'
 
 print '   Pad[', \
@@ -113,8 +118,8 @@ print '   Pad[', \
 	mm2mils100(-TabInner - TabWidth + TabHeight/2), \
 	mm2mils100(TabHeight/2), \
 	mm2mils100(TabHeight), \
-	mm2mils100(PinSpacing - PinWidth), \
-	mm2mils100(TabHeight + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(TabHeight)+(MaskDelta*2), \
 	'"tab2" "G" 0x0100]'
 
 # the two ground / mounting tabs near the center of area
@@ -125,8 +130,8 @@ print '   Pad[', \
 	mm2mils100(PadInner + PadWidth - PadHeight/2), \
 	mm2mils100(PadCenter), \
 	mm2mils100(PadHeight), \
-	mm2mils100(PinSpacing - PinWidth), \
-	mm2mils100(PadHeight + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(PadHeight)+(MaskDelta*2), \
 	'"tab3" "G" 0x0100]'
 
 print '   Pad[', \
@@ -135,8 +140,8 @@ print '   Pad[', \
 	mm2mils100(-PadInner - PadWidth + PadHeight/2), \
 	mm2mils100(PadCenter), \
 	mm2mils100(PadHeight), \
-	mm2mils100(PinSpacing - PinWidth), \
-	mm2mils100(PadHeight + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(PadHeight)+(MaskDelta*2), \
 	'"tab4" "G" 0x0100]'
 
 # the two "wing tab" ground / mounting pads on the sides
@@ -147,8 +152,8 @@ print '   Pad[', \
 	mm2mils100(WingInner + WingWidth/2), \
 	mm2mils100(PadCenter + WingHeight/2 - WingWidth/2), \
 	mm2mils100(WingWidth), \
-	mm2mils100(PinSpacing - PinWidth), \
-	mm2mils100(WingWidth + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(WingWidth)+(MaskDelta*2), \
 	'"tab5" "G" 0x0100]'
 
 print '   Pad[', \
@@ -157,8 +162,8 @@ print '   Pad[', \
 	mm2mils100(-WingInner - WingWidth/2), \
 	mm2mils100(PadCenter + WingHeight/2 - WingWidth/2), \
 	mm2mils100(WingWidth), \
-	mm2mils100(PinSpacing - PinWidth), \
-	mm2mils100(WingWidth + 0.2), \
+	(MinClearance*2), \
+  	mm2mils100(WingWidth)+(MaskDelta*2), \
 	'"tab6" "G" 0x0100]'
 
 # box around actual connector size, with line at PCB edge

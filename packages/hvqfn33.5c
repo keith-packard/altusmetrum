@@ -18,7 +18,7 @@
 load "footprint.5c"
 import Footprint;
 
-process_clearance = 0.25;
+process_clearance = 0.26;
 
 real package_width = 5;
 real package_height = 5;
