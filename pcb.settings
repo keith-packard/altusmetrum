@@ -1,0 +1,3 @@
+# ensure footprints all come from the altusmetrum library
+lib-newlib = ../altusmetrum/packages
+lib-path = ../altusmetrum/packages
