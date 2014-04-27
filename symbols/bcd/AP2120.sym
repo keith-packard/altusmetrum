@@ -1,0 +1,39 @@
+v 20130925 2
+P 0 900 300 900 1 0 0
+{
+T 0 900 5 10 0 0 0 0 1
+pintype=unknown
+T 355 895 5 10 1 1 0 0 1
+pinlabel=VIN
+T 205 945 5 10 1 1 0 6 1
+pinnumber=3
+T 0 900 5 10 0 0 0 0 1
+pinseq=3
+}
+P 2100 900 1800 900 1 0 0
+{
+T 2100 900 5 10 0 0 0 0 1
+pintype=unknown
+T 1745 895 5 10 1 1 0 6 1
+pinlabel=VOUT
+T 1895 945 5 10 1 1 0 0 1
+pinnumber=2
+T 2100 900 5 10 0 0 0 0 1
+pinseq=2
+}
+P 1100 0 1100 300 1 0 0
+{
+T 1100 0 5 10 0 0 0 0 1
+pintype=unknown
+T 1245 500 5 10 1 1 180 0 1
+pinlabel=GND
+T 1305 50 5 10 1 1 0 6 1
+pinnumber=1
+T 1100 0 5 10 0 0 0 0 1
+pinseq=1
+}
+B 300 300 1500 800 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 395 1195 8 10 1 1 0 0 1
+refdes=U?
+T -5 -5 8 10 0 1 0 0 1
+footprint=SOT23-5
