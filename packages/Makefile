@@ -67,7 +67,8 @@ FOOTPRINTS= \
 	lipo-15x24.fp \
 	wire-ant.fp \
 	PCM12SMTR.fp \
-	usbAmale.fp
+	usbAmale.fp \
+	nx3215sa.fp
 
 .5c.fp:
 	nickle $*.5c > $@
