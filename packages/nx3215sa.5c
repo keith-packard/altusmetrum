@@ -21,9 +21,9 @@ import Footprint;
 real package_width = 3.20;
 real package_height = 1.50;
 
-real pad_width = 0.75;
-real pad_height = 1.30;
-real pad_space = 1.70+0.75;
+real pad_width = 1.0;
+real pad_height = 1.8;
+real pad_space = 1.50+1.0;
 
 element_start("cx1vsm");
 
