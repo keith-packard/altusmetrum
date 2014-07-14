@@ -69,7 +69,8 @@ FOOTPRINTS= \
 	PCM12SMTR.fp \
 	usbAmale.fp \
 	nx3215sa.fp \
-	DR127.fp
+	DR127.fp \
+	PowerPAD32.fp
 
 .5c.fp:
 	nickle $*.5c > $@
