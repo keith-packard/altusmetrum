@@ -1,4 +1,7 @@
-all:	282834-10.fp 0-215079-4.fp tphybrid.fp
+all:	284512-4.fp 282834-10.fp 0-215079-4.fp tphybrid.fp
+
+284512-4.fp:	3.5mm-ra.py 3.5mm-series.sh
+	./3.5mm-series.sh
 
 282834-10.fp:	buchanan.py buchanan-Series.sh
 	./buchanan-Series.sh

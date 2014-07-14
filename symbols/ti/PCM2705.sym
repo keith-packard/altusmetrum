@@ -243,18 +243,18 @@ pinnumber=17
 P 3300 600 2900 600 1 0 0
 {
 T 3300 600 5 10 0 0 0 6 1
-pinseq=18
+pinseq=16
 T 2845 595 5 10 1 1 0 6 1
 pinlabel=VCCR
 T 2995 645 5 10 1 1 0 0 1
-pinnumber=18
+pinnumber=16
 }
 P 3300 200 2900 200 1 0 0
 {
 T 3300 200 5 10 0 0 0 6 1
-pinseq=17
+pinseq=15
 T 2845 195 5 10 1 1 0 6 1
 pinlabel=VOUTR
 T 2995 245 5 10 1 1 0 0 1
-pinnumber=17
+pinnumber=15
 }
