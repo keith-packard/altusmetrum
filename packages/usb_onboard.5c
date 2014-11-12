@@ -27,22 +27,22 @@ real power_height = 7.41;
 real data_width = 1.0;
 real data_height = 6.41;
 
-real pad_y = package_height/2 - 8.65;
+real pad_y = 8.65;
 real power_x = 3.5;
 real data_x = 1.0;
 
 element_start("usb_onboard");
 
-rect(-package_width/2, -package_height/2, package_width, package_height);
+rect(-package_width/2, 0, package_width, package_height);
 
 line(-package_width/2, pad_y, package_width/2, pad_y);
 
-pad_mm(-power_x, pad_y + power_height/2, power_width, power_height, "GND", "1");
+pad_mm(-power_x, pad_y - power_height/2, power_width, power_height, "VBUS", "1");
 
-pad_mm(-data_x, pad_y + data_height/2, data_width, data_height, "DP", "2");
+pad_mm(-data_x, pad_y - data_height/2, data_width, data_height, "DM", "2");
 
-pad_mm( data_x, pad_y + data_height/2, data_width, data_height, "DM", "3");
+pad_mm( data_x, pad_y - data_height/2, data_width, data_height, "DP", "3");
 
-pad_mm( power_x, pad_y + power_height/2, power_width, power_height, "VBUS", "4");
+pad_mm( power_x, pad_y - power_height/2, power_width, power_height, "GND", "4");
 
 element_end();
