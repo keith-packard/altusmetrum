@@ -97,7 +97,7 @@ for pin in range (1,9):
 	mm2mils100(PinWidth), \
 	mm2mils100(PinSpacing - PinWidth), \
 	mm2mils100(PinResist), \
-	'"pin%i"' % (25-pin), '"%i"' % (25-pin), '0x0000]'
+	'"pin%i"' % (25-pin), '"%i"' % (25-pin), '"square"]'
 
     print '   Pad[',\
  	mm2mils100((-4.5 + pin) * PinSpacing), \
@@ -107,7 +107,7 @@ for pin in range (1,9):
 	mm2mils100(PinWidth), \
 	mm2mils100(PinSpacing - PinWidth), \
 	mm2mils100(PinResist), \
-	'"pin%i"' % pin, '"%i"' % pin, '0x0000]'
+	'"pin%i"' % pin, '"%i"' % pin, '"square"]'
 
     print '   Pad[',\
 	mm2mils100(Overall/2 - PinHeight + PinWidth/2), \
@@ -117,7 +117,7 @@ for pin in range (1,9):
 	mm2mils100(PinWidth), \
 	mm2mils100(PinSpacing - PinWidth), \
 	mm2mils100(PinResist), \
-	'"pin%i"' % (17-pin), '"%i"' % (17-pin), '0x0000]'
+	'"pin%i"' % (17-pin), '"%i"' % (17-pin), '"square"]'
 
     print '   Pad[',\
 	mm2mils100(-Overall/2 + PinWidth/2), \
@@ -127,7 +127,7 @@ for pin in range (1,9):
 	mm2mils100(PinWidth), \
 	mm2mils100(PinSpacing - PinWidth), \
 	mm2mils100(PinResist), \
-	'"pin%i"' % (24+pin), '"%i"' % (24+pin), '0x0000]'
+	'"pin%i"' % (24+pin), '"%i"' % (24+pin), '"square"]'
 
 print '   ElementArc[',\
 	mm2mils100(-2.6), \
