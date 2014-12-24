@@ -23,6 +23,7 @@ FOOTPRINTS= \
 	ABM8.fp \
 	1212-8.fp \
 	AN3111.fp \
+	lqfp32.fp \
 	lqfp48.fp \
 	lqfp64.fp \
 	lqfp100.fp \
