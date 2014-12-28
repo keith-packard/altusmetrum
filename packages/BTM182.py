@@ -71,7 +71,7 @@ print '   Pad[',\
 	mm2mils100(SmallPinHeight), \
 	mm2mils100(PinSpacing - PinWidth), \
   	mm2mils100(SmallPinHeight)+600, \
-	'"pin%i"' % 32, '"%i"' % 31, '0x0100]'
+	'"pin%i"' % 32, '"%i"' % 32, '0x0100]'
 
 print '   ElementLine[',\
  	mm2mils100(-BodyHeight/2-BodyOffset), \
