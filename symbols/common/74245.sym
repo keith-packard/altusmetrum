@@ -231,3 +231,5 @@ pinlabel=VCC
 T 1650 200 5 8 0 1 0 8 1
 pintype=pwr
 }
+T -4394 -352 8 10 0 1 0 0 1
+datasheet=ti/sn74hc245.pdf
