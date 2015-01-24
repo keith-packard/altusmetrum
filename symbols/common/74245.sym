@@ -91,132 +91,124 @@ V 250 1000 50 6 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
 P 0 1000 200 1000 1 0 0
 {
 T 200 1050 5 8 1 1 0 6 1
-pinnumber=1
+pinnumber=19
 T 200 950 5 8 0 1 0 8 1
-pinseq=1
+pinseq=19
 T 350 1000 9 8 1 1 0 0 1
 pinlabel=\_OE\_
 T 350 1000 5 8 0 1 0 2 1
 pintype=in
 }
+P 1700 1400 2000 1400 1 0 1
+{
+T 1800 1450 5 8 1 1 0 0 1
+pinnumber=11
+T 1800 1350 5 8 0 1 0 2 1
+pinseq=11
+T 1650 1400 9 8 1 1 0 6 1
+pinlabel=B8
+T 1650 1400 5 8 0 1 0 8 1
+pintype=tri
+}
 P 1700 4200 2000 4200 1 0 1
 {
 T 1800 4250 5 8 1 1 0 0 1
-pinnumber=19
+pinnumber=18
 T 1800 4150 5 8 0 1 0 2 1
-pinseq=19
+pinseq=18
 T 1650 4200 9 8 1 1 0 6 1
-pinlabel=Q1
+pinlabel=B1
 T 1650 4200 5 8 0 1 0 8 1
 pintype=tri
 }
 P 1700 3800 2000 3800 1 0 1
 {
 T 1800 3850 5 8 1 1 0 0 1
-pinnumber=18
+pinnumber=17
 T 1800 3750 5 8 0 1 0 2 1
-pinseq=18
+pinseq=17
 T 1650 3800 9 8 1 1 0 6 1
-pinlabel=Q2
+pinlabel=B2
 T 1650 3800 5 8 0 1 0 8 1
 pintype=tri
 }
 P 1700 3400 2000 3400 1 0 1
 {
 T 1800 3450 5 8 1 1 0 0 1
-pinnumber=17
+pinnumber=16
 T 1800 3350 5 8 0 1 0 2 1
-pinseq=17
+pinseq=16
 T 1650 3400 9 8 1 1 0 6 1
-pinlabel=Q3
+pinlabel=B3
 T 1650 3400 5 8 0 1 0 8 1
 pintype=tri
 }
 P 1700 3000 2000 3000 1 0 1
 {
 T 1800 3050 5 8 1 1 0 0 1
-pinnumber=16
+pinnumber=15
 T 1800 2950 5 8 0 1 0 2 1
-pinseq=16
+pinseq=15
 T 1650 3000 9 8 1 1 0 6 1
-pinlabel=Q4
+pinlabel=B4
 T 1650 3000 5 8 0 1 0 8 1
 pintype=tri
 }
 P 1700 2600 2000 2600 1 0 1
 {
 T 1800 2650 5 8 1 1 0 0 1
-pinnumber=15
+pinnumber=14
 T 1800 2550 5 8 0 1 0 2 1
-pinseq=15
+pinseq=14
 T 1650 2600 9 8 1 1 0 6 1
-pinlabel=Q5
+pinlabel=B5
 T 1650 2600 5 8 0 1 0 8 1
 pintype=tri
 }
 P 1700 2200 2000 2200 1 0 1
 {
 T 1800 2250 5 8 1 1 0 0 1
-pinnumber=14
+pinnumber=13
 T 1800 2150 5 8 0 1 0 2 1
-pinseq=14
+pinseq=13
 T 1650 2200 9 8 1 1 0 6 1
-pinlabel=Q6
+pinlabel=B6
 T 1650 2200 5 8 0 1 0 8 1
 pintype=tri
 }
 P 1700 1800 2000 1800 1 0 1
 {
 T 1800 1850 5 8 1 1 0 0 1
-pinnumber=13
+pinnumber=12
 T 1800 1750 5 8 0 1 0 2 1
-pinseq=13
+pinseq=12
 T 1650 1800 9 8 1 1 0 6 1
-pinlabel=Q7
+pinlabel=B7
 T 1650 1800 5 8 0 1 0 8 1
 pintype=tri
 }
-P 1700 1400 2000 1400 1 0 1
-{
-T 1800 1450 5 8 1 1 0 0 1
-pinnumber=12
-T 1800 1350 5 8 0 1 0 2 1
-pinseq=12
-T 1650 1400 9 8 1 1 0 6 1
-pinlabel=Q8
-T 1650 1400 5 8 0 1 0 8 1
-pintype=tri
-}
 B 300 0 1400 4500 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
-T -3400 -250 5 10 0 0 0 0 1
+T -4400 -350 5 10 0 0 0 0 1
 device=74573
 P 300 600 0 600 1 0 1
 {
 T 200 650 5 8 1 1 0 6 1
-pinnumber=11
+pinnumber=1
 T 200 550 5 8 0 1 0 8 1
-pinseq=11
+pinseq=1
 T 350 600 9 8 1 1 0 0 1
-pinlabel=LE
+pinlabel=DIR
 T 350 600 5 8 0 1 0 2 1
 pintype=in
 }
 T 500 4600 8 10 1 1 0 6 1
 refdes=U?
-T -3400 750 5 10 0 0 0 0 1
+T -1600 650 5 10 0 0 0 0 1
 pins=20
-T -3400 350 5 10 0 0 0 0 1
-net=GND:10
-T -3400 550 5 10 0 0 0 0 1
-net=Vcc:20
-T -3400 -50 5 10 0 0 0 0 1
-footprint=DIP20
-T -3400 150 5 10 0 0 0 0 1
+T -1600 250 5 10 0 0 0 0 1
 description=8-bit D-type latch with tristate outputs
-T -3400 950 5 10 0 0 0 0 1
+T -1600 850 5 10 0 0 0 0 1
 numslots=0
-T -3400 1150 5 10 0 0 0 0 1
-documentation=http://www.semiconductors.philips.com/acrobat/datasheets/74HC_HCT573_CNV_2.pdf
 P 300 200 0 200 1 0 1
 {
 T 200 250 5 8 1 1 0 6 1

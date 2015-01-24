@@ -8,5 +8,9 @@ do
 	./micromatch-th-v.py $i > $FILE.fp
 	FILE=$TENS"-338068-"$ONES
 	./micromatch-th-v.py $i latch > $FILE.fp
+	FILE=$TENS"-188275-"$ONES
+	./micromatch-smt-v.py $i > $FILE.fp
+	FILE=$TENS"-338069-"$ONES
+	./micromatch-smt-v.py $i latch > $FILE.fp
 done
 ./micromatch-th-v.py 24 > 2-215079-24.fp
