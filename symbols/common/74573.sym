@@ -241,4 +241,3 @@ pintype=pwr
 }
 T -4394 -352 8 10 0 1 0 0 1
 datasheet=ti/sn74hc573.pdf
-
