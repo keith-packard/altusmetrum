@@ -4,7 +4,7 @@ refdes=D?
 T -1800 -2800 8 10 0 0 0 0 1
 device=LED
 T -1750 -3400 8 10 0 1 0 0 1
-footprint=0605
+footprint=LED4727
 P 2000 0 2000 300 1 0 0
 {
 T 1930 150 5 8 1 1 0 6 1

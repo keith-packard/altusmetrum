@@ -1,0 +1,25 @@
+
+Element["" "quad7seg" "D0" "" 796.00mil 257.00mil -155.00mil -30.00mil 0 100 ""]
+(
+	Pin[-350.00mil -200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "16" "16" "edge2"]
+	Pin[-250.00mil -200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "15" "15" "edge2"]
+	Pin[-150.00mil -200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "14" "14" "edge2"]
+	Pin[-50.00mil -200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "13" "13" "edge2"]
+	Pin[50.00mil -200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "12" "12" "edge2"]
+	Pin[150.00mil -200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "11" "11" "edge2"]
+	Pin[250.00mil -200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "10" "10" "edge2"]
+	Pin[350.00mil -200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "9" "9" "edge2"]
+	Pin[-350.00mil 200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "1" "1" "square,edge2"]
+	Pin[-250.00mil 200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "2" "2" "edge2"]
+	Pin[-150.00mil 200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "3" "3" "edge2"]
+	Pin[-50.00mil 200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "4" "4" "edge2"]
+	Pin[50.00mil 200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "5" "5" "edge2"]
+	Pin[150.00mil 200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "6" "6" "edge2"]
+	Pin[250.00mil 200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "7" "7" "edge2"]
+	Pin[350.00mil 200.00mil 70.00mil 14.00mil 85.00mil 38.00mil "8" "8" "edge2"]
+	ElementLine [-791.00mil -252.00mil 791.00mil -252.00mil 10.00mil]
+	ElementLine [-791.00mil 252.00mil 791.00mil 252.00mil 10.00mil]
+	ElementLine [791.00mil -252.00mil 791.00mil 252.00mil 10.00mil]
+	ElementLine [-791.00mil -252.00mil -791.00mil 252.00mil 10.00mil]
+
+	)
