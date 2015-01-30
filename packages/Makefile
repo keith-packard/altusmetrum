@@ -74,7 +74,8 @@ FOOTPRINTS= \
 	PowerPAD32.fp \
 	usb_onboard.fp \
 	u-pdfn-8.fp \
-	ufqfpn28.fp
+	ufqfpn28.fp \
+	sot666.fp
 
 .5c.fp:
 	nickle $*.5c > $@
