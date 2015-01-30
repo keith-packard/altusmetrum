@@ -1,0 +1,128 @@
+/*
+ * Copyright © 2012 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+real pad_width = 0.55;
+real corner_pad_width = 0.50;
+real pad_height = 0.30;
+real corner_pad_notch = 0.12;
+real pad_spacing = 0.50;
+real pad_clearance = 12 / 1000 * 25.4;
+
+real pad_x_off = 3.20 / 2;
+real pad_y_off = 3.20 / 2;
+
+real package_width = 4;
+real package_height = 4;
+
+real num_pad = 7;	/* per side */
+
+element_start("ufqfpn-28");
+
+real pad_off(int n) {
+	return pad_spacing * (n - (num_pad - 1) / 2);
+}
+
+real corner(int dx, int dy) {
+	real	x = dx * package_width / 2;
+	real	y = dy * package_height / 2;
+	real	len = 0.4;
+
+	line(x, y, x - dx * len, y);
+	line(x, y, x, y - dy * len);
+}
+
+corner(-1, -1);
+corner(1, -1);
+corner(-1, 1);
+corner(1, 1);
+
+real dot_off = .3;
+
+line(-package_width/2 + dot_off, -package_height/2 + dot_off,
+     -package_width/2 + dot_off, -package_height/2 + dot_off);
+
+for (pad = 0; pad < num_pad; pad++) {
+	real pw = pad_width;
+	real ph = pad_height;
+	real pwa = 0;
+	real pha = 0;
+
+	int	nstep = 0;
+
+	if (pad == 0 || pad == num_pad-1)
+		nstep = 50;
+
+	for (int s = 0; s <= nstep; s++) {
+		if (nstep != 0) {
+			real	step = (corner_pad_notch) / nstep;
+
+			pw = corner_pad_width - (nstep - s) * step;
+			ph = pad_height - s * step*2/3;
+
+			pwa = pad_width - pw;
+
+			pha = pad_height - ph;
+			if (pad != 0)
+				pha = -pha;
+		}
+
+		/* left (1-7) */
+		pad_mm_clear(-pad_x_off - pw / 2 - pwa,
+			     pad_off(pad) + pha,
+			     pw,
+			     ph,
+			     pad_clearance,
+			     sprintf("%d", pad + 1),
+			     sprintf("%d", pad + 1));
+
+		/* bottom (8-14) */
+
+		pad_mm_clear(pad_off(pad) + pha,
+			     pad_y_off + pw / 2 + pwa,
+			     ph,
+			     pw,
+			     pad_clearance,
+			     sprintf("%d", pad + 8),
+			     sprintf("%d", pad + 8));
+
+		/* right side (15-21) */
+
+		pad_mm_clear(pad_x_off + pw / 2 + pwa,
+			     -pad_off(pad) - pha,
+			     pw,
+			     ph,
+			     pad_clearance,
+			     sprintf("%d", pad + 15),
+			     sprintf("%d", pad + 15));
+
+		/* top (22-28) */
+
+		pad_mm_clear(-pad_off(pad) - pha,
+			     -pad_y_off - pw / 2 - pwa,
+			     ph,
+			     pw,
+			     pad_clearance,
+			     sprintf("%d", pad + 22),
+			     sprintf("%d", pad + 22));
+	}
+
+}
+
+element_end();
