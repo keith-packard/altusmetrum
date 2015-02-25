@@ -75,7 +75,10 @@ FOOTPRINTS= \
 	usb_onboard.fp \
 	u-pdfn-8.fp \
 	ufqfpn28.fp \
-	sot666.fp
+	sot666.fp \
+	sot323.fp \
+	sod123.fp \
+	0806.fp
 
 .5c.fp:
 	nickle $*.5c > $@
