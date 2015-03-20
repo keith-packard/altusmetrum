@@ -71,6 +71,7 @@ FOOTPRINTS= \
 	wire-ant.fp \
 	PCM12SMTR.fp \
 	usbAmale.fp \
+	usbAmale-around.fp \
 	nx3215sa.fp \
 	DR127.fp \
 	PowerPAD32.fp \
