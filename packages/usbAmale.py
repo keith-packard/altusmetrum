@@ -12,7 +12,6 @@
 				# in which case just delete the features in
 				# the PCB layout and make board width right
 TabDiam = 2.50
-TabMinor = 1.00
 TabSpacing = 11.70
 
 PinDiam = 1.10
@@ -96,45 +95,29 @@ print '   Pin[',\
         mm2mils100(PinDiam), \
         '"mnt" "G" 0x0000]'
 
-print '   Pad[',\
-        mm2mils100(-TabSpacing/2 + PadWidth/2 + TabMinor/2), \
-        mm2mils100(-TabDiam/2), \
-        mm2mils100(-TabSpacing/2 + PadWidth/2 + TabMinor/2), \
-        mm2mils100(TabDiam/2), \
-        mm2mils100(PadWidth), \
+print '   Pin[',\
+        mm2mils100(-TabSpacing/2), \
+        mm2mils100(0), \
+        mm2mils100(TabDiam+0.3556), \
         mm2mils100(0.31), \
-        mm2mils100(0.15), \
-        '"mnt" "G" "onsolder,nopaste"]'
+        mm2mils100(TabDiam+0.66), \
+        mm2mils100(TabDiam), \
+        '"mnt" "G" 0x0000]'
 
-print '   Pad[',\
-        mm2mils100(TabSpacing/2 - PadWidth/2 - TabMinor/2), \
-        mm2mils100(-TabDiam/2), \
-        mm2mils100(TabSpacing/2 - PadWidth/2 - TabMinor/2), \
-        mm2mils100(TabDiam/2), \
-        mm2mils100(PadWidth), \
+print '   Pin[',\
+        mm2mils100(TabSpacing/2), \
+        mm2mils100(0), \
+        mm2mils100(TabDiam+0.3556), \
         mm2mils100(0.31), \
-        mm2mils100(0.15), \
-        '"mnt" "G" "onsolder,nopaste"]'
+        mm2mils100(TabDiam+0.66), \
+        mm2mils100(TabDiam), \
+        '"mnt" "G" 0x0000]'
 
 print '   ElementLine[',\
        mm2mils100(-TabSpacing/2), \
        mm2mils100(-EdgeOffset)+500, \
        mm2mils100(TabSpacing/2), \
        mm2mils100(-EdgeOffset)+500, \
-       '1000 ]'
-
-print '   ElementLine[',\
-       mm2mils100(-TabSpacing/2 + TabMinor/2), \
-       mm2mils100(-TabDiam/2), \
-       mm2mils100(-TabSpacing/2 + TabMinor/2), \
-       mm2mils100(TabDiam/2), \
-       '1000 ]'
-
-print '   ElementLine[',\
-       mm2mils100(TabSpacing/2 - TabMinor/2), \
-       mm2mils100(-TabDiam/2), \
-       mm2mils100(TabSpacing/2 - TabMinor/2), \
-       mm2mils100(TabDiam/2), \
        '1000 ]'
 
 print ")"
