@@ -67,7 +67,7 @@ for (int pad = 0; pad < num_pad; pad++) {
 				  clearance * 2, pad_width + mask,
 				  sprintf("%d", pad + 1),
 				  sprintf("%d", pad + 1), "square");
-	
+
 	/* top side (8-5) */
 
 	pad_mm_clear_mask_options(pad_off(pad),
@@ -77,7 +77,14 @@ for (int pad = 0; pad < num_pad; pad++) {
 				  clearance * 2, pad_width + mask,
 				  sprintf("%d", 8 - pad),
 				  sprintf("%d", 8 - pad), "square");
-	
+
 }
+
+rect(-package_width/2, -package_height/2, package_width, package_height);
+
+real dot_off = -.3;
+
+line(-package_width/2 + dot_off, package_height/2 - dot_off,
+     -package_width/2 + dot_off, package_height/2 - dot_off);
 
 element_end();
