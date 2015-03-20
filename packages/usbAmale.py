@@ -103,7 +103,7 @@ print '   Pad[',\
         mm2mils100(TabDiam/2), \
         mm2mils100(PadWidth), \
         mm2mils100(0.31), \
-        mm2mils100(0.15), \
+        mm2mils100(PadWidth + 0.15), \
         '"mnt" "G" "onsolder,nopaste"]'
 
 print '   Pad[',\
@@ -113,7 +113,7 @@ print '   Pad[',\
         mm2mils100(TabDiam/2), \
         mm2mils100(PadWidth), \
         mm2mils100(0.31), \
-        mm2mils100(0.15), \
+        mm2mils100(PadWidth + 0.15), \
         '"mnt" "G" "onsolder,nopaste"]'
 
 print '   ElementLine[',\
