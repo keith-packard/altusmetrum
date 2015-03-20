@@ -13,6 +13,7 @@ SOIC=soic-16.fp
 FOOTPRINTS= \
 	$(SOIC) \
 	s-pwson-n8.fp \
+	s-pwson-n6.fp \
 	MS5607.fp \
 	uson-8.fp \
 	wson6x5.fp \
@@ -21,6 +22,7 @@ FOOTPRINTS= \
 	TDK_PS12.fp \
 	ABM3B.fp \
 	ABM8.fp \
+	7S.fp \
 	1212-8.fp \
 	AN3111.fp \
 	lqfp32.fp \
