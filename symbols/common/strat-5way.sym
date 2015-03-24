@@ -1,0 +1,90 @@
+v 20130925 2
+T -100 -100 0 1 0 0 0 0 1
+gedasymbols::url=http://www.gedasymbols.org/user/levente_kovacs/symbols/switch-dpdt-2.sym
+T 210 1450 8 10 0 0 0 0 1
+device=Dual_Two_Way_Switch
+T 310 2000 8 10 1 1 0 0 1
+refdes=S?
+T 210 1700 8 10 0 0 0 0 1
+footprint=SWITCH2
+P 0 1200 300 1200 1 0 0
+{
+T 0 1200 5 10 0 1 0 0 1
+pinnumber=2
+T 0 1200 5 10 0 0 0 0 1
+pinseq=2
+T 400 1150 5 10 1 1 0 0 1
+pinlabel=middle
+}
+P 2100 1000 1800 1000 1 0 0
+{
+T 2100 1000 5 10 0 1 0 0 1
+pinnumber=1
+T 2100 1000 5 10 0 0 0 0 1
+pinseq=1
+T 1700 1100 5 10 1 1 180 0 1
+pinlabel=bridge
+}
+P 0 400 300 400 1 0 0
+{
+T 0 400 5 10 0 1 0 0 1
+pinnumber=5
+T 0 400 5 10 0 0 0 0 1
+pinseq=5
+T 400 350 5 10 1 1 0 0 1
+pinlabel=common
+}
+P 2100 1400 1800 1400 1 0 0
+{
+T 2100 1400 5 10 0 1 0 0 1
+pinnumber=3
+T 2100 1400 5 10 0 0 0 0 1
+pinseq=3
+T 1700 1450 5 10 1 1 180 0 1
+pinlabel=common
+}
+P 2100 600 1800 600 1 0 0
+{
+T 2100 600 5 10 0 1 0 0 1
+pinnumber=4
+T 2100 600 5 10 0 0 0 0 1
+pinseq=4
+T 1700 700 5 10 1 1 180 0 1
+pinlabel=middle
+}
+P 2100 200 1800 200 1 0 0
+{
+T 2100 200 5 10 0 1 0 0 1
+pinnumber=6
+T 2100 200 5 10 0 0 0 0 1
+pinseq=6
+T 1700 300 5 10 1 1 180 0 1
+pinlabel=neck
+}
+T 200 2300 5 10 0 0 0 0 1
+author=Levente Kovacs
+T 200 2100 5 10 0 0 0 0 1
+email=levente.kovacs@interware.hu
+T 200 2500 5 10 0 0 0 0 1
+dist-license=GPL
+T 200 1900 5 10 0 0 0 0 1
+use-license=unlimited
+P 0 1600 300 1600 1 0 0
+{
+T 0 1600 5 10 0 1 0 0 1
+pinnumber=2
+T 0 1600 5 10 0 0 0 0 1
+pinseq=2
+T 400 1550 5 10 1 1 0 0 1
+pinlabel=bridge
+}
+P 0 800 300 800 1 0 0
+{
+T 0 800 5 10 0 1 0 0 1
+pinnumber=5
+T 0 800 5 10 0 0 0 0 1
+pinseq=5
+T 400 750 5 10 1 1 0 0 1
+pinlabel=neck
+}
+B 300 0 1500 1900 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
