@@ -13,6 +13,7 @@ SOIC=soic-16.fp
 FOOTPRINTS= \
 	$(SOIC) \
 	s-pwson-n8.fp \
+	s-pwson-n6.fp \
 	MS5607.fp \
 	uson-8.fp \
 	wson6x5.fp \
@@ -21,6 +22,7 @@ FOOTPRINTS= \
 	TDK_PS12.fp \
 	ABM3B.fp \
 	ABM8.fp \
+	7S.fp \
 	1212-8.fp \
 	AN3111.fp \
 	lqfp32.fp \
@@ -69,11 +71,17 @@ FOOTPRINTS= \
 	wire-ant.fp \
 	PCM12SMTR.fp \
 	usbAmale.fp \
+	usbAmale-around.fp \
 	nx3215sa.fp \
 	DR127.fp \
 	PowerPAD32.fp \
 	usb_onboard.fp \
-	u-pdfn-8.fp
+	u-pdfn-8.fp \
+	ufqfpn28.fp \
+	sot666.fp \
+	sot323.fp \
+	sod123.fp \
+	0806.fp
 
 .5c.fp:
 	nickle $*.5c > $@

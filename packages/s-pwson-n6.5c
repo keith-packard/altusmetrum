@@ -21,9 +21,9 @@ import Footprint;
 Footprint::process_clearance = 0.07;
 
 real pad_expose = 0.1;
-real pad_width = 0.28;
-real pad_height = 0.50;
-real pad_x_spacing = 0.50;
+real pad_width = 0.3;
+real pad_height = 0.7;
+real pad_x_spacing = 0.65;
 real pad_y_gap = 1.4;
 real pad_y_spacing = pad_y_gap + pad_height;
 
@@ -31,25 +31,31 @@ real package_width = 2;
 real package_height = 2;
 
 real center_width = 1.6;
-real center_height = 0.9;
+real center_height = 1.0;
 
 real clearance = 0.0061 * 25.4;
 real mask = 0.07;
 
 real pad_x_off = package_width / 2 - (pad_width - pad_expose) / 2 + pad_expose;
 
-real num_pad = 4;	/* per side */
+real num_pad = 3;	/* per side */
 
-element_start("s-pwson-n8");
+element_start("s-pwson-n6");
 
 /* full center pad */
-pad_mm_clear_mask_options(0, 0, center_width, center_height, 0, center_height + mask, "9", "9", "square,nopaste");
+pad_mm_clear_mask_options(0, 0, center_width, center_height, 0, center_height + mask, "7", "7", "square,nopaste");
 
-/* 63% paste coverage */
-real paste_coverage = 0.63;
+/* 70% paste coverage */
+real paste_coverage = 0.70;
 real paste_coverage_scale = sqrt(paste_coverage);
 pad_mm_clear_mask_options(0, 0, center_width * paste_coverage_scale,
-			  center_height * paste_coverage_scale, 0, center_height + mask, "9", "9", "square");
+			  center_height * paste_coverage_scale, 0, center_height + mask, "7", "7", "square");
+
+pin_mm_clear_mask_options(-0.9, 0,
+			  0.3811, 0.17, 0.2, 0, "GND", "7", "via");
+
+pin_mm_clear_mask_options(0.9, 0,
+			  0.3811, 0.17, 0.2, 0, "GND", "7", "via");
 
 real pad_y_off = pad_y_spacing / 2;
 
@@ -58,7 +64,7 @@ real pad_off(int n) {
 }
 
 for (int pad = 0; pad < num_pad; pad++) {
-	/* bottom side (1-4) */
+	/* bottom side (1-3) */
 
 	pad_mm_clear_mask_options(pad_off(pad),
 				  pad_y_off,
@@ -68,15 +74,15 @@ for (int pad = 0; pad < num_pad; pad++) {
 				  sprintf("%d", pad + 1),
 				  sprintf("%d", pad + 1), "square");
 
-	/* top side (8-5) */
+	/* top side (6-4) */
 
 	pad_mm_clear_mask_options(pad_off(pad),
 				  -pad_y_off,
 				  pad_width,
 				  pad_height,
 				  clearance * 2, pad_width + mask,
-				  sprintf("%d", 8 - pad),
-				  sprintf("%d", 8 - pad), "square");
+				  sprintf("%d", 6 - pad),
+				  sprintf("%d", 6 - pad), "square");
 
 }
 
