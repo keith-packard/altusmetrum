@@ -1,0 +1,42 @@
+/*
+ * Copyright © 2015 Bdale Garbee <bdale@gag.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "../footprint.5c"
+import Footprint;
+
+real hole_space_x = 12.5;
+real hole_space_y = 5.0;
+real package_width = 12;
+real package_height = 12;
+real hole_diameter = 1.20;
+real hole_copper = 0.3;
+
+element_start("lph");
+
+for (int y = 0; y < 2; y++) 
+	for (int x = 0; x < 2; x++) {
+		int	pin = y + 1;
+		string	pin_name = sprintf ("%d", pin);
+		string	options = "";
+		pin_mm_options (x * hole_space_x - hole_space_x/2, y * hole_space_y - hole_space_y/2, hole_diameter,
+				hole_copper, pin_name, pin_name, options);
+	}
+
+rect(-package_width/2, -package_height/2, package_width, package_height);
+
+element_end();
+

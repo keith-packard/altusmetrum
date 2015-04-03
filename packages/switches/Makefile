@@ -1,6 +1,7 @@
 .SUFFIXES: .5c .py .fp
 
 FOOTPRINTS = \
+	20571.fp \
 	cus-12.fp \
 	lph.fp
 
