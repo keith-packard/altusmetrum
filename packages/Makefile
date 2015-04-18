@@ -83,7 +83,8 @@ FOOTPRINTS= \
 	sod123.fp \
 	0806.fp \
 	fuse345.fp \
-	g5rl1ae.fp
+	g5rl1ae.fp \
+	DO-214AC.fp
 
 .5c.fp:
 	nickle $*.5c > $@
