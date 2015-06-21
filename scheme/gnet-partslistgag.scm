@@ -48,6 +48,8 @@
 			(get-value package)  
 			(gnetlist:get-package-attribute package "footprint")
 			(gnetlist:get-package-attribute package "loadstatus")
+			(gnetlist:get-package-attribute package "provided")
+			(gnetlist:get-package-attribute package "mfg_part_number")
 			(gnetlist:get-package-attribute package "vendor")
 			(gnetlist:get-package-attribute package "vendor_part_number")) ;; sdb change
 		  (get-parts-table (cdr packages)))))))
@@ -100,7 +102,7 @@
 
 (define partslistgag:write-top-header
   (lambda (port)
-    (display "\"device\",\"value\",\"footprint\",\"loadstatus\",\"vendor\",\"vendor_part_number\",\"quantity\",\"refdes\"\n" port)))
+    (display "\"device\",\"value\",\"footprint\",\"loadstatus\",\"provided\",\"mfg_part_number\",\"vendor\",\"vendor_part_number\",\"quantity\",\"refdes\"\n" port)))
 
 (define (partslistgag:write-partslist ls port)
   (if (null? ls)

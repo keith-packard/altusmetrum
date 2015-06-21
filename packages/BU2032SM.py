@@ -32,7 +32,7 @@ print '   Pad[',\
  	mm2mils100(-PinSpacing/2 - PinWidth/2), \
 	mm2mils100(PinHeight/2 - PinWidth/2), \
 	mm2mils100(PinWidth), \
-	0, \
+	mm2mils100(1.5), \
 	mm2mils100(PinWidth+0.4), \
 	'"pin1" "1" 0x0100]'
 
@@ -42,7 +42,7 @@ print '   Pad[',\
  	mm2mils100(PinSpacing/2 + PinWidth/2), \
 	mm2mils100(PinHeight/2 - PinWidth/2), \
 	mm2mils100(PinWidth), \
-	0, \
+	mm2mils100(1.5), \
 	mm2mils100(PinWidth+0.4), \
 	'"pin2" "2" 0x0100]'
 
