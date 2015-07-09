@@ -86,7 +86,8 @@ FOOTPRINTS= \
 	g5rl1ae.fp \
 	DO-214AC.fp \
 	BU2032SM.fp \
-	TO252AA.fp
+	TO252AA.fp \
+	microSD.fp
 
 .5c.fp:
 	nickle $*.5c > $@
