@@ -87,6 +87,7 @@ FOOTPRINTS= \
 	DO-214AC.fp \
 	BU2032SM.fp \
 	TO252AA.fp \
+	SD.fp \
 	microSD.fp
 
 .5c.fp:
