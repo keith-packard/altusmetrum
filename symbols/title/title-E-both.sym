@@ -1,0 +1,21 @@
+v 20130925 2
+B 0 0 64000 44000 15 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 26500 1800 5 10 0 0 0 0 1
+graphical=1
+T 56500 400 15 8 1 0 0 0 1
+FILE:
+T 61500 400 15 8 1 0 0 0 1
+REVISION:
+T 59400 400 15 8 1 0 0 0 1
+PAGE
+T 60200 400 15 8 1 0 0 0 1
+OF
+B 56400 0 7600 2700 15 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+L 56400 600 64000 600 15 0 0 0 -1 -1
+T 56500 100 15 10 1 0 0 0 1
+Project URL:
+T 57200 750 9 10 1 0 0 0 3
+Copyright 2015 by Bdale Garbee <bdale@gag.com> and
+                              Keith Packard <keithp@keithp.com>
+Licensed under the TAPR Open Hardware License, http://www.tapr.org/OHL
+L 56400 1400 64000 1400 15 0 0 0 -1 -1
