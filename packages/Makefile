@@ -6,7 +6,8 @@ DIRS= \
 	molex \
 	pinheader \
 	switches \
-	tyco
+	tyco \
+	phoenix
 
 SOIC=soic-16.fp
 
