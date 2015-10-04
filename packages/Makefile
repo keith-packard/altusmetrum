@@ -88,7 +88,8 @@ FOOTPRINTS= \
 	DO-214AC.fp \
 	BU2032SM.fp \
 	TO252AA.fp \
-	vbrite.fp
+	vbrite.fp \
+	qfn16-3x3.fp
 
 .5c.fp:
 	nickle $*.5c > $@

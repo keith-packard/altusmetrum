@@ -1,0 +1,146 @@
+/*
+ * Copyright © 2012 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+real pad_width = 0.55;
+real metal_width = 0.32;
+real metal_height = 0.24;
+real pad_height = 0.30;
+real pad_spacing = 0.50;
+real pad_clearance = 12 / 1000 * 25.4;
+
+real center_width = 2;
+real center_height = 2;
+
+real package_width = 3;
+real package_height = 3;
+
+real pad_x_off = package_width / 2 - metal_width;
+real pad_y_off = package_height / 2 - metal_width;
+
+real num_pad = 4;	/* per side */
+
+element_start("qfn16-3x3");
+
+real pad_off(int n) {
+	return pad_spacing * (n - (num_pad - 1) / 2);
+}
+
+real corner(int dx, int dy) {
+	real	x = dx * package_width / 2;
+	real	y = dy * package_height / 2;
+	real	len = 0.4;
+
+	line(x, y, x - dx * len, y);
+	line(x, y, x, y - dy * len);
+}
+
+corner(-1, -1);
+corner(1, -1);
+corner(-1, 1);
+corner(1, 1);
+
+real dot_off = .3;
+
+line(-package_width/2 + dot_off, -package_height/2 + dot_off,
+     -package_width/2 + dot_off, -package_height/2 + dot_off);
+
+for (pad = 0; pad < num_pad; pad++) {
+	/* left side (1-4) */
+
+	pad_mm_clear(-pad_x_off - pad_width / 2,
+		     pad_off(pad),
+		     pad_width,
+		     pad_height,
+		     pad_clearance,
+		     sprintf("%d", pad + 1),
+		     sprintf("%d", pad + 1));
+
+	/* bottom (5-8) */
+
+	pad_mm_clear(pad_off(pad),
+		     pad_y_off + pad_width / 2,
+		     pad_height,
+		     pad_width,
+		     pad_clearance,
+		     sprintf("%d", pad + 5),
+		     sprintf("%d", pad + 5));
+
+	/* right side (9-12) */
+
+	pad_mm_clear(pad_x_off + pad_width / 2,
+		     -pad_off(pad),
+		     pad_width,
+		     pad_height,
+		     pad_clearance,
+		     sprintf("%d", pad + 9),
+		     sprintf("%d", pad + 9));
+
+	/* top (13-16) */
+
+	pad_mm_clear(-pad_off(pad),
+		     -pad_y_off - pad_width / 2,
+		     pad_height,
+		     pad_width,
+		     pad_clearance,
+		     sprintf("%d", pad + 13),
+		     sprintf("%d", pad + 13));
+
+}
+
+int pad_blocks = 3;
+
+real block_width = center_width / pad_blocks;
+real block_height = center_height / pad_blocks;
+
+real block_x(int x) = (x - (pad_blocks - 1)/2) * block_width;
+real block_y(int y) = (y - (pad_blocks - 1)/2) * block_height;
+
+bool via_block(int x, int y) {
+	return (x & 1) == 0 && (y & 1) == 0;
+}
+
+real via_hole = 13/1000 * 25.4;		/* 13 mil drill */
+real via_copper = 7/1000 * 25.4; 	/* 5.6 mil anulus */
+
+for (int pad_y = 0; pad_y < pad_blocks; pad_y++) {
+	for (int pad_x = 0; pad_x < pad_blocks; pad_x++)
+		if (via_block(pad_x, pad_y)) {
+			pin_mm_clear_mask(block_x(pad_x), block_y(pad_y),
+					  via_hole, via_hole + 2 * via_copper, pad_clearance, 0,
+					  "GND", "GND");
+			pad_mm_clear_mask_options(block_x(pad_x), block_y(pad_y),
+						  block_width, block_height,
+						  pad_clearance, 0,
+						  "GND", "GND","square,nopaste");
+		} else {
+			/* full square of metal */
+			pad_mm_clear_options(block_x(pad_x), block_y(pad_y),
+					     block_width, block_height,
+					     0,
+					     "GND", "GND","square,nopaste");
+			/* 1/4 full of solder paste */
+			pad_mm_clear_options(block_x(pad_x), block_y(pad_y),
+					     block_width/2, block_height/2,
+					     0,
+					     "GND", "GND","square");
+		}
+}
+
+element_end();
