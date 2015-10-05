@@ -6,7 +6,8 @@ DIRS= \
 	molex \
 	pinheader \
 	switches \
-	tyco
+	tyco \
+	phoenix
 
 SOIC=soic-16.fp
 
@@ -88,7 +89,8 @@ FOOTPRINTS= \
 	BU2032SM.fp \
 	TO252AA.fp \
 	SD.fp \
-	microSD.fp
+	microSD.fp \
+	vbrite.fp
 
 .5c.fp:
 	nickle $*.5c > $@

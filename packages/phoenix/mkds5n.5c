@@ -1,0 +1,76 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "../footprint.5c"
+import Footprint;
+
+
+void
+mkds5n(int pins) {
+	real pin_odd_off = 0;
+	real pin_even_off = 9;
+
+	real package_left = 3.18;
+	real package_right = 3.18;
+	real package_top = 2.1;
+	real package_bottom = 15.85 - package_top;
+
+	real pin_diameter = 1.3;
+	real pin_spacing = 6.35;
+	real pin_copper = 1.5;
+
+	real package_width = package_left + (pins - 1) * pin_spacing + package_right;
+	real package_height = package_top + package_bottom;
+
+	real pin_x(int pin) {
+		return (pin - 1) * pin_spacing;
+	}
+
+	real pin_y(int pin) {
+		return ((pin & 1) == 0) ? pin_even_off : pin_odd_off;
+	}
+
+	element_start(sprintf("MKDS-5N-HV-%d", pins));
+
+	for (int pin = 1; pin <= pins; pin++) {
+		string options = "";
+		if (pin == 1)
+			options = "square";
+		pin_mm_options(pin_x(pin), pin_y(pin), pin_diameter, pin_copper,
+			       sprintf("%d", pin), sprintf("%d", pin), options);
+	}
+
+	rect(-package_left, -package_top, package_width, package_height);
+
+	element_end();
+}
+
+void main () {
+	int pins;
+	if (dim(argv) < 2) {
+		printf("usage: %s <pins>\n", argv[0]);
+		exit(1);
+	}
+	pins = atoi(argv[1]);
+	if (pins <= 0 || pins > 32) {
+		printf("Invalid pins: %d\n", pins);
+		exit(1);
+	}
+	mkds5n(pins);
+}
+
+main();

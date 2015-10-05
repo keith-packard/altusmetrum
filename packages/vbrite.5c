@@ -1,0 +1,49 @@
+/*
+ * Copyright © 2015 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+/* Bomar Inteconnect Products, Inc V-Brite footprint.
+ *
+ * This footprint covers their BNC, TNC, F and N connectors
+ */
+
+real pin_drill = 2.2;
+real pin_y = 5.1;
+real pin_x = 5.9;
+real pin_copper = 0.2;
+
+real gnd_width = 8.0;
+real gnd_height = 3.5;
+
+real center_width = 8.0;
+real center_height = 2.0;
+
+element_start("vbrite");
+
+pad_mm_options(gnd_width / 2, -pin_y, gnd_width, gnd_height, "GND", "2", "square,nopaste");
+pad_mm_options(gnd_width / 2, -pin_y, gnd_width, gnd_height, "GND", "2", "onsolder,square,nopaste");
+pin_mm(gnd_width - pin_x, -pin_y, pin_drill, pin_copper, "GND", "2");
+
+pad_mm_options(gnd_width / 2, pin_y, gnd_width, gnd_height, "GND", "2", "square,nopaste");
+pad_mm_options(gnd_width / 2, pin_y, gnd_width, gnd_height, "GND", "2", "onsolder,square,nopaste");
+pin_mm(gnd_width -pin_x, pin_y, pin_drill, pin_copper, "GND", "2");
+
+pad_mm_options(center_width / 2, 0, center_width, center_height,"1", "1", "square,nopaste");
+
+element_end();
