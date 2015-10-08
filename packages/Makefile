@@ -4,10 +4,11 @@ DIRS= \
 	diodes \
 	jst \
 	molex \
+	norcomp \
+	phoenix \
 	pinheader \
 	switches \
-	tyco \
-	phoenix
+	tyco 
 
 SOIC=soic-16.fp
 
