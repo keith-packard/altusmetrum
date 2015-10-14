@@ -367,11 +367,5 @@ pinseq=26
 }
 T -105 -600 8 10 0 1 0 0 1
 footprint=hvqfn33
-T -105 -600 8 10 0 1 0 0 1
-vendor=digikey
 T 395 9900 8 10 1 1 0 0 1
 refdes=U?
-T 395 12500 8 10 0 1 0 0 1
-loadstatus=smt
-T -105 -600 8 10 0 1 0 0 1
-vendor_part_number=568-8581-ND
