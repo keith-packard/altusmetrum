@@ -21,12 +21,12 @@ drc:	$(PROJECT).sch Makefile
 partslist:	$(PROJECT).sch Makefile
 	gnetlist -g bom -o $(PROJECT).unsorted $(SCHEMATICS)
 	head -n1 $(PROJECT).unsorted > partslist
-	tail -n+2 $(PROJECT).unsorted | sort >> partslist
+	tail -n+2 $(PROJECT).unsorted | sort | awk -f ../altusmetrum/bin/fillpartslist >> partslist
 	rm -f $(PROJECT).unsorted
 
 partslist.csv:	$(SCHEMATICS) Makefile
 	gnetlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
-	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8) > $@ && rm -f $(PROJECT).csvtmp
+	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8) | awk -f ../altusmetrum/bin/fillpartscsv > $@ && rm -f $(PROJECT).csvtmp
 
 
 partslist.dk: $(SCHEMATICS) Makefile $(SCHEME)/gnet-partslist-bom.scm

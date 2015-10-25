@@ -57,7 +57,7 @@
 (define (write-one-row ls separator end-char port)
   (if (null? ls)
       '()
-      (begin (display "\"" port)
+      (begin (display "" port)
 	     (display (car ls) port)
 	     (for-each (lambda (st) (display separator port)(display st port)) (cdr ls))
 	     (display end-char port))))
@@ -102,13 +102,13 @@
 
 (define partslistgag:write-top-header
   (lambda (port)
-    (display "\"device\",\"value\",\"footprint\",\"loadstatus\",\"provided\",\"mfg_part_number\",\"vendor\",\"vendor_part_number\",\"quantity\",\"refdes\"\n" port)))
+    (display "device,value,footprint,loadstatus,provided,mfg_part_number,vendor,vendor_part_number,quantity,refdes\n" port)))
 
 (define (partslistgag:write-partslist ls port)
   (if (null? ls)
       '()
-      (begin (write-one-row (cdar ls) "\",\"" "\"," port)
-	     (write-one-row (caar ls) " " "\"\n" port)
+      (begin (write-one-row (cdar ls) "," "," port)
+	     (write-one-row (caar ls) " " "\n" port)
 	     (partslistgag:write-partslist (cdr ls) port))))
 
 (define partslistgag:write-bottom-footer
