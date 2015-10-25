@@ -26,7 +26,7 @@ partslist:	$(PROJECT).sch Makefile
 
 partslist.csv:	$(SCHEMATICS) Makefile
 	gnetlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
-	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8) | awk -f $(AM)/bin/fillpartscsv > $@ && rm -f $(PROJECT).csvtmp
+	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | awk -f $(AM)/bin/fillpartscsv ) > $@ && rm -f $(PROJECT).csvtmp
 
 
 partslist.dk: $(SCHEMATICS) Makefile $(SCHEME)/gnet-partslist-bom.scm
