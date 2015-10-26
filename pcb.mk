@@ -52,15 +52,15 @@ zip:	$(PROJECT).bottom.gbr $(PROJECT).bottommask.gbr $(PROJECT).fab.gbr $(PROJEC
 	zip $(PROJECT).zip $(PROJECT).*.gbr $(PROJECT).*.cnc $(PROJECT).xy # $(PROJECT).xls
 
 oshpark: $(PROJECT).bottom.gbr $(PROJECT).bottommask.gbr $(PROJECT).top.gbr $(PROJECT).topmask.gbr $(PROJECT).plated-drill.cnc
-	mv $(PROJECT).bottom.gbr bottom\ layer.ger
-	mv $(PROJECT).bottommask.gbr bottom\ solder\ mask.ger
-	mv $(PROJECT).bottomsilk.gbr bottom\ silk\ screen.ger
-	mv $(PROJECT).outline.gbr board\ outline.ger
-	mv $(PROJECT).top.gbr top\ layer.ger
-	mv $(PROJECT).topmask.gbr top\ solder\ mask.ger
-	mv $(PROJECT).plated-drill.cnc drills.xln
-	mv $(PROJECT).group2.gbr internal\ plane\ 1.ger
-	mv $(PROJECT).group3.gbr internal\ plane\ 2.ger
+	cp $(PROJECT).bottom.gbr bottom\ layer.ger
+	cp $(PROJECT).bottommask.gbr bottom\ solder\ mask.ger
+	cp $(PROJECT).bottomsilk.gbr bottom\ silk\ screen.ger
+	cp $(PROJECT).outline.gbr board\ outline.ger
+	cp $(PROJECT).top.gbr top\ layer.ger
+	cp $(PROJECT).topmask.gbr top\ solder\ mask.ger
+	cp $(PROJECT).plated-drill.cnc drills.xln
+	cp $(PROJECT).group2.gbr internal\ plane\ 1.ger
+	cp $(PROJECT).group3.gbr internal\ plane\ 2.ger
 	zip $(PROJECT)-oshpark.zip *.ger *.xln
 
 stencil:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
