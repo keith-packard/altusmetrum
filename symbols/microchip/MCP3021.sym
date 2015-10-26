@@ -2,7 +2,7 @@ v 20130925 2
 P 0 1200 300 1200 1 0 0
 {
 T 0 1200 5 10 0 0 0 0 1
-pintype=passive
+pintype=pas
 T 355 1195 5 10 1 1 0 0 1
 pinlabel=AIN
 T 205 1245 5 10 1 1 0 6 1
