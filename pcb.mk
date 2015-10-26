@@ -18,13 +18,13 @@ all:	drc partslist partslist.csv pcb
 drc:	$(PROJECT).sch Makefile
 	-gnetlist -g drc2 $(PROJECT).sch -o $(PROJECT).drc
 
-partslist:	$(PROJECT).sch Makefile
+partslist:	$(PROJECT).sch Makefile $(AM)/preferred-parts
 	gnetlist -g bom -o $(PROJECT).unsorted $(SCHEMATICS)
 	head -n1 $(PROJECT).unsorted > partslist
 	tail -n+2 $(PROJECT).unsorted | sort | awk -f $(AM)/bin/fillpartslist >> partslist
 	rm -f $(PROJECT).unsorted
 
-partslist.csv:	$(SCHEMATICS) Makefile
+partslist.csv:	$(SCHEMATICS) Makefile $(AM)/preferred-parts
 	gnetlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
 	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | awk -f $(AM)/bin/fillpartscsv ) > $@ && rm -f $(PROJECT).csvtmp
 
