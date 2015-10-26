@@ -1,0 +1,63 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+real side_pin_x = 2.8;
+real center_pin_y = 2.15;
+real side_pin_width = 0.70;
+real center_pin_width = 1.10;
+real pin_copper = 0.30;
+real npad = 5;
+real pad_pitch = 0.65;
+real pad_width = 0.45;
+real pad_height = 1.50;
+real pad_y = 1.00 - pad_height/2;
+real package_width = 8.00;
+real package_height = 3.00;
+real package_y = center_pin_y / 2 - package_height / 2;
+real package_x = -package_width / 2;
+
+public void slot(real x, real y, real width, real drill) {
+
+	pin_mm(x - width / 2, y, drill, pin_copper, "mnt", "mnt");
+
+	if (drill <= width/2)
+		pin_mm(x, y, drill, pin_copper, "mnt", "mnt");
+
+	pin_mm(x + width / 2, y, drill, pin_copper, "mnt", "mnt");
+}
+
+public real pad_x(int pad) {
+	return pad * pad_pitch - (npad -1 ) / 2 * pad_pitch;
+}
+
+element_start("1051330011");
+
+slot(-side_pin_x, 0, side_pin_width, 0.50);
+slot(side_pin_x, 0, side_pin_width, 0.50);
+slot(0, center_pin_y, center_pin_width, 0.50);
+
+for (int pad = 0; pad < npad; pad++) {
+	string name = sprintf("%d", pad + 1);
+	pad_mm(pad_x(pad), pad_y, pad_width, pad_height, name, name);
+}
+
+rect(package_x, package_y, package_width, package_height);
+
+element_end();

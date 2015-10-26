@@ -92,7 +92,8 @@ FOOTPRINTS= \
 	SD.fp \
 	microSD.fp \
 	vbrite.fp \
-	qfn16-3x3.fp
+	qfn16-3x3.fp \
+	1051330011.fp
 
 .5c.fp:
 	nickle $*.5c > $@
