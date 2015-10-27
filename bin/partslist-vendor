@@ -38,6 +38,7 @@ string[*] required_elements = {
 	"mfg_part_number",
 	"device",
 	"value",
+	"refdes",
 };
 
 bool has_header_member(string member) {
@@ -86,6 +87,31 @@ string part_number(string[string] entry)
 		return entry["vendor_part_number"];
 }
 
+void process_seeed(string[string] entry)
+{
+
+	if (entry["loadstatus"] != "smt")
+		return;
+
+	static bool start = true;
+	if (start) {
+		printf("Part/Designator,Manufacturer Part Number/Seeed SKU, Quantity");
+		start = false;
+	}
+
+	string[*] refdes = String::wordsplit(entry["refdes"], " \t");
+	if (dim(refdes) > 1)
+		printf ("\"");
+	for (int i = 0; i < dim(refdes); i++) {
+		printf("%s", refdes[i]);
+		if (i < dim(refdes) - 1)
+			printf (",");
+	}
+	if (dim(refdes) > 1)
+		printf ("\"");
+	printf(",%s,%s\n", entry["mfg_part_number"], entry["quantity"]);
+}
+
 void process_digikey(string[string] entry)
 {
 	printf("%s,%s,%s %s\n",
@@ -109,8 +135,10 @@ void process_file(file f) {
 	while (!File::end(f)) {
 		string[string] entry = read_entry(f);
 		string vendor = entry["vendor"];
-		if ((!is_uninit(&vendors) && has_vendor(vendors, vendor)) ||
-		    (!is_uninit(&not_vendors) && !has_vendor(not_vendors, vendor))) {
+		if (!is_uninit(&vendors) && has_vendor(vendors, "seeed")) {
+			process_seeed(entry);
+		} else if ((!is_uninit(&vendors) && has_vendor(vendors, vendor)) ||
+			   (!is_uninit(&not_vendors) && !has_vendor(not_vendors, vendor))) {
 			switch (entry["vendor"]) {
 			case "digikey":
 				process_digikey(entry);
