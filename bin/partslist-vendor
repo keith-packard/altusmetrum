@@ -1,0 +1,162 @@
+#!/usr/bin/env nickle
+#
+# Convert CSV parts list into vendor import format
+#
+# Copyright © 2015 Keith Packard <keithp@keithp.com>, GPL v3+
+#
+
+bool	mfg_part = false;
+string[*]	vendors;
+string		vendor_list;
+string[*]	not_vendors;
+string		not_vendor_list;
+string	input_name;
+string	output_name;
+string 	program;
+int	argi;
+int	lineno = 0;
+
+void fatal(string format, poly args ...)
+{
+	File::fprintf(stderr, format, args...);
+	exit(1);
+}
+
+string[*] read_line(file f) {
+	lineno++;
+	string	line = fgets(f);
+
+	return String::parse_csv(line);
+}
+
+string[*] header;
+
+string[*] required_elements = {
+	"quantity",
+	"vendor",
+	"vendor_part_number",
+	"mfg_part_number",
+	"device",
+	"value",
+};
+
+bool has_header_member(string member) {
+	for (int i = 0; i < dim(header); i++)
+		if (header[i] == member)
+			return true;
+	return false;
+}
+
+bool has_vendor(string[*] vendors, string vendor) {
+	for (int i = 0; i < dim(vendors); i++)
+		if (vendors[i] == vendor)
+			return true;
+	return false;
+}
+
+void read_header(file f) {
+	header = read_line(f);
+
+	for (int i = 0; i < dim(required_elements); i++)
+		if (!has_header_member(required_elements[i]))
+			fatal("Missing header element \"%s\"\n", required_elements[i]);
+}
+
+string[string] read_entry(file f) {
+	string[*]	elements = read_line(f);
+	string[string]	entry = {};
+
+	if (dim(header) != dim(elements))
+		fatal("line %d: has %d instead of %d elements (%V)\n",
+		      lineno, dim(elements), dim(header), elements);
+
+	for (int i = 0; i < dim(header); i++) {
+		if (elements[i] == "")
+			elements[i] = "unknown";
+		entry[header[i]] = elements[i];
+	}
+	return entry;
+}
+
+string part_number(string[string] entry)
+{
+	if (mfg_part)
+		return entry["mfg_part_number"];
+	else
+		return entry["vendor_part_number"];
+}
+
+void process_digikey(string[string] entry)
+{
+	printf("%s,%s,%s %s\n",
+	       entry["quantity"],
+	       part_number(entry),
+	       entry["device"],
+	       entry["value"]);
+}
+
+void process_other(string[string] entry) {
+	printf("%s,%s,%s,%s %s\n",
+	       entry["vendor"],
+	       entry["quantity"],
+	       part_number(entry),
+	       entry["device"],
+	       entry["value"]);
+}
+
+void process_file(file f) {
+	read_header(f);
+	while (!File::end(f)) {
+		string[string] entry = read_entry(f);
+		string vendor = entry["vendor"];
+		if ((!is_uninit(&vendors) && has_vendor(vendors, vendor)) ||
+		    (!is_uninit(&not_vendors) && !has_vendor(not_vendors, vendor))) {
+			switch (entry["vendor"]) {
+			case "digikey":
+				process_digikey(entry);
+				break;
+			default:
+				process_other(entry);
+				break;
+			}
+		}
+	}
+}
+
+ParseArgs::argdesc argd = {
+	.args = {
+		{ .var = { .arg_flag = &mfg_part },
+		  .abbr = 'm',
+		  .name = "mfg",
+		  .desc = "Display manufacturer part number"},
+		{ .var = { .arg_string = &vendor_list },
+		  .abbr = 'v',
+		  .name = "vendor",
+		  .expr_name = "vendors",
+		  .desc = "Vendors to match"},
+		{ .var = { .arg_string = &not_vendor_list },
+		  .abbr = 'n',
+		  .name = "not-vendor",
+		  .expr_name = "not-vendor",
+		  .desc = "Vendors to exclude"},
+	},
+	.unknown = &argi,
+};
+
+void main() {
+	ParseArgs::parseargs(&argd, &argv);
+	if (!is_uninit(&vendor_list))
+		vendors = String::parse_csv(vendor_list);
+
+	if (!is_uninit(&not_vendor_list))
+		not_vendors = String::parse_csv(not_vendor_list);
+
+	if (!is_uninit(&argi)) {
+		for (int i = argi; i < dim(argv); i++)
+			twixt(file f = File::open(argv[i], "r"); File::close(f))
+				process_file(f);
+	} else
+		process_file(stdin);
+}
+
+main();

@@ -28,15 +28,17 @@ partslist.csv:	$(SCHEMATICS) Makefile $(AM)/preferred-parts
 	gnetlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
 	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | awk -f $(AM)/bin/fillpartscsv ) > $@ && rm -f $(PROJECT).csvtmp
 
+partslist.dk: $(SCHEMATICS) Makefile $(AM)/preferred-parts partslist.csv
+	$(AM)/bin/partslist-vendor --vendor digikey partslist.csv > $@
 
-partslist.dk: $(SCHEMATICS) Makefile $(SCHEME)/gnet-partslist-bom.scm
-	gnetlist -L $(SCHEME) -g partslist-bom -Ovendor=digikey -o $@ $(SCHEMATICS)
-
-partslist-check.dk: $(SCHEMATICS) Makefile $(SCHEME)/gnet-partslist-mfg-bom.scm
-	gnetlist -L $(SCHEME) -g partslist-mfg-bom -Ovendor=digikey -o $@ $(SCHEMATICS)
+partslist-check.dk: $(SCHEMATICS) Makefile $(AM)/preferred-parts partslist.csv
+	$(AM)/bin/partslist-vendor --vendor digikey --mfg partslist.csv > $@
 
 partslist.mouser: $(SCHEMATICS) Makefile $(SCHEME)/gnet-partslist-bom.scm
-	gnetlist -L $(SCHEME) -g partslist-bom -Ovendor=mouser -o $@ $(SCHEMATICS)
+	$(AM)/bin/partslist-vendor --vendor mouser partslist.csv > $@
+
+partslist.other: $(SCHEMATICS) Makefile $(SCHEME)/gnet-partslist-bom.scm
+	$(AM)/bin/partslist-vendor --not-vendor digikey,mouser partslist.csv > $@
 
 pcb:	$(SCHEMATICS) project Makefile
 	gsch2pcb project
