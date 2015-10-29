@@ -166,3 +166,17 @@ $(PROJECT)-big.pdf:	$(PROJECT)-big.ps
 	ps2pdf $(PROJECT)-big.ps
 
 pdf:	$(PROJECT)-sch.pdf $(PROJECT)-pcb.pdf $(PROJECT)-big.pdf
+
+project:
+	(echo 'schematics $(SCHEMATICS)'; \
+	 echo 'output-name $(PROJECT)'; \
+	 echo 'elements-dir $(AM)/packages'; \
+	 echo 'skip-m4') > $@
+
+attribs: $(AM)/attribs
+	cp $(AM)/attribs $@
+
+gafrc:
+	(echo '; empty the library path and populate it with only our own symbols'; \
+	 echo '(reset-component-library)'; \
+	 echo '(load "../altusmetrum/gafrc")') > $@
