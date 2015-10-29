@@ -91,7 +91,7 @@ FOOTPRINTS= \
 	TO252AA.fp \
 	SD.fp \
 	microSD.fp \
-	vbrite.fp \
+	v-bite.fp \
 	qfn16-3x3.fp \
 	1051330011.fp
 

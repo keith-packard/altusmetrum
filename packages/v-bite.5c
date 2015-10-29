@@ -18,7 +18,7 @@
 load "footprint.5c"
 import Footprint;
 
-/* Bomar Inteconnect Products, Inc V-Brite footprint.
+/* Bomar Inteconnect Products, Inc V-Bite footprint.
  *
  * This footprint covers their BNC, TNC, F and N connectors
  */
@@ -34,7 +34,7 @@ real gnd_height = 3.5;
 real center_width = 8.0;
 real center_height = 2.0;
 
-element_start("vbrite");
+element_start("v-bite");
 
 pad_mm_options(gnd_width / 2, -pin_y, gnd_width, gnd_height, "GND", "2", "square,nopaste");
 pad_mm_options(gnd_width / 2, -pin_y, gnd_width, gnd_height, "GND", "2", "onsolder,square,nopaste");
