@@ -142,19 +142,27 @@ muffins: partslist.csv $(AM)/glabels/muffin-short-5267.glabels
 		ps2pdf muffin-5267.ps && rm muffin-5267.ps
 
 .sch.ps:
-	gschem -p -o $*.ps -s /usr/share/gEDA/scheme/print.scm $*.sch
+	gschem -p -o $@ -s /usr/share/gEDA/scheme/print.scm $*.sch
 
-$(PROJECT)-sch.ps:	$(SCHEMATICS:.sch=.ps)
-	psmerge -o$(PROJECT)-sch.ps $(SCHEMATICS:.sch=.ps)
+.ps.pdf:
+	ps2pdf $*.ps
 
-$(PROJECT)-sch.pdf:	$(PROJECT)-sch.ps
-	ps2pdf $(PROJECT)-sch.ps
+SCHEMATICS_PS=$(SCHEMATICS:.sch=.ps)
+SCHEMATICS_PDF=$(SCHEMATICS:.sch=.pdf)
 
-$(PROJECT)-pcb.ps:	$(PROJECT).pcb
-	pcb -x ps --psfile $(PROJECT)-pcb.ps --media Letter $(PROJECT).pcb
+$(PROJECT)-sch.pdf:	$(SCHEMATICS_PDF)
+	pdfjoin -o $@ $(SCHEMATICS_PDF)
+
+$(PROJECT)-pcb.ps:	$(PROJECT).pcb $(CONFIG)
+	pcb -x ps --psfile $@ --media Letter --ps-color $(PROJECT).pcb
 
 $(PROJECT)-pcb.pdf:	$(PROJECT)-pcb.ps
 	ps2pdf $(PROJECT)-pcb.ps
 
-pdf:	$(PROJECT)-sch.pdf $(PROJECT)-pcb.pdf
+$(PROJECT)-big.ps:	$(PROJECT).pcb $(CONFIG)
+	pcb -x ps --psfile $@ --media Letter --ps-color --fill-page --no-align-marks $(PROJECT).pcb
 
+$(PROJECT)-big.pdf:	$(PROJECT)-big.ps
+	ps2pdf $(PROJECT)-big.ps
+
+pdf:	$(PROJECT)-sch.pdf $(PROJECT)-pcb.pdf $(PROJECT)-big.pdf
