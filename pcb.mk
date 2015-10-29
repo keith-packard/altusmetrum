@@ -13,18 +13,22 @@ ifndef SCHEMATICS
 	SCHEMATICS=$(PROJECT).sch
 endif
 
+CONFIG=gafrc attribs project
+
 all:	drc partslist partslist.csv pcb
 
-drc:	$(PROJECT).sch Makefile
-	-gnetlist -g drc2 $(PROJECT).sch -o $(PROJECT).drc
+drc:	$(PROJECT).drc
 
-partslist:	$(PROJECT).sch Makefile $(AM)/preferred-parts
+$(PROJECT).drc: $(PROJECT).sch Makefile $(CONFIG)
+	-gnetlist -g drc2 $(PROJECT).sch -o $@
+
+partslist:	$(PROJECT).sch Makefile $(AM)/preferred-parts $(CONFIG)
 	gnetlist -g bom -o $(PROJECT).unsorted $(SCHEMATICS)
 	head -n1 $(PROJECT).unsorted > partslist
 	tail -n+2 $(PROJECT).unsorted | sort | awk -f $(AM)/bin/fillpartslist >> partslist
 	rm -f $(PROJECT).unsorted
 
-partslist.csv:	$(SCHEMATICS) Makefile $(AM)/preferred-parts
+partslist.csv:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
 	gnetlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
 	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | awk -f $(AM)/bin/fillpartscsv ) > $@ && rm -f $(PROJECT).csvtmp
 
@@ -43,13 +47,13 @@ partslist.other: partslist.csv
 $(PROJECT)-seeed.csv: partslist.csv
 	$(AM)/bin/partslist-vendor --vendor seeed partslist.csv > $@
 
-pcb:	$(SCHEMATICS) project Makefile
+pcb:	$(SCHEMATICS) Makefile $(CONFIG)
 	gsch2pcb project
 
-$(PROJECT).xy:	$(PROJECT).pcb
+$(PROJECT).xy:	$(PROJECT).pcb $(CONFIG)
 	pcb -x bom $(PROJECT).pcb
 
-$(PROJECT).bottom.gbr:	$(PROJECT).pcb
+$(PROJECT).bottom.gbr:	$(PROJECT).pcb $(CONFIG)
 	pcb -x gerber $(PROJECT).pcb
 	@case "$(SILK)" in \
 	none) 	rm -f $(PROJECT).topsilk.gbr $(PROJECT).bottom.gbr; \
