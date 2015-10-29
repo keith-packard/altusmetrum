@@ -131,6 +131,10 @@ clean:
 	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln
 	rm -f *.partslist *.new.pcb *.unsorted $(PROJECT).xls muffin-5267.pdf
 	rm -f $(PROJECT)-sch.ps $(PROJECT)-sch.pdf $(PROJECT)-pcb.ps $(PROJECT)-pcb.pdf
+	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gto $(PROJECT).gml
+	rm -f $(PROJECT).gtl $(PROJECT).gts $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3
+	rm -f $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
+	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf
 
 muffins: partslist.csv $(AM)/glabels/muffin-short-5267.glabels
 	glabels-3-batch $(AM)/glabels/muffin-short-5267.glabels \
