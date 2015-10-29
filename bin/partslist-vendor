@@ -95,7 +95,7 @@ void process_seeed(string[string] entry)
 
 	static bool start = true;
 	if (start) {
-		printf("Part/Designator,Manufacturer Part Number/Seeed SKU, Quantity");
+		printf("Part/Designator,Manufacturer Part Number/Seeed SKU, Quantity\n");
 		start = false;
 	}
 
