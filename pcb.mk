@@ -70,7 +70,7 @@ $(PROJECT).bottom.gbr:	$(PROJECT).pcb $(CONFIG)
 
 zip: $(PROJECT).zip
 
-$(PROJECT).zip: $(PROJECT).bottom.gbr Makefile
+$(PROJECT).zip: $(PROJECT).bottom.gbr $(PROJECT).xy Makefile
 	zip $(PROJECT).zip $(PROJECT).*.gbr $(PROJECT).*.cnc $(PROJECT).xy # $(PROJECT).xls
 
 oshpark: $(PROJECT)-oshpark.zip
