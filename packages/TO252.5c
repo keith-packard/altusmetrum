@@ -1,0 +1,53 @@
+/*
+ * Copyright © 2015 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+/* TO-252/DPAK footprint from ST */
+
+load "footprint.5c";
+import Footprint;
+
+real gnd_width = 6.3;
+real gnd_height = 6.1;
+
+real pad_width = 1.5;
+real pad_height = 2.8;
+real pad_space = 4.572;
+
+real total_height = 10.7;
+real gnd_y = pad_height / 2 + gnd_height / 2 - total_height;
+
+real pkg_width = 6.5;
+real pkg_height = 6.1;
+real pkg_center_y = 1.5/2 - 2.8 - pkg_height/2;
+
+element_start("TO252");
+
+pad_mm(-pad_space/2, 0,
+       pad_width, pad_height,
+       "1", "1");
+
+pad_mm(0, gnd_y,
+       gnd_width, gnd_height,
+       "2", "2");
+
+pad_mm(pad_space/2, 0,
+       pad_width, pad_height,
+       "3", "3");
+
+rect(-pkg_width / 2, pkg_center_y - pkg_height/2, pkg_width, pkg_height);
+
+element_end();

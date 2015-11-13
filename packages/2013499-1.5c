@@ -1,0 +1,75 @@
+/*
+ * Copyright © 2015 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+/* TE 2013499-1 USB micro B with solder tangs. Y origin is the board edge */
+
+load "footprint.5c"
+import Footprint;
+
+real pad_width = 0.4;
+real pad_height = 1.35;
+real pad_spacing = 0.65;
+real pad_y = 1.45 + 3.35 - pad_height/2;
+
+real tab_width = 1.9;
+real tab_height = 1.9;
+real tab_x = 0.5 + tab_width / 2;
+real tab_y = 1.45;
+
+real tang_y = 1.45;
+real tang_radius = 0.36;
+real tang_length = 1.2;
+real tang_x = 5.8/2 + tang_radius;
+real tang_copper = 0.22;
+
+real wing_width = 1.6;
+real wing_height = 1.4;
+real wing_x = 2.4 + wing_width/2;
+real wing_y = 1.45 + 3.35 - 0.9;
+
+real pkg_width = 6.1;
+real pkg_height = 7.9;
+real edge_height = 4.8;
+real edge_width = 2 * (wing_inner + wing_width);
+
+element_start("2013499-1");
+
+pad_mm(pad_spacing* 2, pad_y, pad_width, pad_height, "VBUS", "1");
+pad_mm(pad_spacing* 1, pad_y, pad_width, pad_height, "D-", "2");
+pad_mm(pad_spacing* 0, pad_y, pad_width, pad_height, "D+", "3");
+pad_mm(pad_spacing*-1, pad_y, pad_width, pad_height, "HS", "4");
+pad_mm(pad_spacing*-2, pad_y, pad_width, pad_height, "GND", "5");
+
+/* "Wings", which are next to the signal pads */
+
+pad_mm_clear(-wing_x, wing_y, wing_width, wing_height, 0, "GND", "5");
+pad_mm_clear( wing_x, wing_y, wing_width, wing_height, 0, "GND", "5");
+
+/* Tabs under package */
+
+pad_mm_clear(-tab_x, tab_y, tab_width, tab_height, 0, "GND", "5");
+pad_mm_clear( tab_x, tab_y, tab_width, tab_height, 0, "GND", "5");
+
+/* tangs at edges of package */
+
+pin_mm_clear(-tang_x, tang_y - tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
+pin_mm_clear(-tang_x, tang_y + tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
+
+pin_mm_clear( tang_x, tang_y - tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
+pin_mm_clear( tang_x, tang_y + tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
+
+element_end();

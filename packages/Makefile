@@ -89,11 +89,13 @@ FOOTPRINTS= \
 	DO-214AC.fp \
 	BU2032SM.fp \
 	TO252AA.fp \
+	TO252.fp \
 	SD.fp \
 	microSD.fp \
 	v-bite.fp \
 	qfn16-3x3.fp \
-	1051330011.fp
+	1051330011.fp \
+	2013499-1.fp
 
 .5c.fp:
 	nickle $*.5c > $@
