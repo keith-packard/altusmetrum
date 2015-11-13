@@ -127,7 +127,19 @@ void process_mouser(string[string] entry)
 {
 	if (entry["loadstatus"] == "noload")
 		return;
-	printf("%s|%s\n", part_number(entry), entry["quantity"]);
+/*	printf("%s|%s\n", part_number(entry), entry["quantity"]); */
+
+	static bool start = true;
+
+	if (start) {
+		printf("Mouser Part Number,Manufacturer Part Number,Quantity 1\n");
+		start = false;
+	}
+
+	printf("%s,%s,%s\n",
+	       entry["vendor_part_number"],
+	       entry["mfg_part_number"],
+	       entry["quantity"]);
 }
 
 void process_other(string[string] entry) {
