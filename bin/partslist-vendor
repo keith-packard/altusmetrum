@@ -39,6 +39,7 @@ string[*] required_elements = {
 	"device",
 	"value",
 	"refdes",
+	"loadstatus"
 };
 
 bool has_header_member(string member) {
@@ -89,7 +90,6 @@ string part_number(string[string] entry)
 
 void process_seeed(string[string] entry)
 {
-
 	if (entry["loadstatus"] != "smt")
 		return;
 
@@ -114,6 +114,8 @@ void process_seeed(string[string] entry)
 
 void process_digikey(string[string] entry)
 {
+	if (entry["loadstatus"] == "noload")
+		return;
 	printf("%s,%s,%s %s\n",
 	       entry["quantity"],
 	       part_number(entry),
@@ -121,7 +123,16 @@ void process_digikey(string[string] entry)
 	       entry["value"]);
 }
 
+void process_mouser(string[string] entry)
+{
+	if (entry["loadstatus"] == "noload")
+		return;
+	printf("%s|%s\n", part_number(entry), entry["quantity"]);
+}
+
 void process_other(string[string] entry) {
+	if (entry["loadstatus"] == "noload")
+		return;
 	printf("%s,%s,%s,%s %s\n",
 	       entry["vendor"],
 	       entry["quantity"],
@@ -142,6 +153,9 @@ void process_file(file f) {
 			switch (entry["vendor"]) {
 			case "digikey":
 				process_digikey(entry);
+				break;
+			case "mouser":
+				process_mouser(entry);
 				break;
 			default:
 				process_other(entry);
