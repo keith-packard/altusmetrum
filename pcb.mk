@@ -38,7 +38,7 @@ partslist.dk: partslist.csv
 partslist-check.dk: partslist.csv
 	$(AM)/bin/partslist-vendor --vendor digikey --mfg partslist.csv > $@
 
-partslist.mouser: partslist.csv
+partslist-mouser.csv: partslist.csv
 	$(AM)/bin/partslist-vendor --vendor mouser partslist.csv > $@
 
 partslist.other: partslist.csv
