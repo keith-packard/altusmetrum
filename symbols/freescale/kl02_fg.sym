@@ -6,16 +6,10 @@ T 5300 3000 8 10 0 0 0 0 1
 slot=1
 T -105 -600 8 10 0 1 0 0 1
 footprint=qfn16-3x3
-T -105 -600 8 10 0 1 0 0 1
-vendor=digikey
 T 395 4600 8 10 1 1 0 0 1
 refdes=U?
 T 395 12500 8 10 0 1 0 0 1
 loadstatus=smt
-T -105 -600 8 10 0 1 0 0 1
-vendor_part_number=???
-T -105 -600 8 10 0 1 0 0 1
-mfg_part_number=MKL02Z32VFG4
 P 5300 4900 5300 4500 1 0 0
 {
 T 5300 4900 5 10 0 0 0 0 1
