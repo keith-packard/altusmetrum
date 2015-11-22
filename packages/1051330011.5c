@@ -37,8 +37,8 @@ public void slot(real x, real y, real width, real drill) {
 
 	pin_mm(x - width / 2, y, drill, pin_copper, "mnt", "mnt");
 
-	if (drill <= width/2)
-		pin_mm(x, y, drill, pin_copper, "mnt", "mnt");
+	pad_mm_options(x, y, width + pin_copper*2 + drill, drill + pin_copper * 2, "mnt", "mnt", "");
+	pad_mm_options(x, y, width + pin_copper*2 + drill, drill + pin_copper * 2, "mnt", "mnt", "onsolder");
 
 	pin_mm(x + width / 2, y, drill, pin_copper, "mnt", "mnt");
 }
