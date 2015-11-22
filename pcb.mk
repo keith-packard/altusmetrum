@@ -119,8 +119,10 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr
 		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
 	fi
-	zip $(PROJECT)-seeed.zip $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo \
-		$(PROJECT).gto $(PROJECT).gml $(PROJECT).gtl $(PROJECT).txt \
+	zip $(PROJECT)-seeed.zip \
+		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto \
+		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo \
+		$(PROJECT).gml $(PROJECT).txt \
 		$(PROJECT).gl2 $(PROJECT).gl3
 
 stencil:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
