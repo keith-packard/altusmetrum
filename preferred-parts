@@ -41,11 +41,11 @@ CONNECTOR	Debug	530470610	throughhole	no	0530470610	digikey	WM1735-ND
 CONNECTOR	Debug	picodebug	throughhole	no	GRPB041VWVN-RC	digikey	S9014E-04-ND
 CONNECTOR	LiPo	B2B-PH	throughhole	no	440054-2	digikey	A100034-ND
 CONNECTOR	LiPo	S2B-PH	throughhole	no	S2B-PH-K-S(LF)(SN)	digikey	455-1719-ND
-CONNECTOR	Pyro	282834-6	throughhole	no	20088	4ucon	20088
-CONNECTOR	Pyro	282834-9	throughhole	no	18477	4ucon	18477
+CONNECTOR	Pyro	282834-6	throughhole	yes	20088	4ucon	20088
+CONNECTOR	Pyro	282834-9	throughhole	yes	18477	4ucon	18477
 CONNECTOR	Servos	0-338068-6	throughhole	no	338068-6	digikey	A99437CT-ND
 CONNECTOR	SMA	sma-edge	handload	no	73251-2120	mouser	538-73251-2120
-CONNECTOR	Terminal-4	282834-4	throughhole	no	20067	4ucon	20087
+CONNECTOR	Terminal-4	282834-4	throughhole	yes	20067	4ucon	20087
 CONNECTOR	USBcable	usbcable	handload	no	88728-3400	mouser	538-88728-3400
 CONNECTOR	USBmicroB	ZX62-B-5PA	smt	yes	18575	4ucon	18575
 CONNECTOR	USBmicroB	2013499-1	smt	no	2013499-1	digikey	A107962CT-ND
