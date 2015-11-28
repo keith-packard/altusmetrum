@@ -90,7 +90,7 @@ string part_number(string[string] entry)
 
 void process_seeed(string[string] entry)
 {
-	if (entry["loadstatus"] != "smt")
+	if (entry["loadstatus"] == "noload")
 		return;
 
 	static bool start = true;
