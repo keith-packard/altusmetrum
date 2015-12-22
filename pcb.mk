@@ -22,6 +22,8 @@ drc:	$(PROJECT).drc
 $(PROJECT).drc: $(PROJECT).sch Makefile $(CONFIG)
 	-gnetlist -g drc2 $(PROJECT).sch -o $@
 
+partslists: partslist partslist.csv partslist.dk partslist-check.dk partslist-mouser.csv partslist.other
+
 partslist:	$(PROJECT).sch Makefile $(AM)/preferred-parts $(CONFIG)
 	gnetlist -g bom -o $(PROJECT).unsorted $(SCHEMATICS)
 	head -n1 $(PROJECT).unsorted > partslist
@@ -30,7 +32,7 @@ partslist:	$(PROJECT).sch Makefile $(AM)/preferred-parts $(CONFIG)
 
 partslist.csv:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
 	gnetlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
-	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | awk -f $(AM)/bin/fillpartscsv ) > $@ && rm -f $(PROJECT).csvtmp
+	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | awk -f $(AM)/bin/fillpartscsv | sort ) > $@ && rm -f $(PROJECT).csvtmp
 
 partslist.dk: partslist.csv
 	$(AM)/bin/partslist-vendor --vendor digikey partslist.csv > $@
@@ -99,7 +101,7 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr
 
 seeed: $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 
-$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr
+$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT)-sch.pdf
 	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
 	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
 	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
@@ -123,7 +125,8 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr
 		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto \
 		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo \
 		$(PROJECT).gml $(PROJECT).txt \
-		$(PROJECT).gl2 $(PROJECT).gl3
+		$(PROJECT).gl2 $(PROJECT).gl3 \
+		$(PROJECT).xy $(PROJECT)-sch.pdf
 
 stencil:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 	zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
@@ -138,10 +141,13 @@ clean:
 	rm -f $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf
 
-muffins: partslist.csv $(AM)/glabels/muffin-short-5267.glabels
-	glabels-3-batch $(AM)/glabels/muffin-short-5267.glabels \
-		-i partslist.csv -o muffin-5267.ps >/dev/null && \
-		ps2pdf muffin-5267.ps && rm muffin-5267.ps
+muffins: muffin-5267.pdf muffin-keithp.pdf
+
+muffin-5267.pdf: partslist.csv $(AM)/glabels/muffin-short-5267.glabels
+	glabels-3-batch $(AM)/glabels/muffin-short-5267.glabels -i partslist.csv -o $@ > /dev/null
+
+muffin-keithp.pdf: partslist.csv $(AM)/glabels/muffin-5267.glabels
+	glabels-3-batch $(AM)/glabels/muffin-5267.glabels -i partslist.csv -o $@ > /dev/null
 
 .sch.ps:
 	gschem -p -o $@ -s /usr/share/gEDA/scheme/print.scm $*.sch
