@@ -20,15 +20,15 @@
 load "footprint.5c";
 import Footprint;
 
-real gnd_width = 6.3;
-real gnd_height = 6.1;
+real body_width = 6.3;
+real body_height = 6.1;
 
 real pad_width = 1.5;
 real pad_height = 2.8;
 real pad_space = 4.572;
 
 real total_height = 10.7;
-real gnd_y = pad_height / 2 + gnd_height / 2 - total_height;
+real body_y = pad_height / 2 + body_height / 2 - total_height;
 
 real pkg_width = 6.5;
 real pkg_height = 6.1;
@@ -40,8 +40,8 @@ pad_mm(-pad_space/2, 0,
        pad_width, pad_height,
        "1", "1");
 
-pad_mm(0, gnd_y,
-       gnd_width, gnd_height,
+pad_mm(0, body_y,
+       body_width, body_height,
        "2", "2");
 
 pad_mm(pad_space/2, 0,
