@@ -90,6 +90,7 @@ FOOTPRINTS= \
 	BU2032SM.fp \
 	TO252AA.fp \
 	TO252.fp \
+	TO252FET.fp \
 	SD.fp \
 	microSD.fp \
 	v-bite.fp \
