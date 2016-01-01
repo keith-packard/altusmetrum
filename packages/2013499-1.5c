@@ -44,7 +44,6 @@ real wing_y = 1.45 + 3.35 - 0.9;
 real pkg_width = 6.1;
 real pkg_height = 7.9;
 real edge_height = 4.8;
-real edge_width = 2 * (wing_inner + wing_width);
 
 element_start("2013499-1");
 
