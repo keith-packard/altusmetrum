@@ -11,8 +11,10 @@
 				# holes for the tabs in a USB key form factor,
 				# in which case just delete the features in
 				# the PCB layout and make board width right
-TabDiam = 2.50
+TabDiam = 1.00
+TabLen = 2.50
 TabSpacing = 11.70
+TabMetal = 0.5
 
 PinDiam = 1.10
 PinSpacing = 4.50		# keystone wants 4.6 here .. really?
@@ -97,8 +99,46 @@ print '   Pin[',\
 
 print '   Pin[',\
         mm2mils100(-TabSpacing/2), \
-        mm2mils100(0), \
-        mm2mils100(TabDiam+0.3556), \
+        mm2mils100(-(TabLen-TabDiam)/2), \
+        mm2mils100(TabDiam+TabMetal), \
+        mm2mils100(0.31), \
+        mm2mils100(TabDiam+0.66), \
+        mm2mils100(TabDiam), \
+        '"mnt" "G" 0x0000]'
+
+print '   Pin[',\
+        mm2mils100(-TabSpacing/2), \
+        mm2mils100((TabLen-TabDiam)/2), \
+        mm2mils100(TabDiam+TabMetal), \
+        mm2mils100(0.31), \
+        mm2mils100(TabDiam+0.66), \
+        mm2mils100(TabDiam), \
+        '"mnt" "G" 0x0000]'
+
+print '   Pad[',\
+ 	mm2mils100(-TabSpacing/2), \
+	mm2mils100(-(TabLen - TabDiam)/2), \
+ 	mm2mils100(-TabSpacing/2), \
+	mm2mils100((TabLen - TabDiam)/2), \
+	mm2mils100(TabDiam + TabMetal), \
+	mm2mils100(0.31), \
+  	mm2mils100(PadWidth)+600, \
+	'"mnt" "2" ""]'
+
+print '   Pad[',\
+ 	mm2mils100(-TabSpacing/2), \
+	mm2mils100(-(TabLen - TabDiam)/2), \
+ 	mm2mils100(-TabSpacing/2), \
+	mm2mils100((TabLen - TabDiam)/2), \
+	mm2mils100(TabDiam + TabMetal), \
+	mm2mils100(0.31), \
+  	mm2mils100(PadWidth)+600, \
+	'"mnt" "2" "onsolder"]'
+
+print '   Pin[',\
+        mm2mils100(TabSpacing/2), \
+        mm2mils100(-(TabLen-TabDiam)/2), \
+        mm2mils100(TabDiam+TabMetal), \
         mm2mils100(0.31), \
         mm2mils100(TabDiam+0.66), \
         mm2mils100(TabDiam), \
@@ -106,12 +146,32 @@ print '   Pin[',\
 
 print '   Pin[',\
         mm2mils100(TabSpacing/2), \
-        mm2mils100(0), \
-        mm2mils100(TabDiam+0.3556), \
+        mm2mils100((TabLen-TabDiam)/2), \
+        mm2mils100(TabDiam+TabMetal), \
         mm2mils100(0.31), \
         mm2mils100(TabDiam+0.66), \
         mm2mils100(TabDiam), \
         '"mnt" "G" 0x0000]'
+
+print '   Pad[',\
+ 	mm2mils100(TabSpacing/2), \
+	mm2mils100(-(TabLen - TabDiam)/2), \
+ 	mm2mils100(TabSpacing/2), \
+	mm2mils100((TabLen - TabDiam)/2), \
+	mm2mils100(TabDiam + TabMetal), \
+	mm2mils100(0.31), \
+  	mm2mils100(PadWidth)+600, \
+	'"mnt" "2" ""]'
+
+print '   Pad[',\
+ 	mm2mils100(TabSpacing/2), \
+	mm2mils100(-(TabLen - TabDiam)/2), \
+ 	mm2mils100(TabSpacing/2), \
+	mm2mils100((TabLen - TabDiam)/2), \
+	mm2mils100(TabDiam + TabMetal), \
+	mm2mils100(0.31), \
+  	mm2mils100(PadWidth)+600, \
+	'"mnt" "2" "onsolder"]'
 
 print '   ElementLine[',\
        mm2mils100(-TabSpacing/2), \
