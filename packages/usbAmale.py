@@ -123,7 +123,7 @@ print '   Pad[',\
 	mm2mils100(TabDiam + TabMetal), \
 	mm2mils100(0.31), \
   	mm2mils100(PadWidth)+600, \
-	'"mnt" "2" ""]'
+	'"mnt" "G" ""]'
 
 print '   Pad[',\
  	mm2mils100(-TabSpacing/2), \
@@ -133,7 +133,7 @@ print '   Pad[',\
 	mm2mils100(TabDiam + TabMetal), \
 	mm2mils100(0.31), \
   	mm2mils100(PadWidth)+600, \
-	'"mnt" "2" "onsolder"]'
+	'"mnt" "G" "onsolder"]'
 
 print '   Pin[',\
         mm2mils100(TabSpacing/2), \
@@ -161,7 +161,7 @@ print '   Pad[',\
 	mm2mils100(TabDiam + TabMetal), \
 	mm2mils100(0.31), \
   	mm2mils100(PadWidth)+600, \
-	'"mnt" "2" ""]'
+	'"mnt" "G" ""]'
 
 print '   Pad[',\
  	mm2mils100(TabSpacing/2), \
@@ -171,7 +171,7 @@ print '   Pad[',\
 	mm2mils100(TabDiam + TabMetal), \
 	mm2mils100(0.31), \
   	mm2mils100(PadWidth)+600, \
-	'"mnt" "2" "onsolder"]'
+	'"mnt" "G" "onsolder"]'
 
 print '   ElementLine[',\
        mm2mils100(-TabSpacing/2), \
