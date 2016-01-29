@@ -107,8 +107,14 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT)-sch.pdf
 	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
 		cp $(PROJECT).bottomsilk.gbr $(PROJECT).gbo; \
 	fi
+	if [ -f $(PROJECT).bottompaste.gbr ]; then \
+		cp $(PROJECT).bottompaste.gbr $(PROJECT).gbp; \
+	fi
 	if [ -f $(PROJECT).topsilk.gbr ]; then \
 		cp $(PROJECT).topsilk.gbr $(PROJECT).gto; \
+	fi
+	if [ -f $(PROJECT).toppaste.gbr ]; then \
+		cp $(PROJECT).toppaste.gbr $(PROJECT).gtp; \
 	fi
 	cp $(PROJECT).outline.gbr $(PROJECT).gml
 	cp $(PROJECT).top.gbr $(PROJECT).gtl
@@ -122,8 +128,8 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT)-sch.pdf
 		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
 	fi
 	zip $(PROJECT)-seeed.zip \
-		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto \
-		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo \
+		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
+		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
 		$(PROJECT).gml $(PROJECT).txt \
 		$(PROJECT).gl2 $(PROJECT).gl3 \
 		$(PROJECT).xy $(PROJECT)-sch.pdf
