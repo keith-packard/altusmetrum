@@ -258,3 +258,5 @@ pinlabel=VOUTR
 T 2995 245 5 10 1 1 0 0 1
 pinnumber=15
 }
+T -5 0 8 10 0 1 0 0 1
+datasheet=ti/audio/pcm2705c.pdf
