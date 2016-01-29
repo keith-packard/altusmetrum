@@ -70,6 +70,9 @@ $(PROJECT).bottom.gbr:	$(PROJECT).pcb $(CONFIG)
 		;; \
 	esac
 
+$(PROJECT).all-drill.cnc: $(PROJECT).bottom.gbr
+	gerbv -x drill -o $(PROJECT).all-drill.cnc $(PROJECT).plated-drill.cnc $(PROJECT).unplated-drill.cnc
+
 zip: $(PROJECT).zip
 
 $(PROJECT).zip: $(PROJECT).bottom.gbr $(PROJECT).xy Makefile
@@ -77,7 +80,7 @@ $(PROJECT).zip: $(PROJECT).bottom.gbr $(PROJECT).xy Makefile
 
 oshpark: $(PROJECT)-oshpark.zip
 
-$(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr
+$(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc 
 	cp $(PROJECT).bottom.gbr bottom\ layer.ger
 	cp $(PROJECT).bottommask.gbr bottom\ solder\ mask.ger
 	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
@@ -89,7 +92,7 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr
 	cp $(PROJECT).outline.gbr board\ outline.ger
 	cp $(PROJECT).top.gbr top\ layer.ger
 	cp $(PROJECT).topmask.gbr top\ solder\ mask.ger
-	cp $(PROJECT).plated-drill.cnc drills.xln
+	cp $(PROJECT).all-drill.cnc drills.xln
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr internal\ plane\ 1.ger; \
 		cp $(PROJECT).group2.gbr internal\ plane\ 2.ger; \
@@ -101,7 +104,7 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr
 
 seeed: $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 
-$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT)-sch.pdf
+$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf
 	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
 	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
 	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
@@ -119,7 +122,7 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT)-sch.pdf
 	cp $(PROJECT).outline.gbr $(PROJECT).gml
 	cp $(PROJECT).top.gbr $(PROJECT).gtl
 	cp $(PROJECT).topmask.gbr $(PROJECT).gts
-	cp $(PROJECT).plated-drill.cnc $(PROJECT).txt
+	cp $(PROJECT).all-drill.cnc $(PROJECT).txt
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group2.gbr $(PROJECT).gl3; \
@@ -141,9 +144,11 @@ clean:
 	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip 
 	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln
 	rm -f *.partslist *.new.pcb *.unsorted $(PROJECT).xls muffin-5267.pdf
+	rm -f partslist-check.dk partslist.dk partslist-mouser.csv partslist.other
 	rm -f $(PROJECT)-sch.ps $(PROJECT)-sch.pdf $(PROJECT)-pcb.ps $(PROJECT)-pcb.pdf
-	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gto $(PROJECT).gml
-	rm -f $(PROJECT).gtl $(PROJECT).gts $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3
+	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp
+	rm -f $(PROJECT).gto $(PROJECT).gtp $(PROJECT).gml $(PROJECT).gtl $(PROJECT).gts
+	rm -f $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3
 	rm -f $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf
 
@@ -194,3 +199,6 @@ gafrc:
 	(echo '; empty the library path and populate it with only our own symbols'; \
 	 echo '(reset-component-library)'; \
 	 echo '(load "../altusmetrum/gafrc")') > $@
+
+.gitignore: $(AM)/gitignore.in
+	sed 's/@@PROJECT@@/$(PROJECT)/g' $(AM)/gitignore.in > .gitignore
