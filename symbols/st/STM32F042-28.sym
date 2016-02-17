@@ -21,17 +21,6 @@ pinnumber=12
 T 10100 6000 5 10 0 0 0 0 1
 pinseq=0
 }
-P 10200 4800 9900 4800 1 0 0
-{
-T 10100 4800 5 10 0 0 0 0 1
-pintype=unknown
-T 9845 4795 5 10 1 1 0 6 1
-pinlabel=PA8/USART1_CK/TIM1_CH1/EVENTOUT/MCO/CRS_SYNC
-T 9995 4845 5 10 1 1 0 0 1
-pinnumber=18
-T 10100 4800 5 10 0 0 0 0 1
-pinseq=0
-}
 P 10200 5400 9900 5400 1 0 0
 {
 T 10100 5400 5 10 0 0 0 0 1
@@ -318,5 +307,16 @@ pinlabel=PB8/BOOT0
 T 205 4645 5 10 1 1 0 6 1
 pinnumber=1
 T 0 4600 5 10 0 0 0 0 1
+pinseq=0
+}
+P 3700 11600 3700 11300 1 0 0
+{
+T 3700 11600 5 10 0 0 0 0 1
+pintype=unknown
+T 3700 11245 5 10 1 1 90 6 1
+pinlabel=Vddio2
+T 3650 11395 5 10 1 1 90 0 1
+pinnumber=18
+T 3700 11600 5 10 0 0 0 0 1
 pinseq=0
 }
