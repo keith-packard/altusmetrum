@@ -52,10 +52,10 @@ pad_mm_clear_mask_options(0, 0, center_width * paste_coverage_scale,
 			  center_height * paste_coverage_scale, 0, center_height + mask, "7", "7", "square");
 
 pin_mm_clear_mask_options(-0.9, 0,
-			  0.3811, 0.17, 0.2, 0, "GND", "7", "via");
+			  0.3811, clearance*2, 0.2, 0, "GND", "7", "via");
 
 pin_mm_clear_mask_options(0.9, 0,
-			  0.3811, 0.17, 0.2, 0, "GND", "7", "via");
+			  0.3811, clearance*2, 0.2, 0, "GND", "7", "via");
 
 real pad_y_off = pad_y_spacing / 2;
 
