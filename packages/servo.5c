@@ -1,0 +1,117 @@
+/*
+ * Copyright © 2016 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+real dpi = 4800;
+
+real pixtomm(real pix) = pix / dpi * 25.4;
+
+typedef struct {
+	real	x;
+	real	y;
+} pos_t;
+
+real	origin_x = 423;
+real	origin_y = 213;
+
+real xmm(real xpix) = pixtomm(xpix - origin_x);
+real ymm(real ypix) = pixtomm(ypix - origin_y);
+
+pos_t pos(real xpix, real ypix) = (pos_t) { .x = xmm(xpix), .y = ymm(ypix) };
+
+pos_t ul = pos(543, 213);
+pos_t ur = pos(2912, 213);
+pos_t mll = pos(423, 1036);
+pos_t mlr = pos(543, 1036);
+pos_t mrl = pos(2912, 1036);
+pos_t mrr = pos(3980, 1036);
+pos_t ll = pos(423, 1955);
+pos_t lr = pos(3980, 1955);
+
+pos_t mount_ul = pos(781, 208);
+pos_t mount_ur = pos(2102, 208);
+
+pos_t mount_ll = pos(652, 1999);
+pos_t mount_lr = pos(3561, 1999);
+
+real mounting_hole = pixtomm(142);
+
+void linepos(pos_t a, pos_t b) { line(a.x, a.y, b.x, b.y); }
+
+void outline() {
+	linepos(ul, ur);
+	linepos(ur, mrl);
+	linepos(mrl, mrr);
+	linepos(mrr, lr);
+	linepos(lr, ll);
+	linepos(ll, mll);
+	linepos(mll, mlr);
+	linepos(mlr, ul);
+}
+
+void drill(pos_t a) {
+	pin_mm_clear(a.x, a.y, mounting_hole, 0.22, 0.32, "mount", "mount");
+}
+
+void mount() {
+	drill(mount_ul);
+	drill(mount_ur);
+	drill(mount_ll);
+	drill(mount_lr);
+}
+
+real ysplit = ymm(1500);
+real ygap = pixtomm(1536 - 1442);
+
+void contact(pos_t ul, pos_t lr, string name, string num) {
+	pad_mm((ul.x + lr.x) / 2,
+	       (ul.y + lr.y) / 2,
+	       (lr.x - ul.x),
+	       (lr.y - ul.y),
+	       name, num);
+}
+
+void top_contact(real x, real width, string name, string num) {
+	contact((pos_t) { .x = x, .y = mll.y },
+		(pos_t) { .x = x + width, .y = ysplit - ygap / 2 },
+		name, num);
+}
+
+real contact_left = xmm(563 + 2909 - 2667);
+real contact_right = xmm(2922);
+real contact_width = pixtomm(3267 - 2901);
+
+void bottom_contact(real x, real width, string name, string num) {
+	contact((pos_t) { .x = x, .y = ysplit + ygap / 2 },
+		(pos_t) { .x = x + width, .y = ll.y },
+		name, num);
+}
+
+element_start("servo");
+
+outline();
+mount();
+
+bottom_contact(contact_left, contact_width, "1", "1");
+bottom_contact(contact_right, contact_width, "2", "2");
+
+top_contact(contact_left, contact_width, "3", "3");
+top_contact(contact_right, contact_width, "4", "4");
+
+element_end();

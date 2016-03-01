@@ -96,7 +96,9 @@ FOOTPRINTS= \
 	v-bite.fp \
 	qfn16-3x3.fp \
 	1051330011.fp \
-	2013499-1.fp
+	2013499-1.fp \
+	servo.fp \
+	servo-motor.fp
 
 .5c.fp:
 	nickle $*.5c > $@
