@@ -1,0 +1,131 @@
+/*
+ * Copyright © 2016 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+/* Draw the altusmetrum logo as geda pcb polygons */
+
+load "footprint.5c"
+
+typedef struct {
+	bool	r;
+	real	x, y;
+} pos_t;
+
+typedef struct {
+	real	x1, x2;
+	real	y1, y2;
+} rect_t;
+
+pos_t[] poly1 = {
+	{ .r = true, .x = 931.07168, .y = 1164.597 },
+	{ .r = true, .x = 248.86992, .y = -331.80265 },
+	{ .r = true, .x = 416.1687, .y = 1338.32935 },
+	{ .r = true, .x = 286.6484, .y = 267.1042 },
+	{ .r = true, .x = -520.4224, .y = 0 },
+	{ .r = true, .x = -270.2797, .y = -262.2181 },
+	{ .r = true, .x = 0, .y = -1033.0627 },
+	{ .r = true, .x = -160.98492, .y = 106.6818 },
+	{ .r = true, .x = -160.98492, .y = -106.6818 },
+	{ .r = true, .x = 0, .y = 1033.0627 },
+	{ .r = true, .x = -270.2797, .y = 262.2181 },
+	{ .r = true, .x = -520.4224, .y = 0 },
+	{ .r = true, .x = 286.6484, .y = -267.1042 },
+	{ .r = true, .x = 416.1687, .y = -1338.32935 },
+	{ .r = true, .x = 248.86992, .y = 331.80265 },
+};
+
+pos_t[] poly2 = {
+	{ .r = true, .x = 931.07168, .y = 27.69425 },
+	{ .r = true, .x = 224.03682, .y = 720.46517 },
+	{ .r = true, .x = -63.341, .y = 76.00913 },
+	{ .r = false, .x = 931.07168, .y = 486.3269 },
+	{ .r = false, .x = 770.37586, .y = 824.16855 },
+	{ .r = false, .x = 707.03486, .y = 748.15942 },
+	{ .r = false, .x = 931.07168, .y = 27.69425 },
+};
+
+void
+draw_poly(pos_t[] p, real xpos, real ypos, real scale, bool mirror) {
+	real	x = 0, y = 0;
+	real	yscale = mirror ? -scale : scale;
+
+	printf("\tPolygon(\"clearpoly\")\n");
+	printf("\t(\n");
+	for (int i = 0; i < dim(p); i++) {
+		if (p[i].r) {
+			x += p[i].x;
+			y += p[i].y;
+		} else {
+			x = p[i].x;
+			y = p[i].y;
+		}
+		printf ("\t\t[%7.2fmil %7.2fmil]\n", xpos + x * scale, ypos + y * yscale);
+	}
+	printf("\t)\n");
+}
+
+rect_t bounds (pos_t[] p) {
+	rect_t	r = {
+		.x1 = p[0].x, .x2 = p[0].x,
+		.y1 = p[0].y, .y2 = p[0].y,
+	};
+
+	for (int i = 1; i < dim(p); i++) {
+		if (p[i].x < r.x1) r.x1 = p[i].x;
+		if (p[i].x > r.x2) r.x2 = p[i].x;
+		if (p[i].y < r.y1) r.y1 = p[i].y;
+		if (p[i].y > r.y2) r.y2 = p[i].y;
+	}
+	return r;
+}
+
+rect_t all_bounds(pos_t[] p...) {
+	rect_t	all = bounds(p[0]);
+
+	for (int i = 1; i < dim(p); i++) {
+		rect_t	r = bounds(p[i]);
+
+		if (r.x1 < all.x1) all.x1 = r.x1;
+		if (r.x2 > all.y1) all.x2 = r.x2;
+		if (r.y1 < all.y1) all.y1 = r.y1;
+		if (r.y2 > all.y2) all.y2 = r.y2;
+	}
+	return all;
+}
+
+real height(rect_t r) { return r.y2 - r.y1; }
+real width(rect_t r) { return r.x2 - r.x1; }
+
+real max_scale(rect_t r, real w, real h) {
+	real rh = height(r);
+	real rw = width(r);
+	real sw = w / rw;
+	real sh = h / rh;
+
+	return min(sw, sh);
+}
+
+void
+drawscale(real x, real y, real w, real h, bool mirror, pos_t[] p...) {
+	rect_t bounds = all_bounds(p...);
+	real scale = max_scale(bounds, w, h);
+
+	for (int i = 0; i < dim(p); i++) {
+		draw_poly(p[i], x, y, scale, mirror);
+	}
+}
+
+drawscale(876, 233, 200, 233, true, poly1, poly2);
