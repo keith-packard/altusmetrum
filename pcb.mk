@@ -78,6 +78,47 @@ zip: $(PROJECT).zip
 $(PROJECT).zip: $(PROJECT).bottom.gbr $(PROJECT).xy Makefile
 	zip $(PROJECT).zip $(PROJECT).*.gbr $(PROJECT).*.cnc $(PROJECT).xy # $(PROJECT).xls
 
+ac: $(PROJECT)-ac.zip $(PROJECT)-bom.csv
+
+$(PROJECT)-bom.csv: partslist.csv
+	cp partslist.csv $@
+
+$(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr
+	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
+	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
+	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
+		cp $(PROJECT).bottomsilk.gbr $(PROJECT).gbo; \
+	fi
+	if [ -f $(PROJECT).bottompaste.gbr ]; then \
+		cp $(PROJECT).bottompaste.gbr $(PROJECT).gbp; \
+	fi
+	if [ -f $(PROJECT).topsilk.gbr ]; then \
+		cp $(PROJECT).topsilk.gbr $(PROJECT).gto; \
+	fi
+	if [ -f $(PROJECT).toppaste.gbr ]; then \
+		cp $(PROJECT).toppaste.gbr $(PROJECT).gtp; \
+	fi
+	cp $(PROJECT).outline.gbr $(PROJECT).gml
+	cp $(PROJECT).top.gbr $(PROJECT).gtl
+	cp $(PROJECT).topmask.gbr $(PROJECT).gts
+	cp $(PROJECT).plated-drill.cnc $(PROJECT).ncd
+	if [ -f $(PROJECT).unplated-drill.cnc ]; then \
+		cp $(PROJECT).unplated-drill.cnc $(PROJECT).drd; \
+	fi
+	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
+		cp $(PROJECT).group1.gbr $(PROJECT).gl2; \
+		cp $(PROJECT).group2.gbr $(PROJECT).gl3; \
+	elif [ -f $(PROJECT).group2.gbr -a -f $(PROJECT).group3.gbr ]; then \
+		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
+		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
+	fi
+	zip $@ \
+		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
+		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
+		$(PROJECT).gml $(PROJECT).ncd $(PROJECT).gml $(PROJECT).drd \
+		$(PROJECT).gl2 $(PROJECT).gl3 \
+		$(PROJECT).xy
+
 oshpark: $(PROJECT)-oshpark.zip
 
 $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc 
