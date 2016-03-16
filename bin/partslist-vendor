@@ -88,6 +88,26 @@ string part_number(string[string] entry)
 		return entry["vendor_part_number"];
 }
 
+string quoted(string v)
+{
+	if (String::index(v, "\"") >= 0 || String::index(v, ",") >= 0) {
+		if (String::index(v, "\"") >= 0) {
+			string ret = "\"";
+			for (int i = 0; i < String::length(v); i++) {
+				if (v[i] == '"')
+					ret = ret + "\"";
+				ret = ret + String::new(v[i]);
+			}
+			ret = ret + "\"";
+			return ret;
+		} else {
+			return "\"" + v + "\"";
+		}
+	} else {
+		return v;
+	}
+}
+
 void process_seeed(string[string] entry)
 {
 	if (entry["loadstatus"] == "noload")
@@ -109,7 +129,7 @@ void process_seeed(string[string] entry)
 	}
 	if (dim(refdes) > 1)
 		printf ("\"");
-	printf(",%s,%s\n", entry["mfg_part_number"], entry["quantity"]);
+	printf(",%s,%s\n", quoted(entry["mfg_part_number"]), entry["quantity"]);
 }
 
 void process_digikey(string[string] entry)
@@ -118,9 +138,9 @@ void process_digikey(string[string] entry)
 		return;
 	printf("%s,%s,%s %s\n",
 	       entry["quantity"],
-	       part_number(entry),
-	       entry["device"],
-	       entry["value"]);
+	       quoted(part_number(entry)),
+	       quoted(entry["device"]),
+	       quoted(entry["value"]));
 }
 
 void process_mouser(string[string] entry)
@@ -137,8 +157,8 @@ void process_mouser(string[string] entry)
 	}
 
 	printf("%s,%s,%s\n",
-	       entry["vendor_part_number"],
-	       entry["mfg_part_number"],
+	       quoted(entry["vendor_part_number"]),
+	       quoted(entry["mfg_part_number"]),
 	       entry["quantity"]);
 }
 
@@ -148,8 +168,8 @@ void process_other(string[string] entry) {
 	printf("%s,%s,%s,%s %s\n",
 	       entry["vendor"],
 	       entry["quantity"],
-	       part_number(entry),
-	       entry["device"],
+	       quoted(part_number(entry)),
+	       quoted(entry["device"]),
 	       entry["value"]);
 }
 
