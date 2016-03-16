@@ -31,7 +31,9 @@ real	origin_x = 423;
 real	origin_y = 213;
 
 real xmm(real xpix) = pixtomm(xpix - origin_x);
-real ymm(real ypix) = pixtomm(ypix - origin_y);
+
+/* Image was of the bottom, mirror the result */
+real ymm(real ypix) = pixtomm(1999 - (ypix - origin_y));
 
 pos_t pos(real xpix, real ypix) = (pos_t) { .x = xmm(xpix), .y = ymm(ypix) };
 
@@ -44,13 +46,18 @@ pos_t mrr = pos(3980, 1036);
 pos_t ll = pos(423, 1955);
 pos_t lr = pos(3980, 1955);
 
-pos_t mount_ul = pos(781, 208);
-pos_t mount_ur = pos(2102, 208);
+pos_t mount_ul = pos(761, 208);
+pos_t mount_ur = pos(2082, 208);
 
 pos_t mount_ll = pos(652, 1999);
-pos_t mount_lr = pos(3561, 1999);
+pos_t mount_lr = pos(3500, 1999);
 
 real mounting_hole = pixtomm(142);
+
+pos_t pin_l = pos(423 + 257, 1955 - 826);
+pos_t pin_r = pos(423 + 1788, 1955 - 826);
+
+real index_pin = pixtomm(100);
 
 void linepos(pos_t a, pos_t b) { line(a.x, a.y, b.x, b.y); }
 
@@ -69,11 +76,20 @@ void drill(pos_t a) {
 	pin_mm_clear(a.x, a.y, mounting_hole, 0.22, 0.32, "mount", "mount");
 }
 
+void pin(pos_t a) {
+	pin_mm_clear_options(a.x, a.y, index_pin, 0, 0, "pin", "pin", "hole");
+}
+
 void mount() {
 	drill(mount_ul);
 	drill(mount_ur);
 	drill(mount_ll);
 	drill(mount_lr);
+}
+
+void pins() {
+	pin(pin_l);
+	pin(pin_r);
 }
 
 real ysplit = ymm(1500);
@@ -82,14 +98,14 @@ real ygap = pixtomm(1536 - 1442);
 void contact(pos_t ul, pos_t lr, string name, string num) {
 	pad_mm((ul.x + lr.x) / 2,
 	       (ul.y + lr.y) / 2,
-	       (lr.x - ul.x),
-	       (lr.y - ul.y),
+	       abs(lr.x - ul.x),
+	       abs(lr.y - ul.y),
 	       name, num);
 }
 
 void top_contact(real x, real width, string name, string num) {
 	contact((pos_t) { .x = x, .y = mll.y },
-		(pos_t) { .x = x + width, .y = ysplit - ygap / 2 },
+		(pos_t) { .x = x + width, .y = ysplit + ygap / 2 },
 		name, num);
 }
 
@@ -98,7 +114,7 @@ real contact_right = xmm(2922);
 real contact_width = pixtomm(3267 - 2901);
 
 void bottom_contact(real x, real width, string name, string num) {
-	contact((pos_t) { .x = x, .y = ysplit + ygap / 2 },
+	contact((pos_t) { .x = x, .y = ysplit - ygap / 2 },
 		(pos_t) { .x = x + width, .y = ll.y },
 		name, num);
 }
@@ -107,6 +123,7 @@ element_start("servo");
 
 outline();
 mount();
+pins();
 
 bottom_contact(contact_left, contact_width, "1", "1");
 bottom_contact(contact_right, contact_width, "2", "2");
