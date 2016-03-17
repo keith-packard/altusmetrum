@@ -12,31 +12,31 @@ FOOTPRINTS=\
 all: $(FOOTPRINTS)
 
 mkds5n-4.fp: mkds5n.5c
-	nickle mkds5n.5c 4 > $@
+	nickle mkds5n.5c -o $@ 4
 
 mkds5n-5.fp: mkds5n.5c
-	nickle mkds5n.5c 5 > $@
+	nickle mkds5n.5c -o $@ 5
 
 mkds5n-6.fp: mkds5n.5c
-	nickle mkds5n.5c 6 > $@
+	nickle mkds5n.5c -o $@ 6
 
 mkds5n-7.fp: mkds5n.5c
-	nickle mkds5n.5c 7 > $@
+	nickle mkds5n.5c -o $@ 7
 
 mkds5n-8.fp: mkds5n.5c
-	nickle mkds5n.5c 8 > $@
+	nickle mkds5n.5c -o $@ 8
 
 mkds5n-9.fp: mkds5n.5c
-	nickle mkds5n.5c 9 > $@
+	nickle mkds5n.5c -o $@ 9
 
 mkds5n-10.fp: mkds5n.5c
-	nickle mkds5n.5c 10 > $@
+	nickle mkds5n.5c -o $@ 10
 
 mkds5n-11.fp: mkds5n.5c
-	nickle mkds5n.5c 11 > $@
+	nickle mkds5n.5c -o $@ 11
 
 mkds5n-12.fp: mkds5n.5c
-	nickle mkds5n.5c 12 > $@
+	nickle mkds5n.5c -o $@ 12
 
 clean:
 	rm -f $(FOOTPRINTS)

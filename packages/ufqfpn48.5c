@@ -21,7 +21,6 @@ import Footprint;
 real pad_width = 0.55;
 real pad_height = 0.30;
 real pad_spacing = 0.50;
-real pad_clearance = 12 / 1000 * 25.4;	
 
 real pad_x_off = 6.20 / 2;
 real pad_y_off = 6.20 / 2;
@@ -59,47 +58,42 @@ real dot_off = .3;
 line(-package_width/2 + dot_off, -package_height/2 + dot_off,
      -package_width/2 + dot_off, -package_height/2 + dot_off);
 
-for (pad = 0; pad < num_pad; pad++) {
+for (int pad = 0; pad < num_pad; pad++) {
 	/* left side (1-12) */
 
-	pad_mm_clear(-pad_x_off - pad_width / 2,
-		     pad_off(pad),
-		     pad_width,
-		     pad_height,
-		     pad_clearance,
-		     sprintf("%d", pad + 1),
-		     sprintf("%d", pad + 1));
-	
+	pad_mm(-pad_x_off - pad_width / 2,
+	       pad_off(pad),
+	       pad_width,
+	       pad_height,
+	       sprintf("%d", pad + 1),
+	       sprintf("%d", pad + 1));
+
 	/* bottom (13-24) */
 
-	pad_mm_clear(pad_off(pad),
-		     pad_y_off + pad_width / 2,
-		     pad_height,
-		     pad_width,
-		     pad_clearance,
-		     sprintf("%d", pad + 13),
-		     sprintf("%d", pad + 13));
-	
+	pad_mm(pad_off(pad),
+	       pad_y_off + pad_width / 2,
+	       pad_height,
+	       pad_width,
+	       sprintf("%d", pad + 13),
+	       sprintf("%d", pad + 13));
+
 	/* right side (25-36) */
 
-	pad_mm_clear(pad_x_off + pad_width / 2,
-		     -pad_off(pad),
-		     pad_width,
-		     pad_height,
-		     pad_clearance,
-		     sprintf("%d", pad + 25),
-		     sprintf("%d", pad + 25));
-	
+	pad_mm(pad_x_off + pad_width / 2,
+	       -pad_off(pad),
+	       pad_width,
+	       pad_height,
+	       sprintf("%d", pad + 25),
+	       sprintf("%d", pad + 25));
+
 	/* top (37-48) */
 
-	pad_mm_clear(-pad_off(pad),
-		     -pad_y_off - pad_width / 2,
-		     pad_height,
-		     pad_width,
-		     pad_clearance,
-		     sprintf("%d", pad + 37),
-		     sprintf("%d", pad + 37));
-	
+	pad_mm(-pad_off(pad),
+	       -pad_y_off - pad_width / 2,
+	       pad_height,
+	       pad_width,
+	       sprintf("%d", pad + 37),
+	       sprintf("%d", pad + 37));
 }
 
 int pad_blocks = 3;
@@ -114,30 +108,27 @@ bool via_block(int x, int y) {
 	return (x & 1) == 0 && (y & 1) == 0;
 }
 
-real via_hole = 15/1000 * 25.4;		/* 15 mil drill */
-real via_copper = 7/1000 * 25.4; 	/* 7 mil anulus */
+real via_hole = mils1002mm(1300);
+real via_copper = mils1002mm(700);
 
 for (int pad_y = 0; pad_y < pad_blocks; pad_y++) {
 	for (int pad_x = 0; pad_x < pad_blocks; pad_x++)
 		if (via_block(pad_x, pad_y)) {
-			pin_mm_clear_mask(block_x(pad_x), block_y(pad_y),
-					  via_hole, via_hole + 2 * via_copper, pad_clearance, 0,
-					  "GND", "GND");
-			pad_mm_clear_mask_options(block_x(pad_x), block_y(pad_y),
-						  block_width, block_height,
-						  pad_clearance, 0,
-						  "GND", "GND","square,nopaste");
+			pin_mm_space_options(block_x(pad_x), block_y(pad_y),
+					     via_hole, via_copper, 0,
+					     "GND", "GND", "via");
+			pad_mm_options(block_x(pad_x), block_y(pad_y),
+				       block_width, block_height,
+				       "GND", "GND","square,nopaste");
 		} else {
 			/* full square of metal */
-			pad_mm_clear_options(block_x(pad_x), block_y(pad_y),
-					     block_width, block_height,
-					     0,
-					     "GND", "GND","square,nopaste");
+			pad_mm_options(block_x(pad_x), block_y(pad_y),
+				       block_width, block_height,
+				       "GND", "GND","square,nopaste");
 			/* 1/4 full of solder paste */
-			pad_mm_clear_options(block_x(pad_x), block_y(pad_y),
-					     block_width/2, block_height/2,
-					     0,
-					     "GND", "GND","square");
+			pad_mm_options(block_x(pad_x), block_y(pad_y),
+				       block_width/2, block_height/2,
+				       "GND", "GND","square");
 		}
 }
 

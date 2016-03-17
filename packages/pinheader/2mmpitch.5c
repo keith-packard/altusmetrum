@@ -28,11 +28,6 @@ if (pins < 2) {
 	exit(1);
 }
 
-printf ("# author: Keith Packard\n");
-printf ("# email: keithp@keithp.com\n");
-printf ("# dist-license: GPL 2\n");
-printf ("# use-license: unlimited\n");
-
 element_start(sprintf ("2mm%dpin", pins));
 
 for (int pin = 0; pin < pins; pin++)

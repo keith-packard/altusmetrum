@@ -73,11 +73,11 @@ void outline() {
 }
 
 void drill(pos_t a) {
-	pin_mm_clear(a.x, a.y, mounting_hole, 0.22, 0.32, "mount", "mount");
+	pin_mm(a.x, a.y, mounting_hole, 0.22, "mount", "mount");
 }
 
 void pin(pos_t a) {
-	pin_mm_clear_options(a.x, a.y, index_pin, 0, 0, "pin", "pin", "hole");
+	pin_mm_options(a.x, a.y, index_pin, 0, "pin", "pin", "hole");
 }
 
 void mount() {

@@ -17,136 +17,275 @@
 
 namespace Footprint {
 
-	/* process clearance requirement */
-	public real process_clearance = 0.6;
+	import File;
 
 	public int mm2mils100(real mm) = floor (mm / 25.4 * 1000 * 100 + 0.5);
 
 	public real mils1002mm(real mils100) = mils100 * 25.4 / 100 / 1000;
 
-	public int line_thickness = 1000;
+	/* OSH park adprocess requirement */
+	public real process_soldermask = mils1002mm(300);
+	public real process_trace = mils1002mm(600);
+	public real process_space = mils1002mm(600);
+	public real process_drill = mils1002mm(1300);
+	public real process_ring = mils1002mm(700);
+
+	/* default pad options */
+	public string pad_options = "square";
+
+	/* default pin options */
+	public string pin_options = "pin";
+
+	/* default ink thickness */
+	public real line_thickness = mils1002mm(1000);
+
+	file out;
+	file reread;
+
+	string out_name;
+
+	string tmp_name;
 
 	public void element_start(string name) {
-		printf ("# author: Keith Packard\n");
-		printf ("# email: keithp@keithp.com\n");
-		printf ("# dist-license: GPL 2\n");
-		printf ("# use-license: unlimited\n");
-		printf ("Element [\"\" \"%s\" \"\" \"\" 0 0 0 0 0 100 \"\"]\n",
+
+		if (!is_uninit(&out_name)) {
+			tmp_name = sprintf("_tmp-%d.fp", PID::getpid());
+			out = open(tmp_name, "w");
+			reread = open(tmp_name, "r");
+			unlink(tmp_name);
+		} else
+			out = stdout;
+
+		fprintf(out, "# author: Keith Packard\n");
+		fprintf(out, "# email: keithp@keithp.com\n");
+		fprintf(out, "# dist-license: GPL 2\n");
+		fprintf(out, "# use-license: unlimited\n");
+		fprintf(out, "Element [\"\" \"%s\" \"\" \"\" 0 0 0 0 0 100 \"\"]\n",
 			name);
-		printf ("(\n");
-		
+		fprintf(out, "(\n");
 	}
 
-	public void element_end() {
-		printf (")\n");
+	public void element_args() {
+
+		int other_args;
+
+		ParseArgs::argdesc argd = {
+			.args = {
+				{
+					.var = (ParseArgs::arg_var.arg_string) &out_name,
+					.name = "output",
+					.abbr = 'o',
+					.expr_name = "filename",
+					.desc = "Output file name"
+				}
+			},
+			.unknown = &(int other_args)
+		};
+
+		ParseArgs::parseargs(&argd, &argv);
+
+		if (!is_uninit(&other_args))
+			argv = (string[dim(argv)-other_args+1]) {
+				[i] = (i == 0) ? argv[0] : argv[i + other_args-1]
+			};
 	}
-	
-	public void pad_mm_clear_mask_options(real center_x,
+
+	element_args();
+
+	public void element_end() {
+		fprintf(out, ")\n");
+
+		if (!is_uninit(&out_name)) {
+			try {
+				close(out);
+				twixt(file result = open(out_name, "w"); close(result)) {
+					while (!end(reread)) {
+						putb(getb(reread), result);
+					}
+				}
+			} catch open_error (string message, error_type error, string name) {
+				fprintf(stderr, "%s: %s\n", name, message);
+				exit(1);
+			}
+		}
+	}
+
+	public typedef struct {
+		real	center_x;	/* center of pad */
+		real	center_y;
+
+		real	width;		/* size of pad */
+		real	height;
+
+		real	spacing;	/* space between pad and other traces */
+		real	soldermask;	/* space between pad and solder mask */
+		string	name;		/* pad name */
+		string	number;		/* pad number */
+		string	options;	/* pad options */
+
+		/* normally computed, but can be provided */
+		real	x1;		/* start of pad "line" */
+		real	y1;
+		real	x2;		/* end of pad "line" */
+		real	y2;
+		real	thickness;	/* thickness of pad "line" */
+		real	clearance;	/* twice the spacing between pad and other traces */
+		real	mask;		/* thickness of pad and solder mask */
+	} pad_t;
+
+	pad_t fill_pad(pad_t pad) {
+		if (is_uninit(&pad.x1))
+			pad.x1 = pad.center_x - max(0, (pad.width - pad.height) / 2);
+		if (is_uninit(&pad.x2))
+			pad.x2 = pad.center_x + max(0, (pad.width - pad.height) / 2);
+
+		if (is_uninit(&pad.y1))
+			pad.y1 = pad.center_y - max(0, (pad.height - pad.width) / 2);
+		if (is_uninit(&pad.y2))
+			pad.y2 = pad.center_y + max(0, (pad.height - pad.width) / 2);
+
+		if (is_uninit(&pad.spacing))
+			pad.spacing = process_space;
+		if (is_uninit(&pad.soldermask))
+			pad.soldermask = process_soldermask;
+		if (is_uninit(&pad.number))
+			pad.number = pad.name;
+		if (is_uninit(&pad.options))
+			pad.options = pad_options;
+
+		if (is_uninit(&pad.thickness))
+			pad.thickness = min(pad.width, pad.height);
+
+		if (is_uninit(&pad.clearance))
+			pad.clearance = pad.spacing * 2;
+
+		if (is_uninit(&pad.mask))
+			pad.mask = pad.thickness + pad.soldermask * 2;
+
+#		fprintf(out, "pad %v\n", pad);
+
+		return pad;
+	}
+
+	public exception violation(string rule, real min, real val);
+
+	public check(string rule, real min, real val, bool zero_ok) {
+		if (zero_ok && val <= 0)
+			return;
+		if (val < min) {
+			Debug::trace(Thread::current());
+			File::fprintf(stderr, "rule %s violated (%fmm %fmils < %fmm %fmils)\n",
+				      rule,
+				      val, mm2mils100(val)/100.0,
+				      min, mm2mils100(min)/100.0);
+			exit(1);
+		}
+	}
+
+	public void pad(pad_t pad)
+	{
+		pad = fill_pad(pad);
+
+		check("pad trace", process_trace, pad.thickness, false);
+		check("pad space", process_space, pad.clearance / 2, true);
+		check("pad mask", process_soldermask, (pad.mask - pad.thickness) / 2, true);
+
+		fprintf(out, "    Pad[");
+		fprintf(out, " %6d %6d %6d %6d",
+			mm2mils100(pad.x1),
+			mm2mils100(pad.y1),
+			mm2mils100(pad.x2),
+			mm2mils100(pad.y2));
+		fprintf(out, " %6d %6d %6d",
+			mm2mils100(pad.thickness),
+			mm2mils100(pad.clearance),
+			mm2mils100(pad.mask));
+		fprintf(out, " \"%s\" \"%s\" \"%s\"]\n",
+			pad.name, pad.number, pad.options);
+	}
+
+	public void pad_mm_space_mask_options(real center_x,
 					      real center_y,
 					      real width,
 					      real height,
-					      real clearance,
-					      real mask,
+					      real spacing,
+					      real soldermask,
 					      string name,
-					      string num,
+					      string number,
 					      string options)
 	{
-		real	x1 = 0;
-		real	y1 = 0;
-		real	x2 = 0;
-		real	y2 = 0;
-		real 	thickness = 0;
-
-		if (width > height) {
-			thickness = height;
-			y1 = center_y;
-			x1 = center_x - (width - height) / 2;
-			y2 = center_y;
-			x2 = center_x + (width - height) / 2;
-		} else {
-			thickness = width;
-			x1 = center_x;
-			y1 = center_y - (height - width) / 2;
-			x2 = center_x;
-			y2 = center_y + (height - width) / 2;
-		}
-
-
-		printf ("    Pad[");
-		printf (" %6d %6d %6d %6d",
-			mm2mils100(x1),
-			mm2mils100(y1),
-			mm2mils100(x2),
-			mm2mils100(y2));
-		printf (" %6d %6d %6d",
-			mm2mils100(thickness),
-			mm2mils100(clearance),
-			mm2mils100(mask));
-		printf (" \"%s\" \"%s\" \"%s\"]\n",
-			name, num, options);
+		pad((pad_t) {
+				.center_x = center_x,
+				.center_y = center_y,
+				.width = width,
+				.height = height,
+				.spacing = spacing,
+				.soldermask = soldermask,
+				.name = name,
+				.number = number,
+				.options = options
+				});
 	}
 
-	public void pad_mm_clear_options(real center_x,
+	public void pad_mm_space_options(real center_x,
 					 real center_y,
 					 real width,
 					 real height,
-					 real clearance,
+					 real spacing,
 					 string name,
-					 string num,
+					 string number,
 					 string options)
 	{
-		real	x1 = 0;
-		real	y1 = 0;
-		real	x2 = 0;
-		real	y2 = 0;
-		real 	thickness = 0;
-
-		if (width > height) {
-			thickness = height;
-			y1 = center_y;
-			x1 = center_x - (width - height) / 2;
-			y2 = center_y;
-			x2 = center_x + (width - height) / 2;
-		} else {
-			thickness = width;
-			x1 = center_x;
-			y1 = center_y - (height - width) / 2;
-			x2 = center_x;
-			y2 = center_y + (height - width) / 2;
-		}
-
-		real mask = thickness + clearance / 2;
-
-		printf ("    Pad[");
-		printf (" %6d %6d %6d %6d",
-			mm2mils100(x1),
-			mm2mils100(y1),
-			mm2mils100(x2),
-			mm2mils100(y2));
-		printf (" %6d %6d %6d",
-			mm2mils100(thickness),
-			mm2mils100(clearance),
-			mm2mils100(mask));
-		printf (" \"%s\" \"%s\" \"%s\"]\n",
-			name, num, options);
+		pad((pad_t) {
+				.center_x = center_x,
+				.center_y = center_y,
+				.width = width,
+				.height = height,
+				.spacing = spacing,
+				.name = name,
+				.number = number,
+				.options = options
+				});
 	}
 
-	public void pad_mm_clear(real center_x,
+	public void pad_mm_mask_options(real center_x,
+					 real center_y,
+					 real width,
+					 real height,
+					 real soldermask,
+					 string name,
+					 string number,
+					 string options)
+	{
+		pad((pad_t) {
+				.center_x = center_x,
+				.center_y = center_y,
+				.width = width,
+				.height = height,
+				.soldermask = soldermask,
+				.name = name,
+				.number = number,
+				.options = options
+				});
+	}
+
+	public void pad_mm_space(real center_x,
 				 real center_y,
 				 real width,
 				 real height,
-				 real clearance,
+				 real spacing,
 				 string name,
-				 string num)
+				 string number)
 	{
-		pad_mm_clear_options(center_x,
-				     center_y,
-				     width,
-				     height,
-				     clearance,
-				     name,
-				     num,
-				     "square");
+		pad((pad_t) {
+				.center_x = center_x,
+				.center_y = center_y,
+				.width = width,
+				.height = height,
+				.spacing = spacing,
+				.name = name,
+				.number = number,
+				});
 	}
 
 	public void pad_mm(real center_x,
@@ -154,32 +293,66 @@ namespace Footprint {
 			   real width,
 			   real height,
 			   string name,
-			   string num)
+			   string number)
 	{
-		pad_mm_clear(center_x,
-			     center_y,
-			     width,
-			     height,
-			     process_clearance,
-			     name,
-			     num);
+		pad((pad_t) {
+				.center_x = center_x,
+				.center_y = center_y,
+				.width = width,
+				.height = height,
+				.name = name,
+				.number = number,
+				});
 	}
+
 	public void pad_mm_options(real center_x,
 				   real center_y,
 				   real width,
 				   real height,
 				   string name,
-				   string num,
+				   string number,
 				   string options)
 	{
-		pad_mm_clear_options(center_x,
-				     center_y,
-				     width,
-				     height,
-				     process_clearance,
-				     name,
-				     num,
-				     options);
+		pad((pad_t) {
+				.center_x = center_x,
+				.center_y = center_y,
+				.width = width,
+				.height = height,
+				.name = name,
+				.number = number,
+				.options = options
+				});
+	}
+
+	/* Pad with partial solder coverage.
+	 * Useful for pads under parts which aren't
+	 * big enough to use the center function below
+	 */
+	public void pad_mm_partial(real center_x,
+				   real center_y,
+				   real width,
+				   real height,
+				   real partial,
+				   string name)
+	{
+		pad((pad_t) {
+				.center_x = center_x,
+				.center_y = center_y,
+				.width = width,
+				.height = height,
+				.name = name,
+				.options = pad_options + ",nopaste"
+				});
+
+		real	ratio = floor(sqrt(partial) * 100.0 + 0.5) / 100;
+
+		pad((pad_t) {
+				.center_x = center_x,
+				.center_y = center_y,
+				.width = width * ratio,
+				.height = height * ratio,
+				.name = name,
+				});
 	}
 
 	public void pad_mm_arbitrary(   real x1,
@@ -188,115 +361,163 @@ namespace Footprint {
 					real y2,
 					real thickness,
 					string name,
-					string num,
+					string number,
 					string options)
 	{
-		real clearance = process_clearance;
-
-		real mask = thickness + clearance / 2;
-
-		printf ("    Pad[");
-		printf (" %6d %6d %6d %6d",
-			mm2mils100(x1),
-			mm2mils100(y1),
-			mm2mils100(x2),
-			mm2mils100(y2));
-		printf (" %6d %6d %6d",
-			mm2mils100(thickness),
-			mm2mils100(clearance),
-			mm2mils100(mask));
-		printf (" \"%s\" \"%s\" \"%s\"]\n",
-			name, num, options);
+		pad((pad_t) {
+				.x1 = x1,
+				.y1 = y1,
+				.x2 = x2,
+				.y2 = y2,
+				.thickness = thickness,
+				.name = name,
+				.number = number,
+				.options = options
+				});
 	}
 
-	public void pin_mm_clear(real x, real y, real drill, real copper, real clearance,
-			string name,
-			string number)
+	public typedef struct {
+		real	x;		/* center of pin */
+		real	y;
+		real	drill;		/* diameter of drill hole */
+
+		real	ring;		/* width of annular ring around hole */
+		real	spacing;	/* space between pin and other traces */
+		real	soldermask;	/* space between pin and solder mask */
+
+		string	name;		/* pin name */
+		string	number;		/* pin number */
+		string	options;	/* pin options */
+
+		/* normally computed, but can be provided */
+		real	thickness;	/* thickness of pin "line" */
+		real	clearance;	/* twice the spacing between pin and other traces */
+		real	mask;		/* thickness of pin and solder mask */
+	} pin_t;
+
+	pin_t fill_pin(pin_t pin) {
+
+		/* Fill in process rules if unset */
+		if (is_uninit(&pin.spacing))
+			pin.spacing = process_space;
+		if (is_uninit(&pin.ring))
+			pin.ring = process_ring;
+		if (is_uninit(&pin.soldermask))
+			pin.soldermask = process_soldermask;
+
+		if (is_uninit(&pin.number))
+			pin.number = pin.name;
+		if (is_uninit(&pin.options))
+			pin.options = pin_options;
+
+		if (is_uninit(&pin.thickness))
+			pin.thickness = pin.drill + pin.ring * 2;
+
+		if (is_uninit(&pin.mask))
+			pin.mask = pin.thickness + pin.soldermask * 2;
+
+		if (is_uninit(&pin.clearance))
+			pin.clearance = pin.spacing * 2;
+
+		return pin;
+	}
+
+	public void pin(pin_t pin)
 	{
-		real thickness = drill + copper * 2;
-		real mask = thickness + clearance / 2;
-		printf("    Pin[");
-		printf(" %6d %6d",
-		       mm2mils100(x),
-		       mm2mils100(y));
-		printf(" %6d %6d %6d %6d",
-		       mm2mils100(thickness),
-		       mm2mils100(clearance),
-		       mm2mils100(mask),
-		       mm2mils100(drill));
-		printf (" \"%s\" \"%s\"",
-			name, number);
-		printf (" \"\"]\n");
-		       
+		pin = fill_pin(pin);
+
+		check("pin drill", process_drill, pin.drill, false);
+		check("pin ring", process_ring, (pin.thickness - pin.drill) / 2, true);
+		check("pin space", process_space, pin.clearance / 2, true);
+		if (String::index(pin.options, "via") < 0)
+			check("pin mask", process_soldermask, (pin.mask - pin.thickness) / 2, true);
+
+		fprintf(out, "    Pin[");
+		fprintf(out, " %6d %6d",
+			mm2mils100(pin.x),
+			mm2mils100(pin.y));
+		fprintf(out, " %6d %6d %6d",
+			mm2mils100(pin.thickness),
+			mm2mils100(pin.clearance),
+			mm2mils100(pin.mask));
+		fprintf(out," %6d",
+		       mm2mils100(pin.drill));
+		fprintf(out, " \"%s\" \"%s\" \"%s\"]\n",
+			pin.name, pin.number, pin.options);
 	}
 
-	public void pin_mm_clear_options(real x, real y, real drill, real copper, real clearance,
+	public void pin_mm_space_mask_options(real x, real y,
+					      real drill, real copper, real spacing, real soldermask,
+					      string name, string number, string options)
+	{
+		pin ((pin_t) {
+				.x = x,
+				.y = y,
+				.drill = drill,
+				.ring = copper,
+				.spacing = spacing,
+				.soldermask = soldermask,
+				.name = name,
+				.number = number,
+				.options = options });
+	}
+
+	public void pin_mm_space_options(real x, real y, real drill, real copper, real spacing,
 					 string name,
 					 string number,
 					 string options)
 	{
-		real thickness = drill + copper * 2;
-		real mask = thickness + clearance / 2;
-		printf("    Pin[");
-		printf(" %6d %6d",
-		       mm2mils100(x),
-		       mm2mils100(y));
-		printf(" %6d %6d %6d %6d",
-		       mm2mils100(thickness),
-		       mm2mils100(clearance),
-		       mm2mils100(mask),
-		       mm2mils100(drill));
-		printf (" \"%s\" \"%s\"",
-			name, number);
-		printf (" \"%s\"]\n", options);
-		       
+		pin ((pin_t) {
+				.x = x,
+				.y = y,
+				.drill = drill,
+				.ring = copper,
+				.spacing = spacing,
+				.name = name,
+				.number = number,
+				.options = options });
 	}
 
-	public void pin_mm_clear_mask_options(real x, real y,
-					      real drill, real copper, real clearance, real mask,
-					      string name, string number, string options)
-	{
-		real thickness = drill + copper * 2;
-		printf("    Pin[");
-		printf(" %6d %6d",
-		       mm2mils100(x),
-		       mm2mils100(y));
-		printf(" %6d %6d %6d %6d",
-		       mm2mils100(thickness),
-		       mm2mils100(clearance),
-		       mm2mils100(mask),
-		       mm2mils100(drill));
-		printf (" \"%s\" \"%s\"",
-			name, number);
-		printf (" \"%s\"]\n", options);
-		       
-	}
-	public void pin_mm_clear_mask(real x, real y,
-				      real drill, real copper, real clearance, real mask,
+	public void pin_mm_space_mask(real x, real y,
+				      real drill, real copper, real spacing, real soldermask,
 				      string name, string number)
 	{
-		real thickness = copper;
-		printf("    Pin[");
-		printf(" %6d %6d",
-		       mm2mils100(x),
-		       mm2mils100(y));
-		printf(" %6d %6d %6d %6d",
-		       mm2mils100(thickness),
-		       mm2mils100(clearance),
-		       mm2mils100(mask),
-		       mm2mils100(drill));
-		printf (" \"%s\" \"%s\"",
-			name, number);
-		printf (" \"\"]\n");
-		       
+		pin ((pin_t) {
+				.x = x,
+				.y = y,
+				.drill = drill,
+				.ring = copper,
+				.spacing = spacing,
+				.soldermask = soldermask,
+				.name = name,
+				.number = number });
+	}
+
+	public void pin_mm_space(real x, real y, real drill, real copper, real spacing,
+			string name,
+			string number)
+	{
+		pin ((pin_t) {
+				.x = x,
+				.y = y,
+				.drill = drill,
+				.ring = copper,
+				.spacing = spacing,
+				.name = name,
+				.number = number });
 	}
 
 	public void pin_mm(real x, real y, real drill, real copper,
 			string name,
 			string number)
 	{
-		pin_mm_clear(x, y, drill, copper, process_clearance,
-			     name, number);
+		pin ((pin_t) {
+				.x = x,
+				.y = y,
+				.drill = drill,
+				.ring = copper,
+				.name = name,
+				.number = number,});
 	}
 
 	public void pin_mm_options(real x, real y, real drill, real copper,
@@ -304,19 +525,57 @@ namespace Footprint {
 				   string number,
 				   string options)
 	{
-		pin_mm_clear_options(x, y, drill, copper, process_clearance,
-				     name, number, options);
+		pin ((pin_t) {
+				.x = x,
+				.y = y,
+				.drill = drill,
+				.ring = copper,
+				.name = name,
+				.number = number,
+				.options = options });
+	}
+
+	public void pin_mm_mask_options(real x, real y, real drill, real copper,
+					real soldermask,
+					string name,
+					string number,
+					string options)
+	{
+		pin ((pin_t) {
+				.x = x,
+				.y = y,
+				.drill = drill,
+				.ring = copper,
+				.soldermask = soldermask,
+				.name = name,
+				.number = number,
+				.options = options });
+	}
+
+	public void via_mm(real x, real y,
+			   real drill, real copper,
+			   string name)
+	{
+		pin ((pin_t) {
+				.x = x,
+				.y = y,
+				.drill = drill,
+				.ring = copper,
+				.mask = 0,
+				.name = name,
+				.options = "via"
+			});
 	}
 
 	public void line (real x1, real y1, real x2, real y2)
 	{
-		printf ("    ElementLine[");
-		printf (" %6d %6d %6d %6d",
+		fprintf(out, "    ElementLine[");
+		fprintf(out, " %6d %6d %6d %6d",
 			mm2mils100(x1),
 			mm2mils100(y1),
 			mm2mils100(x2),
 			mm2mils100(y2));
-		printf (" %d]\n", line_thickness);
+		fprintf(out, " %d]\n", mm2mils100(line_thickness));
 	}
 
 	public void rect (real x, real y, real w, real h)
@@ -331,9 +590,109 @@ namespace Footprint {
 			 real radius_x, real radius_y,
 			 real start_angle, real delta_angle)
 	{
-		printf ("    ElementArc[ %6d %6d %6d %6d %3d %3d %d]\n",
+		fprintf(out, "    ElementArc[ %6d %6d %6d %6d %3d %3d %d]\n",
 			mm2mils100(center_x), mm2mils100(center_y),
 			mm2mils100(radius_x), mm2mils100(radius_y),
-			start_angle, delta_angle, line_thickness);
+			start_angle, delta_angle, mm2mils100(line_thickness));
+	}
+
+	public typedef struct {
+		real	x, y;		/* center */
+		real	width, height;	/* size */
+
+		real	via_space_x;
+		real	via_space_y;
+		int	via_cols, via_rows;
+		string	name;
+
+		real	via_drill;
+		real	via_copper;
+
+	} center_t;
+
+	public void center_pad(center_t center) {
+
+		if (is_uninit(&center.via_drill))
+			center.via_drill = process_drill;
+
+		if (is_uninit(&center.via_copper))
+			center.via_copper = process_ring;
+
+		if (is_uninit(&center.via_space_x)) {
+			real	side_x = center.via_drill / 2 + center.via_copper;
+			real	space_x = center.width - 2 * side_x;
+
+			center.via_space_x = space_x / (center.via_cols - 1);
+		}
+
+		if (is_uninit(&center.via_space_y)) {
+			real	side_y = center.via_drill / 2 + center.via_copper;
+			real	space_y = center.width - 2 * side_y;
+
+			center.via_space_y = space_y / (center.via_rows - 1);
+		}
+
+		/* whole pad */
+		pad((pad_t) {
+				.center_x = center.x,
+				.center_y = center.y,
+				.width = center.width,
+				.height = center.height,
+				.name = center.name,
+				.options = "square,nopaste",
+				.spacing = process_space,
+				.mask = 0});
+
+		/* vias */
+		for (int r = 0; r < center.via_rows; r++)
+			for (int c = 0; c < center.via_cols; c++) {
+				real	x = (c - (center.via_cols - 1) / 2) * center.via_space_x;
+				real	y = (r - (center.via_rows - 1) / 2) * center.via_space_y;
+
+				via_mm(x, y, process_drill, process_ring, center.name);
+
+				pad((pad_t) {
+						.center_x = center.x + x,
+						.center_y = center.y + y,
+						.width = center.via_space_x / 2,
+						.height = center.via_space_y / 2,
+						.name = center.name,
+						.options = "square,nopaste",
+						.clearance = 0,
+						.mask = 0,
+					});
+			}
+
+		for (real r = 0; r < center.via_rows - 0.5; r += 0.5) {
+			for (real c = 0; c < center.via_cols - 0.5; c += 0.5) {
+
+				if (is_int(r) && is_int(c))
+					continue;
+
+				real	x = (c - (center.via_cols - 1) / 2) * center.via_space_x;
+				real	y = (r - (center.via_rows - 1) / 2) * center.via_space_y;
+
+				/* exposed copper */
+				pad((pad_t) {
+						.center_x = center.x + x,
+						.center_y = center.y + y,
+						.width = center.via_space_x / 2,
+						.height = center.via_space_x / 2,
+						.soldermask = 0,
+						.name = center.name,
+						.options = "square,nopaste",
+							});
+
+				/* paste spot */
+				pad((pad_t) {
+						.center_x = center.x + x,
+						.center_y = center.y + y,
+						.width = center.via_space_x / 3.5,
+						.height = center.via_space_y / 3.5,
+						.name = center.name,
+						.options = "square",
+					});
+			}
+		}
 	}
 }

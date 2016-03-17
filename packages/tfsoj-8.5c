@@ -54,7 +54,7 @@ real dot_off = -.3;
 line(-package_width/2 + dot_off, package_height/2 - dot_off,
      -package_width/2 + dot_off, package_height/2 - dot_off);
 
-for (pad = 0; pad < num_pad; pad++) {
+for (int pad = 0; pad < num_pad; pad++) {
 	/* left side (1-4) */
 
 	pad_mm(pad_off(pad),

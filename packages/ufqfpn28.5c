@@ -23,7 +23,6 @@ real corner_pad_width = 0.50;
 real pad_height = 0.30;
 real corner_pad_notch = 0.12;
 real pad_spacing = 0.50;
-real pad_clearance = 12 / 1000 * 25.4;
 
 real pad_x_off = 3.20 / 2;
 real pad_y_off = 3.20 / 2;
@@ -58,7 +57,7 @@ real dot_off = .3;
 line(-package_width/2 + dot_off, -package_height/2 + dot_off,
      -package_width/2 + dot_off, -package_height/2 + dot_off);
 
-for (pad = 0; pad < num_pad; pad++) {
+for (int pad = 0; pad < num_pad; pad++) {
 	real pw = pad_width;
 	real ph = pad_height;
 	real pwa = 0;
@@ -84,43 +83,39 @@ for (pad = 0; pad < num_pad; pad++) {
 		}
 
 		/* left (1-7) */
-		pad_mm_clear(-pad_x_off - pw / 2 - pwa,
-			     pad_off(pad) + pha,
-			     pw,
-			     ph,
-			     pad_clearance,
-			     sprintf("%d", pad + 1),
-			     sprintf("%d", pad + 1));
+		pad_mm(-pad_x_off - pw / 2 - pwa,
+		       pad_off(pad) + pha,
+		       pw,
+		       ph,
+		       sprintf("%d", pad + 1),
+		       sprintf("%d", pad + 1));
 
 		/* bottom (8-14) */
 
-		pad_mm_clear(pad_off(pad) + pha,
-			     pad_y_off + pw / 2 + pwa,
-			     ph,
-			     pw,
-			     pad_clearance,
-			     sprintf("%d", pad + 8),
-			     sprintf("%d", pad + 8));
+		pad_mm(pad_off(pad) + pha,
+		       pad_y_off + pw / 2 + pwa,
+		       ph,
+		       pw,
+		       sprintf("%d", pad + 8),
+		       sprintf("%d", pad + 8));
 
 		/* right side (15-21) */
 
-		pad_mm_clear(pad_x_off + pw / 2 + pwa,
-			     -pad_off(pad) - pha,
-			     pw,
-			     ph,
-			     pad_clearance,
-			     sprintf("%d", pad + 15),
-			     sprintf("%d", pad + 15));
+		pad_mm(pad_x_off + pw / 2 + pwa,
+		       -pad_off(pad) - pha,
+		       pw,
+		       ph,
+		       sprintf("%d", pad + 15),
+		       sprintf("%d", pad + 15));
 
 		/* top (22-28) */
 
-		pad_mm_clear(-pad_off(pad) - pha,
-			     -pad_y_off - pw / 2 - pwa,
-			     ph,
-			     pw,
-			     pad_clearance,
-			     sprintf("%d", pad + 22),
-			     sprintf("%d", pad + 22));
+		pad_mm(-pad_off(pad) - pha,
+		       -pad_y_off - pw / 2 - pwa,
+		       ph,
+		       pw,
+		       sprintf("%d", pad + 22),
+		       sprintf("%d", pad + 22));
 	}
 
 }
