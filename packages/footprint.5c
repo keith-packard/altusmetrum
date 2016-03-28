@@ -46,6 +46,16 @@ namespace Footprint {
 
 	string tmp_name;
 
+	bool[string] override_rules = {};
+
+	public void override(string rule) {
+		override_rules[rule] = true;
+	}
+
+	bool overridden(string rule) {
+		return hash_test(override_rules, rule) && override_rules[rule];
+	}
+
 	public void element_start(string name) {
 
 		if (!is_uninit(&out_name)) {
@@ -170,6 +180,9 @@ namespace Footprint {
 	public exception violation(string rule, real min, real val);
 
 	public check(string rule, real min, real val, bool zero_ok) {
+
+		if (overridden(rule))
+			return;
 		if (zero_ok && val <= 0)
 			return;
 		if (val < min) {
