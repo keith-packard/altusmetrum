@@ -54,7 +54,7 @@ real pad_top(real x, real y, int n) {
 	real	w_pad = pad_width + pad_side * 2;
 	real	h_pad = pad_height + pad_outside + pad_inside;
 	real	x_pad = x;
-	real	y_pad = y - pad_outside + h_pad/2;
+	real	y_pad = y + pad_outside - h_pad/2;
 
 	pad_mm(x_pad, y_pad, w_pad, h_pad, sprintf("%d", n), sprintf("%d", n));
 }
@@ -63,7 +63,7 @@ real pad_bottom(real x, real y, int n) {
 	real	w_pad = pad_width + pad_side * 2;
 	real	h_pad = pad_height + pad_outside + pad_inside;
 	real	x_pad = x;
-	real	y_pad = y - pad_height - pad_inside + h_pad/2;
+	real	y_pad = y - pad_outside + h_pad/2;
 
 	pad_mm(x_pad, y_pad, w_pad, h_pad, sprintf("%d", n), sprintf("%d", n));
 }
