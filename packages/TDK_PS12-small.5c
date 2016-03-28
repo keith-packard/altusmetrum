@@ -1,0 +1,38 @@
+/*
+ * Copyright © 2016 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+/* TDK PS12 beeper with minimal size pins */
+
+load "footprint.5c"
+import Footprint;
+
+real	body_diam = 12.2;
+real	pin_spacing = 5.00;
+real	pin_drill = 0.70;
+
+element_start("TDK_PS12");
+
+pin_mm(-pin_spacing/2, 0, pin_drill, process_ring, "1", "1");
+
+pin_mm( pin_spacing/2, 0, pin_drill, process_ring, "2", "2");
+
+arc(0, 0, body_diam/2, body_diam/2, 0, 360);
+
+element_end();
+
+
+
