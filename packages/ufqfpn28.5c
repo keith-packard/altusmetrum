@@ -44,9 +44,6 @@ real package_height = 4;
 
 real num_pad = 7;	/* per side */
 
-/* our magic corner pads appear too narrow */
-override("pad trace");
-
 element_start("ufqfpn-28");
 
 real pad_off(int n) {
@@ -83,7 +80,7 @@ for (int pad = 0; pad < num_pad; pad++) {
 	int	nstep = 0;
 
 	if (pad == 0 || pad == num_pad-1)
-		nstep = 4;
+		nstep = 3;
 
 	for (int s = 0; s <= nstep; s++) {
 
@@ -101,6 +98,11 @@ for (int pad = 0; pad < num_pad; pad++) {
 			pad_w = corner_pad_minimum_width * (1-ratio) + corner_pad_width * ratio;
 
 			pad_h = pad_height * (1 - ratio) + corner_pad_minimum_height * ratio;
+
+			/* Make sure we don't violate the process minimums */
+			if (pad_h < process_trace)
+				pad_h = process_trace;
+
 		} else {
 			pad_x = 0;
 			pad_y = -pad_height / 2;
