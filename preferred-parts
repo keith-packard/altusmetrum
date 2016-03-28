@@ -63,6 +63,7 @@ CONNECTOR	PJ-037AH	PJ-037A	throughhole	no	PJ-037AH	digikey	CP-037AH-ND
 CONNECTOR	Header-5	100mil5pin	throughhole	no	PPTC051LFBN-RC	digikey	S6103-ND
 CONNECTOR	Header-6	100mil6pin	throughhole	no	PPTC061LFBN-RC	digikey	S7004-ND
 CONNECTOR	Header-8	100mil8pin	throughhole	no	PPTC081LFBN-RC	digikey	S7006-ND
+CONNECTOR	Screw-2	282834-2	throughhole	no	282834-2	digikey	A98333-ND
 CONNECTOR	Screw-4	282834-4	throughhole	no	282834-4	digikey	A98335-ND
 CONNECTOR	Screw-6	282834-6	throughhole	no	282834-6	digikey	A98337-ND
 CONNECTOR	Screw-8	282834-8	throughhole	no	282834-8	digikey	A98338-ND
