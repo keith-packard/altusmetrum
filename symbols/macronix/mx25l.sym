@@ -89,15 +89,13 @@ pinseq=0
 }
 B 300 300 1800 2900 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
 T 755 1600 8 10 1 1 0 0 1
-device=MX25L4006E
+device=IC
+T 755 1600 8 10 1 1 0 0 1
+value=MX25L4006E
 T -5 -5 8 10 0 1 0 0 1
-footprint=uson8
+footprint=uson-8
 T -5 -5 8 10 0 1 0 0 1
 loadstatus=smt
-T -5 -5 8 10 0 1 0 0 1
-vendor=digikey
-T -5 -5 8 10 0 1 0 0 1
-vendor_part_number=1092-1064-ND
 L 2000 2600 1600 2600 3 0 0 0 -1 -1
 L 2000 1000 1800 1000 3 0 0 0 -1 -1
 L 2000 3000 1750 3000 3 0 0 0 -1 -1

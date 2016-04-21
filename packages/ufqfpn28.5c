@@ -21,12 +21,23 @@ import Footprint;
 real pad_width = 0.55;
 real corner_pad_width = 0.50;
 real pad_height = 0.30;
-real corner_pad_notch = 0.12;
-real pad_spacing = 0.50;
-real pad_clearance = 12 / 1000 * 25.4;
 
-real pad_x_off = 3.20 / 2;
-real pad_y_off = 3.20 / 2;
+/* Required clearance between corner pads on the diagonal */
+real corner_diag_clearance = 0.21;
+
+/* horizontal/vertical size of corner cut out */
+#real corner_pad_notch = corner_diag_clearance / sqrt(2);
+real corner_pad_notch = 0.15;
+
+real corner_pad_minimum_height = pad_height - corner_pad_notch;
+real corner_pad_minimum_width = corner_pad_width - corner_pad_notch;
+
+real pad_spacing = 0.50;
+
+/* outer location of pad */
+
+real pad_x_off = (3.30 + 2 * 0.5) / 2;
+real pad_y_off = (3.30 + 2 * 0.5) / 2;
 
 real package_width = 4;
 real package_height = 4;
@@ -48,17 +59,19 @@ real corner(int dx, int dy) {
 	line(x, y, x, y - dy * len);
 }
 
+/*
 corner(-1, -1);
 corner(1, -1);
 corner(-1, 1);
 corner(1, 1);
+*/
 
 real dot_off = .3;
 
-line(-package_width/2 + dot_off, -package_height/2 + dot_off,
-     -package_width/2 + dot_off, -package_height/2 + dot_off);
+line(-package_width/2 - dot_off, -package_height/2 - dot_off,
+     -package_width/2 - dot_off, -package_height/2 - dot_off);
 
-for (pad = 0; pad < num_pad; pad++) {
+for (int pad = 0; pad < num_pad; pad++) {
 	real pw = pad_width;
 	real ph = pad_height;
 	real pwa = 0;
@@ -67,60 +80,70 @@ for (pad = 0; pad < num_pad; pad++) {
 	int	nstep = 0;
 
 	if (pad == 0 || pad == num_pad-1)
-		nstep = 4;
+		nstep = 3;
 
 	for (int s = 0; s <= nstep; s++) {
+
+		real	pad_x, pad_y, pad_w, pad_h;
+
 		if (nstep != 0) {
-			real	step = (corner_pad_notch) / nstep;
+			real	ratio = s / nstep;
 
-			pw = corner_pad_width - (nstep - s) * step;
-			ph = pad_height - s * step*2/3;
+			pad_x = 0;
+			if (pad == 0) {
+				pad_y = -pad_height / 2 * (1-ratio) + ((-pad_height / 2) + corner_pad_notch) * ratio;
+			} else {
+				pad_y = -pad_height / 2;
+			}
+			pad_w = corner_pad_minimum_width * (1-ratio) + corner_pad_width * ratio;
 
-			pwa = pad_width - pw;
+			pad_h = pad_height * (1 - ratio) + corner_pad_minimum_height * ratio;
 
-			pha = pad_height - ph;
-			if (pad != 0)
-				pha = -pha;
+			/* Make sure we don't violate the process minimums */
+			if (pad_h < process_trace)
+				pad_h = process_trace;
+
+		} else {
+			pad_x = 0;
+			pad_y = -pad_height / 2;
+			pad_w = pad_width;
+			pad_h = pad_height;
 		}
 
 		/* left (1-7) */
-		pad_mm_clear(-pad_x_off - pw / 2 - pwa,
-			     pad_off(pad) + pha,
-			     pw,
-			     ph,
-			     pad_clearance,
-			     sprintf("%d", pad + 1),
-			     sprintf("%d", pad + 1));
+		pad_mm(-pad_x_off + pad_x + pad_w / 2,
+		       pad_off(pad) + pad_y + pad_h / 2,
+		       pad_w,
+		       pad_h,
+		       sprintf("%d", pad + 1),
+		       sprintf("%d", pad + 1));
 
 		/* bottom (8-14) */
 
-		pad_mm_clear(pad_off(pad) + pha,
-			     pad_y_off + pw / 2 + pwa,
-			     ph,
-			     pw,
-			     pad_clearance,
-			     sprintf("%d", pad + 8),
-			     sprintf("%d", pad + 8));
+		pad_mm(pad_off(pad) + pad_y + pad_h / 2,
+		       pad_y_off + pad_x - pad_w / 2,
+		       pad_h,
+		       pad_w,
+		       sprintf("%d", pad + 8),
+		       sprintf("%d", pad + 8));
 
 		/* right side (15-21) */
 
-		pad_mm_clear(pad_x_off + pw / 2 + pwa,
-			     -pad_off(pad) - pha,
-			     pw,
-			     ph,
-			     pad_clearance,
-			     sprintf("%d", pad + 15),
-			     sprintf("%d", pad + 15));
+		pad_mm(pad_x_off - pad_x - pad_w / 2,
+		       -pad_off(pad) - pad_y - pad_h / 2,
+		       pad_w,
+		       pad_h,
+		       sprintf("%d", pad + 15),
+		       sprintf("%d", pad + 15));
 
 		/* top (22-28) */
 
-		pad_mm_clear(-pad_off(pad) - pha,
-			     -pad_y_off - pw / 2 - pwa,
-			     ph,
-			     pw,
-			     pad_clearance,
-			     sprintf("%d", pad + 22),
-			     sprintf("%d", pad + 22));
+		pad_mm(-pad_off(pad) - pad_y - pad_h / 2,
+		       -pad_y_off - pad_x + pad_w / 2,
+		       pad_h,
+		       pad_w,
+		       sprintf("%d", pad + 22),
+		       sprintf("%d", pad + 22));
 	}
 
 }

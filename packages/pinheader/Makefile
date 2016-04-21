@@ -12,7 +12,7 @@ all: $(FOOTPRINTS) .gitignore
 	./50milpitch.py 5 > $@
 
 2mm2pin.fp: 2mmpitch.5c
-	nickle 2mmpitch.5c 2 > $@
+	nickle 2mmpitch.5c -o $@ 2
 
 clean:
 	rm -f $(FOOTPRINTS)

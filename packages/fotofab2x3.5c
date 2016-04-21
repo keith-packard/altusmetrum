@@ -27,31 +27,25 @@ real shield_width = 76.20;
 real shield_height = 50.80;
 real via_diam = 0.015 * 25.4;
 real via_ring = 0.008 * 25.4;
-real clearance = 0.6;
-real mask = pad_width + clearance / 2;
 
 element_start("fotofab2x3");
 
-pad_mm_clear_mask_options(shield_width/2, 0, 
-			  pad_width, shield_height+pad_width, 
-			  clearance, mask,
-			  "1", "1", 
-			  "square,nopaste");
-pad_mm_clear_mask_options(-shield_width/2, 0, 
-			  pad_width, shield_height+pad_width,
-			  clearance, mask,
-			  "1", "1", 
-			  "square,nopaste");
-pad_mm_clear_mask_options(0, shield_height/2, 
-			  shield_width+pad_width, pad_width,
-			  clearance, mask,
-			  "1", "1", 
-			  "square,nopaste");
-pad_mm_clear_mask_options(0, -shield_height/2, 
-			  shield_width+pad_width, pad_width,
-			  clearance, mask,
-			  "1", "1", 
-			  "square,nopaste");
+pad_mm_options(shield_width/2, 0,
+	       pad_width, shield_height+pad_width,
+	       "1", "1",
+	       "square,nopaste");
+pad_mm_options(-shield_width/2, 0,
+	       pad_width, shield_height+pad_width,
+	       "1", "1",
+	       "square,nopaste");
+pad_mm_options(0, shield_height/2,
+	       shield_width+pad_width, pad_width,
+	       "1", "1",
+	       "square,nopaste");
+pad_mm_options(0, -shield_height/2,
+	       shield_width+pad_width, pad_width,
+	       "1", "1",
+	       "square,nopaste");
 
 pin_mm(shield_width/2, shield_height/2, via_diam, via_ring, "1", "1");
 pin_mm(-shield_width/2, shield_height/2, via_diam, via_ring, "1", "1");

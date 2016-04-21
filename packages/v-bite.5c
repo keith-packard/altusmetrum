@@ -27,7 +27,6 @@ real pin_drill = 2.2;
 real pin_y = 5.1;
 real pin_x = 5.9;
 real pin_copper = 0.2;
-real pin_clear = 0.01 * 2.0 * 25.4;
 
 real gnd_width = 8.0;
 real gnd_height = 3.5;
@@ -39,11 +38,11 @@ element_start("v-bite");
 
 pad_mm_options(gnd_width / 2, -pin_y, gnd_width, gnd_height, "GND", "2", "square,nopaste");
 pad_mm_options(gnd_width / 2, -pin_y, gnd_width, gnd_height, "GND", "2", "onsolder,square,nopaste");
-pin_mm_clear(gnd_width - pin_x, -pin_y, pin_drill, pin_copper, pin_clear, "GND", "2");
+pin_mm_space_options(gnd_width - pin_x, -pin_y, pin_drill, pin_copper, 0, "GND", "2", "via");
 
 pad_mm_options(gnd_width / 2, pin_y, gnd_width, gnd_height, "GND", "2", "square,nopaste");
 pad_mm_options(gnd_width / 2, pin_y, gnd_width, gnd_height, "GND", "2", "onsolder,square,nopaste");
-pin_mm_clear(gnd_width -pin_x, pin_y, pin_drill, pin_copper, pin_clear, "GND", "2");
+pin_mm_space_options(gnd_width -pin_x, pin_y, pin_drill, pin_copper, 0, "GND", "2", "via");
 
 pad_mm_options(center_width / 2, 0, center_width, center_height,"1", "1", "square,nopaste");
 

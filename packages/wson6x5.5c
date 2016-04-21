@@ -57,7 +57,7 @@ real dot_off = .3;
 line(-package_width/2 + dot_off, -package_height/2 + dot_off,
      -package_width/2 + dot_off, -package_height/2 + dot_off);
 
-for (pad = 0; pad < num_pad; pad++) {
+for (int pad = 0; pad < num_pad; pad++) {
 	/* left side (1-4) */
 
 	pad_mm(-pad_x_off - pad_width,
@@ -66,7 +66,7 @@ for (pad = 0; pad < num_pad; pad++) {
 	       pad_height,
 	       sprintf("%d", pad + 1),
 	       sprintf("%d", pad + 1));
-	
+
 	/* right side (5-8) */
 
 	pad_mm(pad_x_off + pad_width,
@@ -75,9 +75,9 @@ for (pad = 0; pad < num_pad; pad++) {
 	       pad_height,
 	       sprintf("%d", pad + 5),
 	       sprintf("%d", pad + 5));
-	
+
 }
 
-pad_mm(0, 0, center_width, center_height, "GND", "GND");
+pad_mm_partial(0, 0, center_width, center_height, 0.63, "GND");
 
 element_end();

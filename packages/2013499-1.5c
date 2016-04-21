@@ -55,20 +55,20 @@ pad_mm(pad_spacing*-2, pad_y, pad_width, pad_height, "GND", "5");
 
 /* "Wings", which are next to the signal pads */
 
-pad_mm_clear(-wing_x, wing_y, wing_width, wing_height, 0, "GND", "5");
-pad_mm_clear( wing_x, wing_y, wing_width, wing_height, 0, "GND", "5");
+pad_mm_space(-wing_x, wing_y, wing_width, wing_height, 0, "GND", "5");
+pad_mm_space( wing_x, wing_y, wing_width, wing_height, 0, "GND", "5");
 
 /* Tabs under package */
 
-pad_mm_clear(-tab_x, tab_y, tab_width, tab_height, 0, "GND", "5");
-pad_mm_clear( tab_x, tab_y, tab_width, tab_height, 0, "GND", "5");
+pad_mm_space(-tab_x, tab_y, tab_width, tab_height, 0, "GND", "5");
+pad_mm_space( tab_x, tab_y, tab_width, tab_height, 0, "GND", "5");
 
 /* tangs at edges of package */
 
-pin_mm_clear(-tang_x, tang_y - tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
-pin_mm_clear(-tang_x, tang_y + tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
+pin_mm_space(-tang_x, tang_y - tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
+pin_mm_space(-tang_x, tang_y + tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
 
-pin_mm_clear( tang_x, tang_y - tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
-pin_mm_clear( tang_x, tang_y + tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
+pin_mm_space( tang_x, tang_y - tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
+pin_mm_space( tang_x, tang_y + tang_length / 2, tang_radius * 2, tang_copper, 0, "GND", "5");
 
 element_end();

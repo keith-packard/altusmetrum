@@ -41,7 +41,7 @@ real	h_pad_y = 0 + h_pad_height / 2;
 
 real	feed_width = 2.1;
 real	feed_height = 1.25;
-real	feed_clear = 0.5;
+real	feed_space = 0.5;
 real	feed_x = 0;
 real	feed_y = feed_height / 2;
 
@@ -49,36 +49,36 @@ real	line_width = 1.29;
 real	line_height = 2;
 real	line_x = 0;
 real	line_y = feed_y + line_height/2;
-real	line_clear = feed_clear;
+real	line_space = feed_space;
 
 /* Center point is at the "top" of the feed pad */
 
 /* Draw a line at the edge of the board for alignment */
 
 real	mark_y = -edge_y + mils1002mm(line_thickness) / 2;
-						      
+
 line(-hole_x, mark_y, hole_x, mark_y);
 
 /* alignment holes */
-pin_mm_clear(-hole_x, -hole_y, hole_diameter, .35, 0.35, "2", "2");
-pin_mm_clear(hole_x, -hole_y, hole_diameter, .35, 0.35, "2", "2");
+pin_mm_options(-hole_x, -hole_y, hole_diameter, process_ring, "2", "2", "via");
+pin_mm_options( hole_x, -hole_y, hole_diameter, process_ring, "2", "2", "via");
 
 /* vertical pads */
 
-pad_mm_clear(-v_pad_x, -v_pad_y, v_pad_width, v_pad_height, 0, "2", "2");
-pad_mm_clear( v_pad_x, -v_pad_y, v_pad_width, v_pad_height, 0, "2", "2");
+pad_mm_space(-v_pad_x, -v_pad_y, v_pad_width, v_pad_height, 0, "2", "2");
+pad_mm_space( v_pad_x, -v_pad_y, v_pad_width, v_pad_height, 0, "2", "2");
 
 /* horizontal pads */
 
-pad_mm_clear(-h_pad_x,  h_pad_y, h_pad_width, h_pad_height, 0, "2", "2");
-pad_mm_clear( h_pad_x,  h_pad_y, h_pad_width, h_pad_height, 0, "2", "2");
+pad_mm_space(-h_pad_x,  h_pad_y, h_pad_width, h_pad_height, 0, "2", "2");
+pad_mm_space( h_pad_x,  h_pad_y, h_pad_width, h_pad_height, 0, "2", "2");
 
 /* feed pad */
 
-pad_mm_clear (feed_x,  feed_y, feed_width, feed_height, feed_clear, "1", "1");
+pad_mm_space (feed_x,  feed_y, feed_width, feed_height, feed_space, "1", "1");
 
 /* feed line */
 
-pad_mm_clear (line_x,  line_y, line_width, line_height, line_clear, "1", "1");
+pad_mm_space (line_x,  line_y, line_width, line_height, line_space, "1", "1");
 
 element_end();

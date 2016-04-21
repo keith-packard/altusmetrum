@@ -98,10 +98,11 @@ FOOTPRINTS= \
 	1051330011.fp \
 	2013499-1.fp \
 	servo.fp \
-	servo-motor.fp
+	servo-motor.fp \
+	TDK_PS12-small.fp
 
 .5c.fp:
-	nickle $*.5c > $@
+	nickle $*.5c -o $@
 
 .py.fp:
 	python $*.py > $@

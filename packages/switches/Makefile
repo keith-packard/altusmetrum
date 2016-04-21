@@ -6,7 +6,7 @@ FOOTPRINTS = \
 	lph.fp
 
 .5c.fp:
-	nickle $*.5c > $@
+	nickle $*.5c -o $@
 
 .py.fp:
 	python $*.py > $@
