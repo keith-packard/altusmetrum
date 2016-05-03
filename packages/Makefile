@@ -99,7 +99,9 @@ FOOTPRINTS= \
 	2013499-1.fp \
 	servo.fp \
 	servo-motor.fp \
-	TDK_PS12-small.fp
+	TDK_PS12-small.fp \
+	CAP_FC8.fp \
+	3568.fp
 
 .5c.fp:
 	nickle $*.5c -o $@
