@@ -145,7 +145,7 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc
 
 seeed: $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 
-$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf
+$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf $(SEEED_EXTRA)
 	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
 	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
 	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
@@ -176,7 +176,8 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-
 		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
 		$(PROJECT).gml $(PROJECT).txt \
 		$(PROJECT).gl2 $(PROJECT).gl3 \
-		$(PROJECT).xy $(PROJECT)-sch.pdf
+		$(PROJECT).xy $(PROJECT)-sch.pdf \
+		$(SEEED_EXTRA)
 
 stencil:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 	zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
