@@ -26,7 +26,11 @@ string[*] read_line(file f) {
 	lineno++;
 	string	line = fgets(f);
 
-	return String::parse_csv(line);
+	string[*] elts = String::parse_csv(line);
+	for (int i = 0; i < dim(elts); i++)
+		if (elts[i][0] == '"')
+			elts[i] = String::dequote(elts[i]);
+	return elts;
 }
 
 string[*] header;
