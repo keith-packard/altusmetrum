@@ -49,6 +49,9 @@ partslist.other: partslist.csv
 $(PROJECT)-seeed.csv: partslist.csv
 	$(AM)/bin/partslist-vendor --vendor seeed partslist.csv > $@
 
+$(PROJECT)-goldphoenix.csv: partslist.csv
+	$(AM)/bin/partslist-vendor --vendor goldphoenix partslist.csv > $@
+
 pcb:	$(SCHEMATICS) Makefile $(CONFIG)
 	gsch2pcb project
 
@@ -179,6 +182,42 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-
 		$(PROJECT).xy $(PROJECT)-sch.pdf \
 		$(SEEED_EXTRA)
 
+goldphoenix: $(PROJECT)-goldphoenix.zip
+
+$(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf  $(PROJECT)-goldphoenix.csv
+	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
+	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
+	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
+		cp $(PROJECT).bottomsilk.gbr $(PROJECT).gbo; \
+	fi
+	if [ -f $(PROJECT).bottompaste.gbr ]; then \
+		cp $(PROJECT).bottompaste.gbr $(PROJECT).gbp; \
+	fi
+	if [ -f $(PROJECT).topsilk.gbr ]; then \
+		cp $(PROJECT).topsilk.gbr $(PROJECT).gto; \
+	fi
+	if [ -f $(PROJECT).toppaste.gbr ]; then \
+		cp $(PROJECT).toppaste.gbr $(PROJECT).gtp; \
+	fi
+	cp $(PROJECT).outline.gbr $(PROJECT).gml
+	cp $(PROJECT).top.gbr $(PROJECT).gtl
+	cp $(PROJECT).topmask.gbr $(PROJECT).gts
+	cp $(PROJECT).all-drill.cnc $(PROJECT).txt
+	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
+		cp $(PROJECT).group1.gbr $(PROJECT).gl2; \
+		cp $(PROJECT).group2.gbr $(PROJECT).gl3; \
+	elif [ -f $(PROJECT).group2.gbr -a -f $(PROJECT).group3.gbr ]; then \
+		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
+		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
+	fi
+	zip $(PROJECT)-goldphoenix.zip \
+		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
+		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
+		$(PROJECT).gml $(PROJECT).txt \
+		$(PROJECT).gl2 $(PROJECT).gl3 \
+		$(PROJECT).xy $(PROJECT)-sch.pdf \
+		$(PROJECT)-goldphoenix.csv
+
 stencil:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 	zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 
@@ -192,6 +231,7 @@ clean:
 	rm -f $(PROJECT).gto $(PROJECT).gtp $(PROJECT).gml $(PROJECT).gtl $(PROJECT).gts
 	rm -f $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3
 	rm -f $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
+	rm -f $(PROJECT)-goldphoenix.zip $(PROJECT)-goldphoenix.csv
 	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf
 
 muffins: muffin-5267.pdf muffin-keithp.pdf
