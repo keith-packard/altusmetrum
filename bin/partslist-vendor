@@ -28,7 +28,7 @@ string[*] read_line(file f) {
 
 	string[*] elts = String::parse_csv(line);
 	for (int i = 0; i < dim(elts); i++)
-		if (elts[i][0] == '"')
+		if (String::length(elts[i]) > 0 && elts[i][0] == '"')
 			elts[i] = String::dequote(elts[i]);
 	return elts;
 }
