@@ -26,7 +26,11 @@ string[*] read_line(file f) {
 	lineno++;
 	string	line = fgets(f);
 
-	return String::parse_csv(line);
+	string[*] elts = String::parse_csv(line);
+	for (int i = 0; i < dim(elts); i++)
+		if (String::length(elts[i]) > 0 && elts[i][0] == '"')
+			elts[i] = String::dequote(elts[i]);
+	return elts;
 }
 
 string[*] header;
@@ -132,6 +136,51 @@ void process_seeed(string[string] entry)
 	printf(",%s,%s\n", quoted(entry["mfg_part_number"]), entry["quantity"]);
 }
 
+void process_goldphoenix(string[string] entry)
+{
+	int units = 1000;
+
+	if (entry["loadstatus"] == "noload")
+		return;
+
+	static int item = 1;
+	static bool start = true;
+	if (start) {
+		printf("#Item,Description,Designator,Package,Manufacturer,Manufacturer Part Number#,Supplier,Supplier Part #,QTY/BOARD,Order QTY,Unit Price, Subtotal \n");
+		start = false;
+	}
+
+	string[*] refdes = String::wordsplit(entry["refdes"], " \t");
+	printf("%d,", item);
+
+	/* description */
+	printf("%s %s,",
+	       quoted(entry["device"]),
+	       quoted(entry["value"]));
+
+	/* designators */
+	if (dim(refdes) > 1)
+		printf ("\"");
+	for (int i = 0; i < dim(refdes); i++) {
+		printf("%s", refdes[i]);
+		if (i < dim(refdes) - 1)
+			printf (",");
+	}
+	if (dim(refdes) > 1)
+		printf ("\"");
+
+	/* rest */
+	printf(",%s,%s,%s,%s,%s,%s,%d\n",
+	       quoted(entry["footprint"]),
+	       quoted(entry["mfg"]),
+	       quoted(entry["mfg_part_number"]),
+	       quoted(entry["vendor"]),
+	       quoted(entry["vendor_part_number"]),
+	       entry["quantity"],
+	       dim(refdes) * units);
+	item++;
+}
+
 void process_digikey(string[string] entry)
 {
 	if (entry["loadstatus"] == "noload")
@@ -152,7 +201,7 @@ void process_mouser(string[string] entry)
 	static bool start = true;
 
 	if (start) {
-		printf("Mouser Part Number,Manufacturer Part Number,Quantity 1\n");
+		printf("Mouser Part Number,Manufacturer Part Number,Quantity\n");
 		start = false;
 	}
 
@@ -180,6 +229,8 @@ void process_file(file f) {
 		string vendor = entry["vendor"];
 		if (!is_uninit(&vendors) && has_vendor(vendors, "seeed")) {
 			process_seeed(entry);
+		} else if (!is_uninit(&vendors) && has_vendor(vendors, "goldphoenix")) {
+			process_goldphoenix(entry);
 		} else if ((!is_uninit(&vendors) && has_vendor(vendors, vendor)) ||
 			   (!is_uninit(&not_vendors) && !has_vendor(not_vendors, vendor))) {
 			switch (entry["vendor"]) {

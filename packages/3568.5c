@@ -1,0 +1,34 @@
+/*
+ * Copyright © 2016 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+real hspace = mils1002mm(39000);
+real vspace = mils1002mm(13400);
+real hole = mils1002mm(6300);
+real copper = mils1002mm(2500);
+
+element_start("3568");
+
+pin_mm(-hspace/2, -vspace/2, hole, copper, "1", "1");
+pin_mm(-hspace/2,  vspace/2, hole, copper, "1", "1");
+
+pin_mm( hspace/2, -vspace/2, hole, copper, "2", "2");
+pin_mm( hspace/2,  vspace/2, hole, copper, "2", "2");
+
+element_end();
