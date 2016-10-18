@@ -43,8 +43,8 @@ element_start("s-pwson-n8");
 /* full center pad */
 pad_mm_partial(0, 0, center_width, center_height, 0.63, "9");
 
-via_mm(-0.9, 0, process_drill, process_ring, "GND");
-via_mm( 0.9, 0, process_drill, process_ring, "GND");
+via_mm(-0.9, 0, process_drill, process_ring, "9");
+via_mm( 0.9, 0, process_drill, process_ring, "9");
 
 real pad_y_off = pad_y_spacing / 2;
 
