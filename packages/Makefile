@@ -33,6 +33,7 @@ FOOTPRINTS= \
 	lqfp100.fp \
 	LPCC16.fp \
 	MPU6000.fp \
+	MPU9250.fp \
 	UBLOX-MAX.fp \
 	TI-QFN32.fp \
 	TI-QFN36.fp \
