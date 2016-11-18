@@ -300,3 +300,10 @@ pintype=pas
 }
 T -4344 -5636 8 10 0 0 0 0 1
 footprint=MPJ18317SW
+P 4400 1000 4100 1000 1 0 0
+{
+T 4250 950 5 8 0 1 180 0 1
+pintype=pas
+T 4195 1045 5 8 1 1 0 0 1
+pinnumber=9
+}
