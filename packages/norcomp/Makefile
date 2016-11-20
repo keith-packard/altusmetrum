@@ -1,15 +1,25 @@
 all:	182-all 189-all
 
-182-all:	182-9.fp 182-15.fp 182-25.fp 182-37.fp
+182-all:	182-f-9.fp 182-f-15.fp 182-f-25.fp 182-f-37.fp \
+		182-m-9.fp 182-m-15.fp 182-m-25.fp 182-m-37.fp
 
-182-9.fp:	182.py
-	./182.py 9 > 182-9.fp
-182-15.fp:	182.py
-	./182.py 15 > 182-15.fp
-182-25.fp:	182.py
-	./182.py 25 > 182-25.fp
-182-37.fp:	182.py
-	./182.py 37 > 182-37.fp
+182-f-9.fp:	182-female.py
+	./182-female.py 9 > 182-f-9.fp
+182-f-15.fp:	182-female.py
+	./182-female.py 15 > 182-f-15.fp
+182-f-25.fp:	182-female.py
+	./182-female.py 25 > 182-f-25.fp
+182-f-37.fp:	182-female.py
+	./182-female.py 37 > 182-f-37.fp
+
+182-m-9.fp:	182-female.py
+	./182-male.py 9 > 182-m-9.fp
+182-m-15.fp:	182-male.py
+	./182-male.py 15 > 182-m-15.fp
+182-m-25.fp:	182-male.py
+	./182-male.py 25 > 182-m-25.fp
+182-m-37.fp:	182-male.py
+	./182-male.py 37 > 182-m-37.fp
 
 189-all:	189-9.fp 189-15.fp 189-25.fp 189-37.fp
 
