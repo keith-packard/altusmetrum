@@ -10,7 +10,9 @@ DIRS= \
 	switches \
 	tyco 
 
-SOIC=soic-16.fp
+SOIC= \
+	soic-16.fp \
+	soic-24.fp
 
 FOOTPRINTS= \
 	$(SOIC) \
@@ -137,6 +139,9 @@ clean: $(CLEANDIRS)
 
 soic-16.fp: soic.5c
 	nickle soic.5c 16 > $@
+
+soic-24.fp: soic.5c
+	nickle soic.5c 24 7.5 > $@
 
 lipo-15x24.fp: lipo-pad.5c
 	nickle lipo-pad.5c 15 24 > $@

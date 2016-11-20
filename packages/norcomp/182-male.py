@@ -84,6 +84,7 @@ for col in range ((pins+1)/2):
 	    '"pin%i"' % pinnum, '"%i"' % pinnum, Flags, ']'
 
 
+pinnum = pins + 1
 
 print '   Pin[', \
     mm2mils100(MntX/2), \
@@ -92,7 +93,7 @@ print '   Pin[', \
     mm2mils100(Clearance), \
     mm2mils100(MntDiam+ARing+Clearance), \
     mm2mils100(MntDiam), \
-    '"mnt" "0"', '0x0001', ']'
+    '"pin%i"' % pinnum, '"%i"' % pinnum, Flags, ']'
 
 print '   Pin[', \
     mm2mils100(-MntX/2), \
@@ -101,7 +102,7 @@ print '   Pin[', \
     mm2mils100(Clearance), \
     mm2mils100(MntDiam+ARing+Clearance), \
     mm2mils100(MntDiam), \
-    '"mnt" "0"', '0x0001', ']'
+    '"pin%i"' % pinnum, '"%i"' % pinnum, Flags, ']'
 
 print '   ElementLine[', \
   	mm2mils100(-BoxX/2), \
