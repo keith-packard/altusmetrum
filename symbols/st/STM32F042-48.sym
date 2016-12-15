@@ -342,19 +342,6 @@ pinlabel=Vddio2
 T 4650 8595 5 10 1 1 90 0 1
 pinnumber=36
 }
-P 5100 8800 5100 8500 1 0 0
-{
-T 5100 8800 5 10 0 0 90 0 1
-pintype=unknown
-T 5100 8800 5 10 0 0 90 0 1
-pinseq=0
-T 5100 8445 5 10 1 1 90 6 1
-pinlabel=Vdda
-T 5050 8595 5 10 1 1 90 0 1
-pinnumber=9
-}
-T 295 8595 8 10 1 1 0 0 1
-refdes=U?
 P 5500 8800 5500 8500 1 0 0
 {
 T 5500 8800 5 10 0 0 90 0 1
@@ -362,8 +349,21 @@ pintype=unknown
 T 5500 8800 5 10 0 0 90 0 1
 pinseq=0
 T 5500 8445 5 10 1 1 90 6 1
-pinlabel=Vbat
+pinlabel=Vdda
 T 5450 8595 5 10 1 1 90 0 1
+pinnumber=9
+}
+T 295 8595 8 10 1 1 0 0 1
+refdes=U?
+P 5100 8800 5100 8500 1 0 0
+{
+T 5100 8800 5 10 0 0 90 0 1
+pintype=unknown
+T 5100 8800 5 10 0 0 90 0 1
+pinseq=0
+T 5100 8445 5 10 1 1 90 6 1
+pinlabel=Vbat
+T 5050 8595 5 10 1 1 90 0 1
 pinnumber=1
 }
 P 15500 7700 15200 7700 1 0 0
