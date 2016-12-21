@@ -19,8 +19,8 @@ all:	drc partslist partslist.csv pcb
 
 drc:	$(PROJECT).drc
 
-$(PROJECT).drc: $(PROJECT).sch Makefile $(CONFIG)
-	-gnetlist -g drc2 $(PROJECT).sch -o $@
+$(PROJECT).drc: $(SCHEMATICS) Makefile $(CONFIG)
+	-gnetlist -g drc2 $(SCHEMATICS) -o $@
 
 partslists: partslist partslist.csv partslist.dk partslist-check.dk partslist-mouser.csv partslist.other
 
