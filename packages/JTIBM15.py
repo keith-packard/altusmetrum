@@ -36,7 +36,7 @@ for pin in range (0,3):
 	mm2mils100(PinWidth), \
 	mm2mils100(PinSpacing - PinWidth), \
   	mm2mils100(PinWidth)+600, \
-	'"pin%i"' % (8 - pin), '"%i"' % (8 - pin), '0x0100]'
+	'"pin%i"' % (6 - pin), '"%i"' % (6 - pin), '0x0100]'
 
     print '   Pad[',\
  	mm2mils100((pin-1) * PinSpacing), \
