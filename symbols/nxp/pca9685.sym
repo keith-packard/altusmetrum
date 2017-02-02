@@ -106,7 +106,7 @@ pintype=pwr
 T 455 395 5 10 1 1 0 0 1
 pinlabel=Vss
 T 305 445 5 10 1 1 0 6 1
-pinnumber=1
+pinnumber=14
 T 0 400 5 10 0 0 270 0 1
 pinseq=0
 }
