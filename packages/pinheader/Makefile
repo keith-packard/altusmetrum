@@ -1,6 +1,7 @@
 FOOTPRINTS = \
 	50mil4pin.fp \
 	50mil5pin.fp \
+	50mil6pin.fp \
 	2mm2pin.fp
 
 all: $(FOOTPRINTS) .gitignore
@@ -10,6 +11,9 @@ all: $(FOOTPRINTS) .gitignore
 
 50mil5pin.fp:	50milpitch.py
 	./50milpitch.py 5 > $@
+
+50mil6pin.fp:	50milpitch.py
+	./50milpitch.py 6 > $@
 
 2mm2pin.fp: 2mmpitch.5c
 	nickle 2mmpitch.5c -o $@ 2
