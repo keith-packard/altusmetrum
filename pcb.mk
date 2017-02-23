@@ -79,7 +79,7 @@ $(PROJECT).all-drill.cnc: $(PROJECT).bottom.gbr
 zip: $(PROJECT).zip
 
 $(PROJECT).zip: $(PROJECT).bottom.gbr $(PROJECT).xy Makefile
-	zip $(PROJECT).zip $(PROJECT).*.gbr $(PROJECT).*.cnc $(PROJECT).xy # $(PROJECT).xls
+	rm -f $@ && zip $@ $(PROJECT).*.gbr $(PROJECT).*.cnc $(PROJECT).xy # $(PROJECT).xls
 
 ac: $(PROJECT)-ac.zip $(PROJECT)-bom.csv
 
@@ -115,7 +115,7 @@ $(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr
 		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
 	fi
-	zip $@ \
+	rm -f $@ && zip $@ \
 		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
 		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
 		$(PROJECT).gml $(PROJECT).ncd $(PROJECT).gml $(PROJECT).drd \
@@ -144,7 +144,7 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc
 		cp $(PROJECT).group2.gbr internal\ plane\ 1.ger; \
 		cp $(PROJECT).group3.gbr internal\ plane\ 2.ger; \
 	fi
-	zip $(PROJECT)-oshpark.zip *.ger *.xln
+	rm -f $@ && zip $@ *.ger *.xln
 
 seeed: $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 
@@ -174,7 +174,7 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-
 		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
 	fi
-	zip $(PROJECT)-seeed.zip \
+	rm -f $@ && zip $@ \
 		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
 		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
 		$(PROJECT).gml $(PROJECT).txt \
@@ -210,7 +210,7 @@ $(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PRO
 		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
 	fi
-	zip $(PROJECT)-goldphoenix.zip \
+	rm -f $@ && zip $@ \
 		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
 		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
 		$(PROJECT).gml $(PROJECT).txt \
@@ -219,7 +219,7 @@ $(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PRO
 		$(PROJECT)-goldphoenix.csv
 
 stencilsunlimited:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
-	zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
+	rm -f $(PROJECT)-stencil.zip && zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 
 stencil:	$(PROJECT).pcb
 	pcb -x gerber --paste-adjust -0.075 $(PROJECT).pcb
@@ -231,7 +231,7 @@ clean:
 	rm -f *.partslist *.new.pcb *.unsorted $(PROJECT).xls muffin-5267.pdf
 	rm -f partslist-check.dk partslist.dk partslist-mouser.csv partslist.other
 	rm -f $(PROJECT)-sch.ps $(PROJECT)-sch.pdf $(PROJECT)-pcb.ps $(PROJECT)-pcb.pdf
-	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp
+	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp $(PROJECT).ncd
 	rm -f $(PROJECT).gto $(PROJECT).gtp $(PROJECT).gml $(PROJECT).gtl $(PROJECT).gts
 	rm -f $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3
 	rm -f $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
