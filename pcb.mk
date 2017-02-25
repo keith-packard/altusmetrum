@@ -218,8 +218,12 @@ $(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PRO
 		$(PROJECT).xy $(PROJECT)-sch.pdf \
 		$(PROJECT)-goldphoenix.csv
 
-stencil:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
+stencilsunlimited:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 	zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
+
+stencil:	$(PROJECT).pcb
+	pcb -x gerber --paste-adjust -0.075 $(PROJECT).pcb
+	mv $(PROJECT).toppaste.gbr stencil.gbr
 
 clean:
 	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip 
