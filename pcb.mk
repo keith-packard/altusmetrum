@@ -86,7 +86,7 @@ ac: $(PROJECT)-ac.zip $(PROJECT)-bom.csv
 $(PROJECT)-bom.csv: partslist.csv
 	cp partslist.csv $@
 
-$(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr
+$(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
 	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
 	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
 	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
@@ -148,7 +148,7 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc
 
 seeed: $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 
-$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf $(SEEED_EXTRA)
+$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf $(PROJECT).xy $(SEEED_EXTRA)
 	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
 	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
 	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
@@ -184,7 +184,7 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-
 
 goldphoenix: $(PROJECT)-goldphoenix.zip
 
-$(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf  $(PROJECT)-goldphoenix.csv
+$(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf $(PROJECT).xy $(PROJECT)-goldphoenix.csv
 	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
 	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
 	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
@@ -228,7 +228,7 @@ stencil:	$(PROJECT).pcb
 clean:
 	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip 
 	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln
-	rm -f *.partslist *.new.pcb *.unsorted $(PROJECT).xls muffin-5267.pdf
+	rm -f *.partslist *.new.pcb *.unsorted $(PROJECT).xls muffin-5267.pdf muffin-keithp.pdf
 	rm -f partslist-check.dk partslist.dk partslist-mouser.csv partslist.other
 	rm -f $(PROJECT)-sch.ps $(PROJECT)-sch.pdf $(PROJECT)-pcb.ps $(PROJECT)-pcb.pdf
 	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp $(PROJECT).ncd
