@@ -1,4 +1,5 @@
 device	value	footprint	loadstatus	provided	mfg_part_number	vendor	vendor_part_number	pnpformat
+ANTENNA	AP.10G.01	ap.10g	smt	no	AP.10G.01	digikey	931-1149-1-ND
 ANTENNA	APAE1575R1840AADB7-T	GP.18.4	throughhole	no	APAE1575R1840AADB7-T	mouser	815-1575R1840AADB7T
 ANTENNA	GP.1575.18.4.A.02	GP.18.4	throughhole	no	GP.1575.18.4.A.02	mouser	960-GP1575184A02
 BATTERY	3v	BU2032SM	smt	no	BU2032SM-BT-GTR	digikey	BU2032SM-BT-GCT-ND
