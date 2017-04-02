@@ -24,7 +24,7 @@ $(PROJECT).drc: $(SCHEMATICS) Makefile $(CONFIG)
 
 partslists: partslist partslist.csv partslist.dk partslist-check.dk partslist-mouser.csv partslist.other
 
-partslist:	$(PROJECT).sch Makefile $(AM)/preferred-parts $(CONFIG)
+partslist:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
 	gnetlist -g bom -o $(PROJECT).unsorted $(SCHEMATICS)
 	head -n1 $(PROJECT).unsorted > partslist
 	tail -n+2 $(PROJECT).unsorted | sort | awk -f $(AM)/bin/fillpartslist >> partslist
