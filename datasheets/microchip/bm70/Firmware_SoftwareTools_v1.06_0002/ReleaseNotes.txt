@@ -1,0 +1,35 @@
+-Version 1.06 Changes from Version 1.03
+
+* Feature Enhancements 
+   - Added Support for BM71 module.  This is inital release of BM71 firmware.
+     Revised unused configurable GPIO pins as inputs by default.
+   - Revise ATT supported MTU size to 158.
+   - Initiate Exchange MTU Request in Slave role.
+   - Revised PWM control command from v1_03 firmware. Added one more option in
+     PWM command for channel parameter.
+   - Modified "Read Local Information" command response.  Added an extra
+     paramter for HW version.
+
+* Bug Fixes
+   - Fixed internal logic for controlling ADC and GPIO's.
+   - Fixed connection parameter update issue at baseband/phy layer.
+   - Revised "Connection Paramter Update Request" command as only for slave
+     and master role. 
+   - Removed LED1 controls in configuration options.  Only LED0 can be 
+     controlled.
+   - Updated configuration memory block to be able to read out Device ID.
+   - Corrected issue with UART controls for some corner cases.
+   - Revised default value for advertising data length for some corner cases.
+   - Added and revised the "Power On" LED mode.
+   - Fixed channel mapping issue when setting up connection.
+   - Revised L2CAP receive buffer issue.  Cleared buffer upon disconnection
+     from peer device.
+   
+
+* Known bugs/limitations
+   - Interoperability issue discovered with HTC M8 and LG Nexus 5.  Phone will
+     initiate disconnect after pairing procedure is complete.  Only happens when
+     association method is "Just Works".  Workaroun is too use "Passkey" method.
+
+-Use the isupdate.exe PC based GUI tool to load hex images into the BM7x module.
+ See description of process in BM70/71 User Guide.
