@@ -8,7 +8,7 @@ DIRS= \
 	phoenix \
 	pinheader \
 	switches \
-	tyco 
+	te-connectivity 
 
 SOIC= \
 	soic-16.fp \

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-for i in 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-do
-	FILE="282834-"$i
-	./buchanan.py $i > $FILE.fp
-done
