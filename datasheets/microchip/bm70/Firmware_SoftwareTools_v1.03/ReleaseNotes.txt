@@ -1,0 +1,13 @@
+-Versfion 1.03 is the initial release of the BM7x firmware.  See User Guide
+ for included functionality.  
+
+
+
+* Known bugs/limitations
+   - Interoperability issue discovered with HTC M8 and LG Nexus 5.  Phone will
+     initiate disconnect after pairing procedure is complete.  Only happens when
+     association method is "Just Works".  Workaround is too use "Passkey" 
+     method.
+
+-Use the isupdate.exe PC based GUI tool to load hex images into the BM7x module.
+ See description of process in BM70/71 User Guide.
