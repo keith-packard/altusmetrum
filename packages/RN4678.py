@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # Copyright 2016 by Bdale Garbee <bdale@gag.com>.  GPLv3+
 #
-# Program to emit PCB footprint for Microchip BM70BLES1FC2 Bluetooth LE module
+# Program to emit PCB footprint for Microchip RN4678 Bluetooth LE module
 #
 
-# dimensions in mm from BM70/71 Data Sheet
+# dimensions in mm from BM70/71 Data Sheet (part of the same family)
 
 BodyWidth = 12.00
 BodyHeight = 22.00

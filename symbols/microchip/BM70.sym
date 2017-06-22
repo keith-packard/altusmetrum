@@ -370,4 +370,4 @@ pintype=pas
 T 3195 8200 8 10 1 1 0 0 1
 value=BM70BLES1FC2
 T 395 8600 8 10 0 0 0 0 1
-footprint=BM70BLES1FC2
+footprint=RN4678

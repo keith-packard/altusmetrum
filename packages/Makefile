@@ -107,7 +107,7 @@ FOOTPRINTS= \
 	3568.fp \
 	ABM12.fp \
 	MD-60S.fp \
-	BM70BLES1FC2.fp \
+	RN4678.fp \
 	JTIBM15.fp
 
 .5c.fp:

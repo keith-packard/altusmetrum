@@ -50,7 +50,7 @@ CONNECTOR	Debug	0-215079-4	throughhole	no	215079-4	mouser	571-215079-4
 CONNECTOR	Debug	530470610	throughhole	no	0530470610	digikey	WM1735-ND
 CONNECTOR	Debug	picodebug	throughhole	no	GRPB041VWVN-RC	digikey	S9014E-04-ND
 CONNECTOR	LiPo	B2B-PH	throughhole	no	440054-2	digikey	A100034-ND
-CONNECTOR	LiPo	S2B-PH	throughhole	no	S2B-PH-K-S(LF)(SN)	digikey	455-1719-ND
+CONNECTOR	LiPo	S2B-PH	throughhole	yes	S2B-PH-K-S(LF)(SN)	digikey	455-1719-ND
 CONNECTOR	LiPo	S2B-PH-SM	smt	no	S2B-PH-SM4-TB(LF)(SN)	digikey	455-1749-1-ND	reel16mm
 CONNECTOR	Pyro	282834-4	throughhole	no	282834-4	digikey	A98335-ND
 CONNECTOR	Pyro	282834-6	throughhole	no	20088	4ucon	20088
