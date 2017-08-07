@@ -11,6 +11,7 @@ DIRS= \
 	te-connectivity 
 
 SOIC= \
+	ssop-28.fp \
 	soic-16.fp \
 	soic-24.fp
 
@@ -138,6 +139,9 @@ clean: $(CLEANDIRS)
 
 .gitignore: Makefile
 	for i in $@ $(FOOTPRINTS); do echo $$i; done > $@
+
+ssop-28.fp: ssop.5c
+	nickle ssop.5c 28 > $@
 
 soic-16.fp: soic.5c
 	nickle soic.5c 16 > $@
