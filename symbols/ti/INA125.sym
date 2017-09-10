@@ -152,14 +152,16 @@ T 0 1000 5 10 0 1 0 0 1
 pintype=io
 }
 B 400 400 3200 5800 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+{
+T 2300 5000 5 10 1 1 0 0 1
+value=INA125
+}
 T 4400 700 8 10 0 0 0 0 1
 description=TI INA125 Instrumentation Amplifier
 T 500 6300 8 10 1 1 0 0 1
 refdes=U?
 T 4400 1600 8 10 0 0 0 0 1
-device=INA125
-T 2350 4650 9 10 1 0 0 0 1
-INA125
+device=IC
 T 4400 1900 8 10 0 0 0 0 1
 footprint=DIP16
 P 2000 6600 2000 6200 1 0 0
