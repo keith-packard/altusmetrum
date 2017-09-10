@@ -11,14 +11,12 @@ T 0 2500 5 10 0 1 0 0 1
 pintype=pas
 }
 B 400 0 2800 4000 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
-T 4400 300 8 10 0 0 0 0 1
-description=TI INA125 Instrumentation Amplifier
 T 400 4100 8 10 1 1 0 0 1
 refdes=U?
 T 4400 1200 8 10 0 0 0 0 1
-device=INA125
+device=IC
 T 4400 1500 8 10 0 0 0 0 1
-footprint=DIP16
+footprint=ssop-16
 P 0 2100 400 2100 1 0 0
 {
 T 100 2200 5 10 1 1 0 0 1
