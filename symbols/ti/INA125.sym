@@ -1,4 +1,4 @@
-v 20080127 1
+v 20130925 2
 P 0 2600 400 2600 1 0 0
 {
 T 100 2700 5 10 1 1 0 0 1
@@ -19,7 +19,7 @@ pinlabel=Vin-
 T -400 700 5 10 0 1 0 0 1
 pinseq=7
 T 0 600 5 10 0 1 0 0 1
-pintype=io
+pintype=pwr
 }
 P 0 3000 400 3000 1 0 0
 {
@@ -63,7 +63,7 @@ pinlabel=IAref
 T 4000 600 5 10 0 1 0 0 1
 pinseq=26
 T 4000 600 5 10 0 1 0 0 1
-pintype=io
+pintype=pas
 }
 P 2000 0 2000 400 1 0 0
 {
@@ -74,7 +74,7 @@ pinlabel=V-
 T 2000 0 5 10 0 1 270 0 1
 pinseq=3
 T 2000 0 5 10 0 1 270 0 1
-pintype=io
+pintype=pwr
 }
 P 0 5800 400 5800 1 0 0
 {
