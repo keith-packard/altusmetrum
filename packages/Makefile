@@ -110,7 +110,8 @@ FOOTPRINTS= \
 	ABM12.fp \
 	MD-60S.fp \
 	RN4678.fp \
-	JTIBM15.fp
+	JTIBM15.fp \
+	s-pqfp-g32.fp
 
 .5c.fp:
 	nickle $*.5c -o $@
