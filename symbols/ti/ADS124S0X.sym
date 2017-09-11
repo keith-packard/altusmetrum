@@ -16,7 +16,7 @@ refdes=U?
 T 4400 1200 8 10 0 0 0 0 1
 device=IC
 T 4400 1500 8 10 0 0 0 0 1
-footprint=ssop-16
+footprint=s-pqfp-g32
 P 0 6100 400 6100 1 0 0
 {
 T 100 6200 5 10 1 1 0 0 1
