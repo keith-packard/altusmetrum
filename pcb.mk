@@ -108,6 +108,9 @@ $(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
 	if [ -f $(PROJECT).unplated-drill.cnc ]; then \
 		cp $(PROJECT).unplated-drill.cnc $(PROJECT).drd; \
 	fi
+	if [ -f $(PROJECT).fab.gbr ]; then \
+		cp $(PROJECT).fab.gbr $(PROJECT).fab; \
+	fi
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group2.gbr $(PROJECT).gl3; \
@@ -120,7 +123,7 @@ $(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
 		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
 		$(PROJECT).gml $(PROJECT).ncd $(PROJECT).gml $(PROJECT).drd \
 		$(PROJECT).gl2 $(PROJECT).gl3 \
-		$(PROJECT).xy
+		$(PROJECT).xy $(PROJECT).fab
 
 oshpark: $(PROJECT)-oshpark.zip
 
@@ -233,7 +236,7 @@ clean:
 	rm -f $(PROJECT)-sch.ps $(PROJECT)-sch.pdf $(PROJECT)-pcb.ps $(PROJECT)-pcb.pdf
 	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp $(PROJECT).ncd
 	rm -f $(PROJECT).gto $(PROJECT).gtp $(PROJECT).gml $(PROJECT).gtl $(PROJECT).gts
-	rm -f $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3
+	rm -f $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3 $(PROJECT).fab
 	rm -f $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 	rm -f $(PROJECT)-goldphoenix.zip $(PROJECT)-goldphoenix.csv
 	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf
