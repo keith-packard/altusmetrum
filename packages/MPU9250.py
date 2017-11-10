@@ -25,10 +25,10 @@ def mm2mils100( mm ):
 
 print '# author: Bdale Garbee'
 print '# email: bdale@gag.com'
-print '# dist-license: GPL 2'
+print '# dist-license: GPL 3'
 print '# use-license: unlimited'
 
-print 'Element[0x0 "ITG3200" "" "" 0 0 0 0 0 100 0x0]'
+print 'Element[0x0 "MPU9250" "" "" 0 0 0 0 0 100 0x0]'
 print "("
 
 # pins
