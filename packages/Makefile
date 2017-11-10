@@ -85,6 +85,7 @@ FOOTPRINTS= \
 	usb_onboard.fp \
 	u-pdfn-8.fp \
 	ufqfpn28.fp \
+	ufqfpn24.fp \
 	sot666.fp \
 	sot323.fp \
 	sod123.fp \
