@@ -21,7 +21,7 @@ import Footprint;
 Footprint::process_soldermask = 0.05;
 
 real package_pad_width = 0.30;
-real pad_outside = 0.25;
+real pad_outside = 0.4;
 real pad_width = package_pad_width + pad_outside;
 real corner_pad_width = pad_width;
 real pad_height = 0.20;
