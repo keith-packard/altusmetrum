@@ -5,11 +5,17 @@
 #
 
 # dimensions in mm from Invensense MPU-9250-Datasheet.pdf
-PinWidth = 0.20		
-PinResist = PinWidth + (2 * 0.07)
-PinHeight = 0.30
 PinSpacing = 0.40
-Overall = 3.80
+PinWidth = 0.20		
+PartOverall = 3.00
+
+PartPinHeight = 0.30		# inward from overall edge
+Tout = 0.40			# extend pads outside by this much
+Tin = -0.05			# extend pads inside by this much
+PinHeight = PartPinHeight + Tout + Tin
+Overall = PartOverall + (2 * Tout)
+
+PinResist = PinWidth + (2 * 0.07)
 
 import sys
 
