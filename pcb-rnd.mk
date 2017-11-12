@@ -55,11 +55,11 @@ $(PROJECT)-goldphoenix.csv: partslist.csv
 pcb:	$(SCHEMATICS) Makefile $(CONFIG)
 	gsch2pcb-rnd project
 
-$(PROJECT).xy:	$(PROJECT).pcb $(CONFIG)
-	pcb -x bom $(PROJECT).pcb
+$(PROJECT).xy:	$(PROJECT).lht $(CONFIG)
+	pcb-rnd -x bom $(PROJECT).lht
 
-$(PROJECT).bottom.gbr:	$(PROJECT).pcb $(CONFIG)
-	pcb -x gerber $(PROJECT).pcb
+$(PROJECT).bottom.gbr:	$(PROJECT).lht $(CONFIG)
+	pcb-rnd -x gerber $(PROJECT).lht
 	@case "$(SILK)" in \
 	none) 	rm -f $(PROJECT).topsilk.gbr $(PROJECT).bottom.gbr; \
 		;; \
@@ -221,14 +221,14 @@ $(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PRO
 stencilsunlimited:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 	rm -f $(PROJECT)-stencil.zip && zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 
-stencil:	$(PROJECT).pcb
-	pcb -x gerber --paste-adjust -0.075 $(PROJECT).pcb
+stencil:	$(PROJECT).lht
+	pcb-rnd -x gerber --paste-adjust -0.075 $(PROJECT).lht
 	mv $(PROJECT).toppaste.gbr stencil.gbr
 
 clean:
 	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip 
 	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln
-	rm -f *.partslist *.new.pcb *.unsorted $(PROJECT).xls muffin-5267.pdf muffin-keithp.pdf
+	rm -f *.partslist *.unsorted $(PROJECT).xls muffin-5267.pdf muffin-keithp.pdf
 	rm -f partslist-check.dk partslist.dk partslist-mouser.csv partslist.other
 	rm -f $(PROJECT)-sch.ps $(PROJECT)-sch.pdf $(PROJECT)-pcb.ps $(PROJECT)-pcb.pdf
 	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp $(PROJECT).ncd
@@ -258,14 +258,14 @@ SCHEMATICS_PDF=$(SCHEMATICS:.sch=.pdf)
 $(PROJECT)-sch.pdf:	$(SCHEMATICS_PDF)
 	pdfjoin -o $@ $(SCHEMATICS_PDF)
 
-$(PROJECT)-pcb.ps:	$(PROJECT).pcb $(CONFIG)
-	pcb -x ps --psfile $@ --media Letter --ps-color $(PROJECT).pcb
+$(PROJECT)-pcb.ps:	$(PROJECT).lht $(CONFIG)
+	pcb-rnd -x ps --psfile $@ --media Letter --ps-color $(PROJECT).lht
 
 $(PROJECT)-pcb.pdf:	$(PROJECT)-pcb.ps
 	ps2pdf $(PROJECT)-pcb.ps
 
-$(PROJECT)-big.ps:	$(PROJECT).pcb $(CONFIG)
-	pcb -x ps --psfile $@ --media Letter --ps-color --fill-page --no-align-marks $(PROJECT).pcb
+$(PROJECT)-big.ps:	$(PROJECT).lht $(CONFIG)
+	pcb-rnd -x ps --psfile $@ --media Letter --ps-color --fill-page --no-align-marks $(PROJECT).lht
 
 $(PROJECT)-big.pdf:	$(PROJECT)-big.ps
 	ps2pdf $(PROJECT)-big.ps
