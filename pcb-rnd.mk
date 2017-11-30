@@ -222,7 +222,7 @@ stencilsunlimited:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outl
 	rm -f $(PROJECT)-stencil.zip && zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 
 stencil:	$(PROJECT).lht
-	pcb-rnd -x gerber --paste-adjust -0.075 $(PROJECT).lht
+	pcb-rnd -x gerber -c design/paste_adjust=-10mil $(PROJECT).lht
 	mv $(PROJECT).toppaste.gbr stencil.gbr
 
 clean:
