@@ -20,6 +20,7 @@ FOOTPRINTS= \
 	$(SOIC) \
 	s-pwson-n8.fp \
 	s-pwson-n6.fp \
+	lga14.fp \
 	MS5607.fp \
 	uson-8.fp \
 	wson6x5.fp \
