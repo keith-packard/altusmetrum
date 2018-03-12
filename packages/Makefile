@@ -108,7 +108,7 @@ FOOTPRINTS= \
 	servo-motor.fp \
 	TDK_PS12-small.fp \
 	CAP_FC8.fp \
-	3568.fp \
+	fuse3568.fp \
 	ABM12.fp \
 	MD-60S.fp \
 	RN4678.fp \

@@ -23,7 +23,7 @@ real vspace = mils1002mm(13400);
 real hole = mils1002mm(6300);
 real copper = mils1002mm(2500);
 
-element_start("3568");
+element_start("fuse3568");
 
 pin_mm(-hspace/2, -vspace/2, hole, copper, "1", "1");
 pin_mm(-hspace/2,  vspace/2, hole, copper, "1", "1");
