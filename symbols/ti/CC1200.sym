@@ -268,14 +268,10 @@ T 5400 1600 8 10 0 0 0 0 1
 description=TI CC1200 Low Power, High Performance RF Transceiver
 T 400 7000 8 10 1 1 0 0 1
 refdes=U?
-T 5400 2500 8 10 0 0 0 0 1
-numslots=1
-T 2500 7000 9 10 1 1 0 0 1
+T 2800 7300 9 10 0 1 0 0 1
 device=IC
 T 2500 7000 9 10 1 1 0 0 1
 value=CC1200
-T 5400 2800 8 10 0 0 0 0 1
-slot=1
 P 3600 5000 3200 5000 1 0 0
 {
 T 3300 5100 5 10 1 1 0 0 1

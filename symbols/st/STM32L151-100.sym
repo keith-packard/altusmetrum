@@ -57,14 +57,10 @@ pintype=pwr
 B 400 400 8700 19600 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
 T -6400 -2200 8 10 0 0 0 0 1
 description=Atmel ATmega328P Microcontroller
-T -6400 -1300 8 10 0 0 0 0 1
-numslots=1
 T -6400 -1600 8 10 0 0 0 0 1
 device=ATmega328P
 T 2750 17450 9 30 1 0 0 0 1
 STM32L151VBT
-T -6400 -1000 8 10 0 0 0 0 1
-slot=1
 T 400 20100 8 10 1 1 0 0 1
 refdes=U?
 P 0 18800 400 18800 1 0 0
