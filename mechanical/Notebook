@@ -1,3 +1,8 @@
+AngleBracket.scad
+	3D-printable bracket for holding panel in on TeleLCO, from a
+	parametric angle bracket generator found on Thingiverse and modified
+	to meet our needs.
+
 M22_Powerpole_Mount.zip
 	3D-printable panel mount for Anderson Powerpole connectors,
 	used for battery charger attachment to TeleFire series, acquired
