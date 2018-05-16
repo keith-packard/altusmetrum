@@ -28,7 +28,7 @@ alignment_studs = 0; // [0:1]
 slot_holes = 0; // [0:1]
 
 // screw hole diameter
-hole_d = 3.2;
+hole_d = 4.8;
 
 
 /* [Advanced] */
