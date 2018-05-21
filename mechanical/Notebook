@@ -8,6 +8,10 @@ M22_Powerpole_Mount.zip
 	used for battery charger attachment to TeleFire series, acquired
 	via Thingiverse.	https://www.thingiverse.com/thing:2580868
 
+telebt-box.py
+	script to generate g-code used for cutting TeleBT boxes on
+	Bdale's cnc router
+
 teledongle-box.py
 	script to generate g-code used for cutting TeleDongle boxes on
 	Bdale's cnc router
