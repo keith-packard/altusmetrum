@@ -1,3 +1,9 @@
+TO DO:
+	- telelco_1170_panel needs 1mm or more thinner panel around the 
+	  encoder shaft and power switch, 27mm diameter should do 
+
+Files here:
+
 AngleBracket.scad
 	3D-printable bracket for holding panel in on TeleLCO, from a
 	parametric angle bracket generator found on Thingiverse and modified
