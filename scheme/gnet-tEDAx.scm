@@ -56,8 +56,7 @@
       (display "tEDAx v1" port) 
       (newline port)
 
-      (display "begin netlist v1 " port)
-      (display "projectname" port)
+      (display "begin netlist v1 netlist" port)
       (newline port)
       (newline port)))
 
