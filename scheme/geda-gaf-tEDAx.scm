@@ -1,5 +1,4 @@
-;;; gEDA - GPL Electronic Design Automation
-;;; gnetlist plug-in for tEDAx
+;;; tEDAx plug-in for gnetlist
 ;;; Copyright (C) 2018 Bdale Garbee
 ;;;
 ;;; This program is free software; you can redistribute it and/or modify
