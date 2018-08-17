@@ -1,0 +1,9 @@
+li:pcb-rnd-conf-v1 {
+ ha:overwrite {
+  ha:rc {
+   li:library_search_paths {
+    ../altusmetrum/packages
+   }
+  }
+ }
+}
