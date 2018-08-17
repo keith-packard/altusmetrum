@@ -1,7 +1,7 @@
 AM=../altusmetrum
 SCHEME=$(AM)/scheme
 
-.SUFFIXES: .sch .lht .ps .pdf
+.SUFFIXES: .lht .sch .ps .pdf .tdx
 
 # need to have PROJECT defined
 ifndef PROJECT
@@ -20,19 +20,20 @@ all:	drc partslist partslist.csv pcb
 drc:	$(PROJECT).drc
 
 $(PROJECT).drc: $(SCHEMATICS) Makefile $(CONFIG)
-	-gnetlist -g drc2 $(SCHEMATICS) -o $@
+	-lepton-netlist -g drc2 $(SCHEMATICS) -o $@
 
 partslists: partslist partslist.csv partslist.dk partslist-check.dk partslist-mouser.csv partslist.other
 
 partslist:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
-	gnetlist -g bom -o $(PROJECT).unsorted $(SCHEMATICS)
+	lepton-netlist -g bom -o $(PROJECT).unsorted $(SCHEMATICS)
 	head -n1 $(PROJECT).unsorted > partslist
 	tail -n+2 $(PROJECT).unsorted | sort | awk -f $(AM)/bin/fillpartslist >> partslist
 	rm -f $(PROJECT).unsorted
 
 partslist.csv:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
-	gnetlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
-	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | awk -f $(AM)/bin/fillpartscsv | sort ) > $@ && rm -f $(PROJECT).csvtmp
+	lepton-netlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
+	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | \
+		awk -f $(AM)/bin/fillpartscsv | sort ) > $@ && rm -f $(PROJECT).csvtmp
 
 partslist.dk: partslist.csv
 	$(AM)/bin/partslist-vendor --vendor digikey partslist.csv > $@
@@ -53,7 +54,9 @@ $(PROJECT)-goldphoenix.csv: partslist.csv
 	$(AM)/bin/partslist-vendor --vendor goldphoenix partslist.csv > $@
 
 pcb:	$(SCHEMATICS) Makefile $(CONFIG)
-	gsch2pcb-rnd project
+	lepton-netlist -g tEDAx -o $(PROJECT).tdx $(SCHEMATICS)
+	echo 'LoadTedaxFrom(netlist, $(PROJECT).tdx); SaveTo(Layout)' | \
+		pcb-rnd --gui batch $(PROJECT).lht
 
 $(PROJECT).xy:	$(PROJECT).lht $(CONFIG)
 	pcb-rnd -x bom $(PROJECT).lht
