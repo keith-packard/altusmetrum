@@ -22,7 +22,7 @@ drc:	$(PROJECT).drc
 $(PROJECT).drc: $(SCHEMATICS) Makefile $(CONFIG)
 	-gnetlist -g drc2 $(SCHEMATICS) -o $@
 
-partslists: partslist partslist.csv partslist.dk partslist-check.dk partslist-mouser.csv partslist.other
+partslists: partslist partslist.csv partslist-dk.csv partslist-check.dk partslist-mouser.csv partslist.other
 
 partslist:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
 	gnetlist -g bom -o $(PROJECT).unsorted $(SCHEMATICS)
@@ -34,7 +34,7 @@ partslist.csv:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
 	gnetlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
 	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | awk -f $(AM)/bin/fillpartscsv | sort ) > $@ && rm -f $(PROJECT).csvtmp
 
-partslist.dk: partslist.csv
+partslist-dk.csv: partslist.csv
 	$(AM)/bin/partslist-vendor --vendor digikey partslist.csv > $@
 
 partslist-check.dk: partslist.csv
@@ -232,7 +232,7 @@ clean:
 	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip 
 	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln
 	rm -f *.partslist *.new.pcb *.unsorted $(PROJECT).xls muffin-5267.pdf muffin-keithp.pdf
-	rm -f partslist-check.dk partslist.dk partslist-mouser.csv partslist.other
+	rm -f partslist-check.dk partslist-dk.csv partslist-mouser.csv partslist.other
 	rm -f $(PROJECT)-sch.ps $(PROJECT)-sch.pdf $(PROJECT)-pcb.ps $(PROJECT)-pcb.pdf
 	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp $(PROJECT).ncd
 	rm -f $(PROJECT).gto $(PROJECT).gtp $(PROJECT).gml $(PROJECT).gtl $(PROJECT).gts
