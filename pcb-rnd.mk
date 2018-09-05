@@ -229,7 +229,7 @@ stencil:	$(PROJECT).lht
 	mv $(PROJECT).toppaste.gbr stencil.gbr
 
 clean:
-	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip 
+	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip *.tdx
 	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln
 	rm -f *.partslist *.unsorted $(PROJECT).xls muffin-5267.pdf muffin-keithp.pdf
 	rm -f partslist-check.dk partslist-dk.csv partslist-mouser.csv partslist-other.csv
@@ -241,7 +241,10 @@ clean:
 	rm -f $(PROJECT)-goldphoenix.zip $(PROJECT)-goldphoenix.csv
 	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf
 
-muffins: muffin-5267.pdf muffin-keithp.pdf
+muffins: muffin-6570.pdf muffin-5267.pdf muffin-keithp.pdf
+
+muffin-6570.pdf: partslist.csv $(AM)/glabels/muffin-6570.glabels
+	glabels-3-batch $(AM)/glabels/muffin-6570.glabels -i partslist.csv -o $@ > /dev/null
 
 muffin-5267.pdf: partslist.csv $(AM)/glabels/muffin-short-5267.glabels
 	glabels-3-batch $(AM)/glabels/muffin-short-5267.glabels -i partslist.csv -o $@ > /dev/null

@@ -241,7 +241,10 @@ clean:
 	rm -f $(PROJECT)-goldphoenix.zip $(PROJECT)-goldphoenix.csv
 	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf
 
-muffins: muffin-5267.pdf muffin-keithp.pdf
+muffins: muffin-6570.pdf muffin-5267.pdf muffin-keithp.pdf
+
+muffin-6570.pdf: partslist.csv $(AM)/glabels/muffin-6570.glabels
+	glabels-3-batch $(AM)/glabels/muffin-6570.glabels -i partslist.csv -o $@ > /dev/null
 
 muffin-5267.pdf: partslist.csv $(AM)/glabels/muffin-short-5267.glabels
 	glabels-3-batch $(AM)/glabels/muffin-short-5267.glabels -i partslist.csv -o $@ > /dev/null
