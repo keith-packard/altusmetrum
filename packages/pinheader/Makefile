@@ -7,6 +7,9 @@ FOOTPRINTS = \
 
 all: $(FOOTPRINTS) .gitignore
 
+50mil3pin.fp:	50milpitch.py
+	./50milpitch.py 3 > 50mil3pin.fp
+
 50mil4pin.fp:	50milpitch.py
 	./50milpitch.py 4 > 50mil4pin.fp
 
