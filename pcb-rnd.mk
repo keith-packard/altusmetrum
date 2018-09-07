@@ -31,7 +31,7 @@ partslist:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
 	rm -f $(PROJECT).unsorted
 
 partslist.csv:	$(SCHEMATICS) Makefile $(AM)/preferred-parts $(CONFIG)
-	lepton-netlist -L $(SCHEME) -g partslistgag -o $(PROJECT).csvtmp $(SCHEMATICS)
+	lepton-netlist -L $(SCHEME) -g bomAM -o $(PROJECT).csvtmp $(SCHEMATICS)
 	(head -n1 $(PROJECT).csvtmp; tail -n+2 $(PROJECT).csvtmp | sort -t \, -k 8 | \
 		awk -f $(AM)/bin/fillpartscsv | sort ) > $@ && rm -f $(PROJECT).csvtmp
 
