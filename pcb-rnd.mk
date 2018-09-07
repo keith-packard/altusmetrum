@@ -230,7 +230,7 @@ stencil:	$(PROJECT).lht
 
 clean:
 	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip *.tdx
-	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln
+	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln PCB*save
 	rm -f *.partslist *.unsorted $(PROJECT).xls muffin-5267.pdf muffin-keithp.pdf
 	rm -f partslist-check.dk partslist-dk.csv partslist-mouser.csv partslist-other.csv
 	rm -f $(PROJECT)-sch.ps $(PROJECT)-sch.pdf $(PROJECT)-pcb.ps $(PROJECT)-pcb.pdf
