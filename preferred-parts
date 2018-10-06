@@ -60,6 +60,7 @@ CONNECTOR	SMA	sma-edge	handload	no	73251-2120	mouser	538-73251-2120
 CONNECTOR	Terminal-4	282834-4	throughhole	yes	20067	4ucon	20087
 CONNECTOR	USBcable-0.81m	usbcable	handload	no	88738-8000	mouser	538-88738-8000
 CONNECTOR	USBcable	usbcable	handload	no	88728-3400	mouser	538-88728-3400
+CONNECTOR	USBmicroB	11071	smt	yes	11071	4ucon	11071	reel16mm
 CONNECTOR	USBmicroB	ZX62-B-5PA	smt	no	ZX62-B-5PA(33)	mouser	798-ZX62-B-5PA33	reel16mm
 CONNECTOR	USBmicroB-amp	ZX62-B-5PA	smt	yes	10118192-0002LF-ND	mouser	649-10118192-0002LF
 CONNECTOR	USBmicroB-hirose	ZX62-B-5PA	smt	yes	ZX62-B-5PA(33)	mouser	798-ZX62-B-5PA33
