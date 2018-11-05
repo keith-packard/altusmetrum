@@ -117,6 +117,9 @@ $(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
 	elif [ -f $(PROJECT).group2.gbr -a -f $(PROJECT).group3.gbr ]; then \
 		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
+	elif [ -f $(PROJECT).group5.gbr -a -f $(PROJECT).group7.gbr ]; then \
+		cp $(PROJECT).group5.gbr $(PROJECT).gl2; \
+		cp $(PROJECT).group7.gbr $(PROJECT).gl3; \
 	fi
 	rm -f $@ && zip $@ \
 		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
