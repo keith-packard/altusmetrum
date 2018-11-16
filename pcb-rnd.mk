@@ -59,7 +59,7 @@ pcb:	$(SCHEMATICS) Makefile $(CONFIG)
 		pcb-rnd --gui batch $(PROJECT).lht
 
 $(PROJECT).xy:	$(PROJECT).lht $(CONFIG)
-	pcb-rnd -x bom $(PROJECT).lht
+	pcb-rnd -x XY $(PROJECT).lht
 
 $(PROJECT).bottom.gbr:	$(PROJECT).lht $(CONFIG)
 	pcb-rnd -x gerber $(PROJECT).lht
