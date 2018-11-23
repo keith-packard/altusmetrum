@@ -149,6 +149,9 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc
 	elif [ -f $(PROJECT).group2.gbr -a -f $(PROJECT).group3.gbr ]; then \
 		cp $(PROJECT).group2.gbr internal\ plane\ 1.ger; \
 		cp $(PROJECT).group3.gbr internal\ plane\ 2.ger; \
+	elif [ -f $(PROJECT).group5.gbr -a -f $(PROJECT).group7.gbr ]; then \
+		cp $(PROJECT).group5.gbr internal\ plane\ 1.ger; \
+		cp $(PROJECT).group7.gbr internal\ plane\ 2.ger; \
 	fi
 	rm -f $@ && zip $@ *.ger *.xln
 
@@ -179,6 +182,9 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-
 	elif [ -f $(PROJECT).group2.gbr -a -f $(PROJECT).group3.gbr ]; then \
 		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
+	elif [ -f $(PROJECT).group5.gbr -a -f $(PROJECT).group7.gbr ]; then \
+		cp $(PROJECT).group5.gbr $(PROJECT).gl2; \
+		cp $(PROJECT).group7.gbr $(PROJECT).gl3; \
 	fi
 	rm -f $@ && zip $@ \
 		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
@@ -215,6 +221,9 @@ $(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PRO
 	elif [ -f $(PROJECT).group2.gbr -a -f $(PROJECT).group3.gbr ]; then \
 		cp $(PROJECT).group2.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group3.gbr $(PROJECT).gl3; \
+	elif [ -f $(PROJECT).group5.gbr -a -f $(PROJECT).group7.gbr ]; then \
+		cp $(PROJECT).group5.gbr $(PROJECT).gl2; \
+		cp $(PROJECT).group7.gbr $(PROJECT).gl3; \
 	fi
 	rm -f $@ && zip $@ \
 		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
@@ -242,7 +251,7 @@ clean:
 	rm -f $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3
 	rm -f $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 	rm -f $(PROJECT)-goldphoenix.zip $(PROJECT)-goldphoenix.csv
-	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf
+	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf $(PROJECT)-bom.csv
 
 muffins: muffin-6570.pdf muffin-5267.pdf muffin-keithp.pdf
 
