@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Bdale Garbee <bdale@gag.com>, GPLv3+
+ * Copyright © 2018 Bdale Garbee <bdale@gag.com>, GPLv3+
  */
 
 load "footprint.5c"
@@ -7,17 +7,20 @@ import Footprint;
 
 int total_pad = 28;
 real center_gap = 7.20 - 1.75;
+real pad_height = 1.75;
+real pad_width = 0.45;
+real pad_spacing = 0.65;
 
 if (dim(argv) > 1)
 	total_pad = string_to_integer(argv[1]);
 if (dim(argv) > 2)
 	center_gap = string_to_real(argv[2]);
-
-real pad_width = 0.45;
-
-real pad_height = 1.75;
-
-real pad_spacing = 0.65;
+if (dim(argv) > 3)
+	pad_height = string_to_real(argv[3]);
+if (dim(argv) > 4)
+	pad_width = string_to_real(argv[4]);
+if (dim(argv) > 5)
+	pad_spacing = string_to_real(argv[5]);
 
 int num_pad = total_pad / 2;	/* per side */
 

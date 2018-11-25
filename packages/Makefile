@@ -14,7 +14,8 @@ SOIC= \
 	ssop-16.fp \
 	ssop-28.fp \
 	soic-16.fp \
-	soic-24.fp
+	soic-24.fp \
+	hssop-56.fp
 
 FOOTPRINTS= \
 	$(SOIC) \
@@ -153,6 +154,9 @@ ssop-16.fp: ssop.5c
 
 ssop-28.fp: ssop.5c
 	nickle ssop.5c 28 > $@
+
+hssop-56.fp: ssop.5c
+	nickle ssop.5c 56 7.6 1.9 0.4 0.635 > $@
 
 soic-16.fp: soic.5c
 	nickle soic.5c 16 > $@
