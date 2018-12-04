@@ -57,6 +57,7 @@ pcb:	$(SCHEMATICS) Makefile $(CONFIG)
 	lepton-netlist -g tEDAx -o $(PROJECT).tdx $(SCHEMATICS)
 	echo 'LoadTedaxFrom(netlist, $(PROJECT).tdx); SaveTo(Layout)' | \
 		pcb-rnd --gui batch $(PROJECT).lht
+#	echo "Run pcb-rnd and import $(PROJECT).tdx"
 
 $(PROJECT).xy:	$(PROJECT).lht $(CONFIG)
 	pcb-rnd -x XY $(PROJECT).lht
@@ -241,7 +242,7 @@ stencil:	$(PROJECT).lht
 	mv $(PROJECT).toppaste.gbr stencil.gbr
 
 clean:
-	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip *.tdx
+	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip *.tdx *.backup
 	rm -f *.net *.xy *.cmd *.png partslist partslist.csv *.ger *.xln PCB*save
 	rm -f *.partslist *.unsorted $(PROJECT).xls muffin-*.pdf
 	rm -f partslist-check.dk partslist-dk.csv partslist-mouser.csv partslist-other.csv
