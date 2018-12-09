@@ -30,8 +30,8 @@
 ;; --------------------------------------------------------------------------
 
 (use-modules (ice-9 rdelim)
-             (gnetlist backend-getopt)
-             (gnetlist schematic)
+             (netlist backend-getopt)
+             (netlist schematic)
              (srfi srfi-26))
 
 (define bomAM:open-input-file
