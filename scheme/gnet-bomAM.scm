@@ -59,7 +59,7 @@ filename)
            (begin
              (bomAM:printlist (append attriblist (list "quantity" "refdes")) #\,)
              (newline)
-             (bomAM:printbom (bomAM:components (schematic-packages toplevel-schematic)
+             (bomAM:printbom (bomAM:components (schematic-package-names toplevel-schematic)
                                              attriblist)
                             0))))))
 
