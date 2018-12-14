@@ -65,8 +65,12 @@ pad_mm_space( tab_x, tab_y, tab_width, tab_height, 0, "", "G");
 
 pin_mm_space(-tang_x, tang_y - tang_length / 2, tang_radius * 2, tang_copper, tang_clearance * 2, "GND", "5");
 pin_mm_space(-tang_x, tang_y + tang_length / 2, tang_radius * 2, tang_copper, tang_clearance * 2, "GND", "5");
+pad_mm_space_options(-tang_x, tang_y, tang_radius * 2 + tang_copper * 2, tang_length + tang_radius * 2 + tang_copper * 2, tang_clearance * 2, "GND", "5", "");
+pad_mm_space_options(-tang_x, tang_y, tang_radius * 2 + tang_copper * 2, tang_length + tang_radius * 2 + tang_copper * 2, tang_clearance * 2, "GND", "5", "onsolder");
 
 pin_mm_space( tang_x, tang_y - tang_length / 2, tang_radius * 2, tang_copper, tang_clearance * 2, "GND", "5");
 pin_mm_space( tang_x, tang_y + tang_length / 2, tang_radius * 2, tang_copper, tang_clearance * 2, "GND", "5");
+pad_mm_space_options(tang_x, tang_y, tang_radius * 2 + tang_copper * 2, tang_length + tang_radius * 2 + tang_copper * 2, tang_clearance * 2, "GND", "5", "");
+pad_mm_space_options(tang_x, tang_y, tang_radius * 2 + tang_copper * 2, tang_length + tang_radius * 2 + tang_copper * 2, tang_clearance * 2, "GND", "5", "onsolder");
 
 element_end();
