@@ -234,6 +234,46 @@ $(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PRO
 		$(PROJECT).xy $(PROJECT)-sch.pdf \
 		$(PROJECT)-goldphoenix.csv
 
+jlcpcb: $(PROJECT)-jlcpcb.zip 
+
+$(PROJECT)-jlcpcb.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
+	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
+	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
+	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
+		cp $(PROJECT).bottomsilk.gbr $(PROJECT).gbo; \
+	fi
+	if [ -f $(PROJECT).bottompaste.gbr ]; then \
+		cp $(PROJECT).bottompaste.gbr $(PROJECT).gbp; \
+	fi
+	if [ -f $(PROJECT).topsilk.gbr ]; then \
+		cp $(PROJECT).topsilk.gbr $(PROJECT).gto; \
+	fi
+	if [ -f $(PROJECT).toppaste.gbr ]; then \
+		cp $(PROJECT).toppaste.gbr $(PROJECT).gtp; \
+	fi
+	cp $(PROJECT).outline.gbr $(PROJECT).gko
+	cp $(PROJECT).top.gbr $(PROJECT).gtl
+	cp $(PROJECT).topmask.gbr $(PROJECT).gts
+	cp $(PROJECT).plated-drill.cnc $(PROJECT).xln
+	if [ -f $(PROJECT).unplated-drill.cnc ]; then \
+		cp $(PROJECT).unplated-drill.cnc $(PROJECT).drd; \
+	fi
+	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
+		cp $(PROJECT).group1.gbr $(PROJECT).g2l; \
+		cp $(PROJECT).group2.gbr $(PROJECT).g3l; \
+	elif [ -f $(PROJECT).group2.gbr -a -f $(PROJECT).group3.gbr ]; then \
+		cp $(PROJECT).group2.gbr $(PROJECT).g2l; \
+		cp $(PROJECT).group3.gbr $(PROJECT).g3l; \
+	elif [ -f $(PROJECT).group5.gbr -a -f $(PROJECT).group7.gbr ]; then \
+		cp $(PROJECT).group5.gbr $(PROJECT).g2l; \
+		cp $(PROJECT).group7.gbr $(PROJECT).g3l; \
+	fi
+	rm -f $@ && zip $@ \
+		$(PROJECT).gtl $(PROJECT).gts $(PROJECT).gto $(PROJECT).gtp \
+		$(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp \
+		$(PROJECT).gko $(PROJECT).xln $(PROJECT).drd \
+		$(PROJECT).g2l $(PROJECT).g3l 
+
 stencilsunlimited:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 	rm -f $(PROJECT)-stencil.zip && zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
 
@@ -250,6 +290,7 @@ clean:
 	rm -f $(PROJECT).gbl $(PROJECT).gbs $(PROJECT).gbo $(PROJECT).gbp $(PROJECT).ncd
 	rm -f $(PROJECT).gto $(PROJECT).gtp $(PROJECT).gml $(PROJECT).gtl $(PROJECT).gts
 	rm -f $(PROJECT).txt $(PROJECT).gl2 $(PROJECT).gl3
+	rm -f $(PROJECT).drd $(PROJECT).g2l $(PROJECT).g3l $(PROJECT).gko 
 	rm -f $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 	rm -f $(PROJECT)-goldphoenix.zip $(PROJECT)-goldphoenix.csv
 	rm -f $(PROJECT)*.ps $(PROJECT)*.pdf $(PROJECT)-bom.csv
