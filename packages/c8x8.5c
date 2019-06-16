@@ -1,0 +1,42 @@
+/*
+ * Copyright © 2019 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ */
+
+load "footprint.5c"
+import Footprint;
+element_args();
+
+/* from the data sheet */
+
+real pad_sep = 3.1;	/* a */
+real pad_width = 4.0;	/* b */
+real pad_height = 2.0;	/* C */
+
+real pad_space = pad_sep + pad_width;
+
+element_start("l8x8");
+
+pad_mm(-pad_space/2, 0, pad_width, pad_height, "1", "1");
+pad_mm( pad_space/2, 0, pad_width, pad_height, "2", "2");
+
+arc(0, 0, 8.3/2, 8.3/2, 0, 360);
+
+real mark_x = -pad_space / 2 - pad_width / 2;
+real mark_y = -pad_height;
+real mark_width = pad_height;
+real mark_height = pad_height;
+
+line(mark_x - mark_width / 2, mark_y, mark_x + mark_width / 2, mark_y);
+line(mark_x, mark_y - mark_height / 2, mark_x, mark_y + mark_height/2);
+
+element_end();

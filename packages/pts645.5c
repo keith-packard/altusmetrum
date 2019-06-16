@@ -1,0 +1,41 @@
+/*
+ * Copyright © 2019 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+element_args();
+
+/* from the data sheet */
+real outside_width = 9.5;
+real inside_width = 6.4;
+real outside_height = 5.8;
+real inside_height = 3.2;
+
+/* computed */
+real pad_width = (outside_width - inside_width) / 2;
+real pad_height = (outside_height - inside_height) / 2;
+
+real pad_x_off = (outside_width + inside_width) / 4;
+real pad_y_off = (outside_height + inside_height) / 4;
+
+element_start("PTS645");
+
+pad_mm(-pad_x_off, -pad_y_off, pad_width, pad_height, "1", "1");
+pad_mm( pad_x_off, -pad_y_off, pad_width, pad_height, "1", "1");
+
+pad_mm(-pad_x_off,  pad_y_off, pad_width, pad_height, "2", "2");
+pad_mm( pad_x_off,  pad_y_off, pad_width, pad_height, "2", "2");
+
+element_end();

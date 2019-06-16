@@ -1,0 +1,60 @@
+/*
+ * Copyright © 2013 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "../footprint.5c";
+import Footprint;
+
+real pin_spacing = 0.1 * 25.4;
+real pin_hole = 0.038 * 25.4;
+real pin_copper = 0.4;
+
+element_args();
+
+int rows = atoi(argv[1]);
+int cols = 1;
+if (dim(argv) > 2)
+	cols = atoi(argv[2]);
+
+if (rows < 2) {
+	File::fprintf (stderr, "must have at least two rows\n");
+	exit(1);
+}
+
+int pins = rows * cols;
+
+element_start(sprintf ("100mil%dx%d", rows, cols));
+
+real col_off = (cols-1) * pin_spacing / 2.0;
+real row_off = (rows-1) * pin_spacing / 2.0;
+
+rect(-rows * pin_spacing / 2.0, -cols * pin_spacing / 2.0, rows * pin_spacing, cols * pin_spacing);
+
+for (int row = 0; row < rows; row++)
+	for (int col = 0; col < cols; col++) {
+		int pin = row * cols + col;
+		pin_mm_options(row * pin_spacing - row_off, col_off - col * pin_spacing, pin_hole, pin_copper,
+		       sprintf ("%d", pin + 1),
+		       sprintf ("%d", pin + 1),
+		       pin == 0 ? "square" : "");
+	}
+
+
+
+element_end();
+
+
+

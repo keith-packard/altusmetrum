@@ -3,6 +3,8 @@ FOOTPRINTS = \
 	50mil5pin.fp \
 	50mil6pin.fp \
 	50mil7pin.fp \
+	100mil8x3.fp \
+	100mil4x2.fp \
 	2mm2pin.fp
 
 all: $(FOOTPRINTS) .gitignore
@@ -24,6 +26,12 @@ all: $(FOOTPRINTS) .gitignore
 
 2mm2pin.fp: 2mmpitch.5c
 	nickle 2mmpitch.5c -o $@ 2
+
+100mil8x3.fp: 100mil.5c
+	nickle 100mil.5c -o $@ 8 3
+
+100mil4x2.fp: 100mil.5c
+	nickle 100mil.5c -o $@ 4 2
 
 clean:
 	rm -f $(FOOTPRINTS)

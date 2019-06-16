@@ -1,0 +1,45 @@
+/*
+ * Copyright © 2019 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ */
+
+load "footprint.5c"
+import Footprint;
+element_args();
+
+/* from the data sheet */
+
+real pad_x_edge = 5.4;	/* outside edge to outside edge */
+real pad_y_edge = 4.2;	/* outside edge to outside edge */
+real pad_width = 1.5;
+real pad_height = 1.5;
+
+real pad_x_space = pad_x_edge - pad_width;
+real pad_y_space = pad_y_edge - pad_height;
+
+real pad_x_off = pad_x_space / 2.0;
+real pad_y_off = pad_y_space / 2.0;
+
+real line_off = pad_width * 2/3;
+
+element_start("sk6812");
+
+pad_mm(pad_x_off, pad_y_off, pad_width, pad_height, "1", "1");
+pad_mm(pad_x_off, -pad_y_off, pad_width, pad_height, "2", "2");
+
+pad_mm(-pad_x_off, -pad_y_off, pad_width, pad_height, "3", "3");
+pad_mm(-pad_x_off, pad_y_off, pad_width, pad_height, "4", "4");
+
+line(pad_x_off + line_off, pad_y_off + line_off,
+     pad_x_off + line_off, pad_y_off + line_off);
+
+element_end();

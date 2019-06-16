@@ -1,0 +1,51 @@
+/*
+ * Copyright © 2019 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+element_args();
+
+/* from the datasheet */
+real pad_x_space = 1.270;	/* C */
+real pad_width = 0.802;		/* X */
+real gnd_width = 3.502;		/* X1 */
+real footprint_width = 4.612;	/* X2 */
+real pad_height = 1.505;	/* Y */
+real gnd_height = 2.613;	/* Y1 */
+real footprint_height = 6.500;	/* Y2 */
+
+/* computed */
+
+int x_pads = 4;
+
+real pad_y_space = footprint_height - pad_height;
+real pad_y_off = pad_y_space / 2.0;
+real pad_x_off = (x_pads - 1) / 2 * pad_x_space;
+
+element_start("so-8ep");
+
+pad_mm(0, 0, gnd_width, gnd_height, "PAD", "PAD");
+
+for (int i = 0; i < x_pads; i++) {
+	int pad_low = i + 1;
+	int pad_high = x_pads * 2 - i;
+	string pad_low_name = sprintf("%d", pad_low);
+	string pad_high_name = sprintf("%d", pad_high);
+	pad_mm(-pad_x_off + i * pad_x_space, pad_y_off, pad_width, pad_height, pad_low_name, pad_low_name);
+	pad_mm(-pad_x_off + i * pad_x_space, -pad_y_off, pad_width, pad_height, pad_high_name, pad_high_name);
+}
+
+
+element_end();
