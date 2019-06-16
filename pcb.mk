@@ -140,6 +140,12 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc
 	cp $(PROJECT).top.gbr top\ layer.ger
 	cp $(PROJECT).topmask.gbr top\ solder\ mask.ger
 	cp $(PROJECT).all-drill.cnc drills.xln
+	if [ -f $(PROJECT).toppaste.gbr ]; then \
+		cp $(PROJECT).toppaste.gbr top\ paste.ger; \
+	fi
+	if [ -f $(PROJECT).bottompaste.gbr ]; then \
+		cp $(PROJECT).bottompaste.gbr bottom\ paste.ger; \
+	fi
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr internal\ plane\ 1.ger; \
 		cp $(PROJECT).group2.gbr internal\ plane\ 2.ger; \
