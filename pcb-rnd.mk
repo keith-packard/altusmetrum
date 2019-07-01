@@ -59,13 +59,29 @@ pcb:	$(SCHEMATICS) Makefile $(CONFIG)
 		pcb-rnd --gui batch $(PROJECT).lht
 #	echo "Run pcb-rnd and import $(PROJECT).tdx"
 
+TOPCOPPER=$(PROJECT).top.copper.none.*.gbr
+TOPSILK=$(PROJECT).top.silk.none.*.gbr
+TOPPASTE=$(PROJECT).top.paste.none.*.gbr
+TOPMASK=$(PROJECT).top.mask.none.*.gbr
+
+BOTTOMCOPPER=$(PROJECT).bottom.copper.none.*.gbr
+BOTTOMSILK=$(PROJECT).bottom.silk.none.*.gbr
+BOTTOMPASTE=$(PROJECT).bottom.paste.none.*.gbr
+BOTTOMMASK=$(PROJECT).bottom.mask.none.*.gbr
+
+UDRILL=$(PROJECT).global.virtual.udrill.none.cnc
+PDRILL=$(PROJECT).global.virtual.pdrill.none.cnc
+DRILL=$(PROJECT).global.virtual.drill.none.cnc
+
+OUTLINE=$(PROJECT).global.boundary.uroute.*.gbr
+
 $(PROJECT).xy:	$(PROJECT).lht $(CONFIG)
 	pcb-rnd -x XY $(PROJECT).lht
 
-$(PROJECT).bottom.gbr:	$(PROJECT).lht $(CONFIG)
+$(BOTTOMCOPPER):	$(PROJECT).lht $(CONFIG)
 	pcb-rnd -x gerber $(PROJECT).lht
 	@case "$(SILK)" in \
-	none) 	rm -f $(PROJECT).topsilk.gbr $(PROJECT).bottom.gbr; \
+	none) 	rm -f $(PROJECT).topsilk.gbr $(BOTTOMCOPPER); \
 		;; \
 	top) 	rm -f $(PROJECT).bottomsilk.gbr; \
 		;; \
@@ -77,12 +93,12 @@ $(PROJECT).bottom.gbr:	$(PROJECT).lht $(CONFIG)
 		;; \
 	esac
 
-$(PROJECT).all-drill.cnc: $(PROJECT).bottom.gbr
-	gerbv -x drill -o $(PROJECT).all-drill.cnc $(PROJECT).plated-drill.cnc $(PROJECT).unplated-drill.cnc
+$(DRILL): $(BOTTOMCOPPER)
+	gerbv -x drill -o $(DRILL) $(UDRILL) $(PDRILL)
 
 zip: $(PROJECT).zip
 
-$(PROJECT).zip: $(PROJECT).bottom.gbr $(PROJECT).xy Makefile
+$(PROJECT).zip: $(BOTTOMCOPPER) $(PROJECT).xy Makefile
 	rm -f $@ && zip $@ $(PROJECT).*.gbr $(PROJECT).*.cnc $(PROJECT).xy # $(PROJECT).xls
 
 ac: $(PROJECT)-ac.zip $(PROJECT)-bom.csv
@@ -90,27 +106,27 @@ ac: $(PROJECT)-ac.zip $(PROJECT)-bom.csv
 $(PROJECT)-bom.csv: partslist.csv
 	cp partslist.csv $@
 
-$(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
-	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
-	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
-	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
-		cp $(PROJECT).bottomsilk.gbr $(PROJECT).gbo; \
+$(PROJECT)-ac.zip:  $(BOTTOMCOPPER) $(PROJECT).xy
+	cp $(BOTTOMCOPPER) $(PROJECT).gbl
+	cp $(BOTTOMMASK) $(PROJECT).gbs
+	if [ -f $(BOTTOMSILK) ]; then \
+		cp $(BOTTOMSILK) $(PROJECT).gbo; \
 	fi
-	if [ -f $(PROJECT).bottompaste.gbr ]; then \
-		cp $(PROJECT).bottompaste.gbr $(PROJECT).gbp; \
+	if [ -f $(BOTTOMPASTE) ]; then \
+		cp $(BOTTOMPASTE) $(PROJECT).gbp; \
 	fi
-	if [ -f $(PROJECT).topsilk.gbr ]; then \
-		cp $(PROJECT).topsilk.gbr $(PROJECT).gto; \
+	if [ -f $(TOPSILK) ]; then \
+		cp $(TOPSILK) $(PROJECT).gto; \
 	fi
-	if [ -f $(PROJECT).toppaste.gbr ]; then \
-		cp $(PROJECT).toppaste.gbr $(PROJECT).gtp; \
+	if [ -f $(TOPPASTE) ]; then \
+		cp $(TOPPASTE) $(PROJECT).gtp; \
 	fi
-	cp $(PROJECT).outline.gbr $(PROJECT).gml
-	cp $(PROJECT).top.gbr $(PROJECT).gtl
-	cp $(PROJECT).topmask.gbr $(PROJECT).gts
-	cp $(PROJECT).plated-drill.cnc $(PROJECT).ncd
-	if [ -f $(PROJECT).unplated-drill.cnc ]; then \
-		cp $(PROJECT).unplated-drill.cnc $(PROJECT).drd; \
+	cp $(OUTLINE) $(PROJECT).gml
+	cp $(TOPCOPPER) $(PROJECT).gtl
+	cp $(TOPMASK) $(PROJECT).gts
+	cp $(PDRILL) $(PROJECT).ncd
+	if [ -f $(UDRILL) ]; then \
+		cp $(UDRILL) $(PROJECT).drd; \
 	fi
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr $(PROJECT).gl2; \
@@ -131,19 +147,19 @@ $(PROJECT)-ac.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
 
 oshpark: $(PROJECT)-oshpark.zip
 
-$(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc 
-	cp $(PROJECT).bottom.gbr bottom\ layer.ger
-	cp $(PROJECT).bottommask.gbr bottom\ solder\ mask.ger
-	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
-		cp $(PROJECT).bottomsilk.gbr bottom\ silk\ screen.ger; \
+$(PROJECT)-oshpark.zip: $(BOTTOMCOPPER) $(DRILL) 
+	cp $(BOTTOMCOPPER) bottom\ layer.ger
+	cp $(BOTTOMMASK) bottom\ solder\ mask.ger
+	if [ -f $(BOTTOMSILK) ]; then \
+		cp $(BOTTOMSILK) bottom\ silk\ screen.ger; \
 	fi
-	if [ -f $(PROJECT).topsilk.gbr ]; then \
-		cp $(PROJECT).topsilk.gbr top\ silk\ screen.ger; \
+	if [ -f $(TOPSILK) ]; then \
+		cp $(TOPSILK) top\ silk\ screen.ger; \
 	fi
-	cp $(PROJECT).outline.gbr board\ outline.ger
-	cp $(PROJECT).top.gbr top\ layer.ger
-	cp $(PROJECT).topmask.gbr top\ solder\ mask.ger
-	cp $(PROJECT).all-drill.cnc drills.xln
+	cp $(OUTLINE) board\ outline.ger
+	cp $(TOPCOPPER) top\ layer.ger
+	cp $(TOPMASK) top\ solder\ mask.ger
+	cp $(DRILL) drills.xln
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr internal\ plane\ 1.ger; \
 		cp $(PROJECT).group2.gbr internal\ plane\ 2.ger; \
@@ -158,25 +174,25 @@ $(PROJECT)-oshpark.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc
 
 seeed: $(PROJECT)-seeed.zip $(PROJECT)-seeed.csv
 
-$(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf $(PROJECT).xy $(SEEED_EXTRA)
-	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
-	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
-	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
-		cp $(PROJECT).bottomsilk.gbr $(PROJECT).gbo; \
+$(PROJECT)-seeed.zip: $(BOTTOMCOPPER) $(DRILL) $(PROJECT)-sch.pdf $(PROJECT).xy $(SEEED_EXTRA)
+	cp $(BOTTOMCOPPER) $(PROJECT).gbl
+	cp $(BOTTOMMASK) $(PROJECT).gbs
+	if [ -f $(BOTTOMSILK) ]; then \
+		cp $(BOTTOMSILK) $(PROJECT).gbo; \
 	fi
-	if [ -f $(PROJECT).bottompaste.gbr ]; then \
-		cp $(PROJECT).bottompaste.gbr $(PROJECT).gbp; \
+	if [ -f $(BOTTOMPASTE) ]; then \
+		cp $(BOTTOMPASTE) $(PROJECT).gbp; \
 	fi
-	if [ -f $(PROJECT).topsilk.gbr ]; then \
-		cp $(PROJECT).topsilk.gbr $(PROJECT).gto; \
+	if [ -f $(TOPSILK) ]; then \
+		cp $(TOPSILK) $(PROJECT).gto; \
 	fi
-	if [ -f $(PROJECT).toppaste.gbr ]; then \
-		cp $(PROJECT).toppaste.gbr $(PROJECT).gtp; \
+	if [ -f $(TOPPASTE) ]; then \
+		cp $(TOPPASTE) $(PROJECT).gtp; \
 	fi
-	cp $(PROJECT).outline.gbr $(PROJECT).gml
-	cp $(PROJECT).top.gbr $(PROJECT).gtl
-	cp $(PROJECT).topmask.gbr $(PROJECT).gts
-	cp $(PROJECT).all-drill.cnc $(PROJECT).txt
+	cp $(OUTLINE) $(PROJECT).gml
+	cp $(TOPCOPPER) $(PROJECT).gtl
+	cp $(TOPMASK) $(PROJECT).gts
+	cp $(DRILL) $(PROJECT).txt
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group2.gbr $(PROJECT).gl3; \
@@ -197,25 +213,25 @@ $(PROJECT)-seeed.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-
 
 goldphoenix: $(PROJECT)-goldphoenix.zip
 
-$(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PROJECT)-sch.pdf $(PROJECT).xy $(PROJECT)-goldphoenix.csv
-	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
-	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
-	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
-		cp $(PROJECT).bottomsilk.gbr $(PROJECT).gbo; \
+$(PROJECT)-goldphoenix.zip: $(BOTTOMCOPPER) $(DRILL) $(PROJECT)-sch.pdf $(PROJECT).xy $(PROJECT)-goldphoenix.csv
+	cp $(BOTTOMCOPPER) $(PROJECT).gbl
+	cp $(BOTTOMMASK) $(PROJECT).gbs
+	if [ -f $(BOTTOMSILK) ]; then \
+		cp $(BOTTOMSILK) $(PROJECT).gbo; \
 	fi
-	if [ -f $(PROJECT).bottompaste.gbr ]; then \
-		cp $(PROJECT).bottompaste.gbr $(PROJECT).gbp; \
+	if [ -f $(BOTTOMPASTE) ]; then \
+		cp $(BOTTOMPASTE) $(PROJECT).gbp; \
 	fi
-	if [ -f $(PROJECT).topsilk.gbr ]; then \
-		cp $(PROJECT).topsilk.gbr $(PROJECT).gto; \
+	if [ -f $(TOPSILK) ]; then \
+		cp $(TOPSILK) $(PROJECT).gto; \
 	fi
-	if [ -f $(PROJECT).toppaste.gbr ]; then \
-		cp $(PROJECT).toppaste.gbr $(PROJECT).gtp; \
+	if [ -f $(TOPPASTE) ]; then \
+		cp $(TOPPASTE) $(PROJECT).gtp; \
 	fi
-	cp $(PROJECT).outline.gbr $(PROJECT).gml
-	cp $(PROJECT).top.gbr $(PROJECT).gtl
-	cp $(PROJECT).topmask.gbr $(PROJECT).gts
-	cp $(PROJECT).all-drill.cnc $(PROJECT).txt
+	cp $(OUTLINE) $(PROJECT).gml
+	cp $(TOPCOPPER) $(PROJECT).gtl
+	cp $(TOPMASK) $(PROJECT).gts
+	cp $(DRILL) $(PROJECT).txt
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr $(PROJECT).gl2; \
 		cp $(PROJECT).group2.gbr $(PROJECT).gl3; \
@@ -236,27 +252,27 @@ $(PROJECT)-goldphoenix.zip: $(PROJECT).bottom.gbr $(PROJECT).all-drill.cnc $(PRO
 
 jlcpcb: $(PROJECT)-jlcpcb.zip 
 
-$(PROJECT)-jlcpcb.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
-	cp $(PROJECT).bottom.gbr $(PROJECT).gbl
-	cp $(PROJECT).bottommask.gbr $(PROJECT).gbs
-	if [ -f $(PROJECT).bottomsilk.gbr ]; then \
-		cp $(PROJECT).bottomsilk.gbr $(PROJECT).gbo; \
+$(PROJECT)-jlcpcb.zip:  $(BOTTOMCOPPER) $(PROJECT).xy
+	cp $(BOTTOMCOPPER) $(PROJECT).gbl
+	cp $(BOTTOMMASK) $(PROJECT).gbs
+	if [ -f $(BOTTOMSILK) ]; then \
+		cp $(BOTTOMSILK) $(PROJECT).gbo; \
 	fi
-	if [ -f $(PROJECT).bottompaste.gbr ]; then \
-		cp $(PROJECT).bottompaste.gbr $(PROJECT).gbp; \
+	if [ -f $(BOTTOMPASTE) ]; then \
+		cp $(BOTTOMPASTE) $(PROJECT).gbp; \
 	fi
-	if [ -f $(PROJECT).topsilk.gbr ]; then \
-		cp $(PROJECT).topsilk.gbr $(PROJECT).gto; \
+	if [ -f $(TOPSILK) ]; then \
+		cp $(TOPSILK) $(PROJECT).gto; \
 	fi
 	if [ -f $(PROJECT).toppaste.gbr ]; then \
 		cp $(PROJECT).toppaste.gbr $(PROJECT).gtp; \
 	fi
-	cp $(PROJECT).outline.gbr $(PROJECT).gko
-	cp $(PROJECT).top.gbr $(PROJECT).gtl
+	cp $(OUTLINE) $(PROJECT).gko
+	cp $(TOPCOPPER) $(PROJECT).gtl
 	cp $(PROJECT).topmask.gbr $(PROJECT).gts
 	cp $(PROJECT).plated-drill.cnc $(PROJECT).xln
-	if [ -f $(PROJECT).unplated-drill.cnc ]; then \
-		cp $(PROJECT).unplated-drill.cnc $(PROJECT).drd; \
+	if [ -f $(UDRILL) ]; then \
+		cp $(UDRILL) $(PROJECT).drd; \
 	fi
 	if [ -f $(PROJECT).group1.gbr -a -f $(PROJECT).group2.gbr ]; then \
 		cp $(PROJECT).group1.gbr $(PROJECT).g2l; \
@@ -274,12 +290,12 @@ $(PROJECT)-jlcpcb.zip:  $(PROJECT).bottom.gbr $(PROJECT).xy
 		$(PROJECT).gko $(PROJECT).xln $(PROJECT).drd \
 		$(PROJECT).g2l $(PROJECT).g3l 
 
-stencilsunlimited:	$(PROJECT).bottom.gbr $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
-	rm -f $(PROJECT)-stencil.zip && zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(PROJECT).outline.gbr
+stencilsunlimited:	$(BOTTOMCOPPER) $(PROJECT).toppaste.gbr $(OUTLINE)
+	rm -f $(PROJECT)-stencil.zip && zip $(PROJECT)-stencil.zip $(PROJECT).toppaste.gbr $(OUTLINE)
 
 stencil:	$(PROJECT).lht
-	pcb-rnd -x gerber -c design/paste_adjust=-3mil $(PROJECT).lht
-	mv $(PROJECT).toppaste.gbr stencil.gbr
+	pcb-rnd -x gerber -c design/paste_adjust=-10mil $(PROJECT).lht
+	mv $(PROJECT).top.paste.none.0.gbr stencil.gbr
 
 clean:
 	rm -f *.bom *.drc *.log *~ $(PROJECT).ps *.gbr *.cnc *bak* *- *.zip *.tdx *.backup
