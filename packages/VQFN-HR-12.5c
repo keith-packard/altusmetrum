@@ -1,0 +1,112 @@
+/*
+ * Copyright © 2019 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+real small_pad_width = 0.2;
+real small_pad_height = 0.6;
+real small_pad_x_sep = 0.5;
+real small_pad_center_distance = 2.3;
+real small_pad_y_off = small_pad_center_distance / 2;
+
+real large_pad_width = 1.05;
+real large_pad_height = 0.4;
+real large_pad_x_sep = 1.35;
+real large_pad_y_sep = 0.7;
+
+real package_width = 2.0;
+real package_height = 2.5;
+
+real num_pad = 4;	/* per side */
+
+element_start("VQFN-HR-12");
+
+real corner(int dx, int dy) {
+	real	x = dx * package_width / 2;
+	real	y = dy * package_height / 2;
+	real	len = 0.4;
+
+	line(x, y, x - dx * len, y);
+	line(x, y, x, y - dy * len);
+}
+
+corner(-1, -1);
+corner(1, -1);
+corner(-1, 1);
+corner(1, 1);
+
+real dot_off = .3;
+
+line(-package_width/2 - dot_off, -package_height/2 - dot_off,
+     -package_width/2 - dot_off, -package_height/2 - dot_off);
+
+/* small pads */
+real small_x(int x)
+{
+	return -1.5 * small_pad_x_sep + x * small_pad_x_sep;
+}
+
+real small_y(int y)
+{
+	return -small_pad_y_off + y * 2 * small_pad_y_off;
+}
+
+for (int y = 0; y < 2; y++) {
+	for (int x = 0; x < 4; x++) {
+		int pad;
+		if (y > 0)
+			pad = 3 + x;
+		else
+			pad = 12 - x;
+		string name = sprintf("%d", pad);
+		pad_mm(small_x(x), small_y(y),
+		       small_pad_width,
+		       small_pad_height,
+		       name,
+		       name);
+	}
+}
+
+/* large pads */
+real large_x(int x)
+{
+	return -large_pad_x_sep / 2 + large_pad_x_sep * x;
+}
+
+real large_y(int y)
+{
+	return -large_pad_y_sep / 2 + large_pad_y_sep * y;
+}
+
+for (int y = 0; y < 2; y++) {
+	for (x = 0; x < 2; x++) {
+		int pad;
+		if (x > 0)
+			pad = 8 - y;
+		else
+			pad = 1 + y;
+		string name = sprintf("%d", pad);
+		pad_mm(large_x(x), large_y(y),
+		       large_pad_width,
+		       large_pad_height,
+		       name,
+		       name);
+	}
+}
+
+element_end();

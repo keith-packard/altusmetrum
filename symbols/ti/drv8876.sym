@@ -1,0 +1,225 @@
+v 20130925 2
+T 2800 1870 3 7 0 0 0 0 1
+numslots=0
+T 0 220 3 7 0 0 0 0 1
+RefDes=RefDes
+T 0 330 3 7 0 0 0 0 1
+Type=Type
+T 0 440 3 7 0 0 0 0 1
+Value=Value
+T 0 550 3 7 0 0 0 0 1
+footprint=RGT16_1P7X1P7
+T 0 660 3 7 0 0 0 0 1
+refdes=U?
+T 0 770 3 7 0 0 0 0 1
+Manufacturer=Texas Instruments
+T 0 880 3 7 0 0 0 0 1
+Datasheet URL=http://www.ti.com/lit/gpn/DRV612
+T 0 990 3 7 0 0 0 0 1
+INDUSTRY_STD_PKG_TYPE=QFN
+T 0 1100 3 7 0 0 0 0 1
+FAMILY_NAME=2V/3VRMS LINE DRIVER
+T 0 1210 3 7 0 0 0 0 1
+PIN_COUNT=16
+T 0 1320 3 7 0 0 0 0 1
+PACKAGE_DESIGNATOR=RGT
+T 0 1430 3 7 0 0 0 0 1
+DESCRIPTION=DirectPath 2Vrms Line Driver With Programmable Fixed Gain
+T 0 1540 3 7 0 0 0 0 1
+GENERIC_PART_NUMBER=DRV612
+T 0 1650 3 7 0 0 0 0 1
+Vendor=Texas Instruments
+T 0 1760 3 7 0 0 0 0 1
+Manufacturer_Part_Number=drv612_rgt_16
+B 300 300 2200 2900 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+P 0 900 300 900 1 0 0
+{
+T 0 900 5 10 0 0 0 0 1
+pintype=unknown
+T 355 895 5 10 1 1 0 0 1
+pinlabel=IPROPI
+T 205 945 5 10 1 1 0 6 1
+pinnumber=4
+T 0 900 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1000 0 1000 300 1 0 0
+{
+T 1000 0 5 10 0 0 0 0 1
+pintype=unknown
+T 1000 355 5 10 1 1 90 0 1
+pinlabel=PAD
+T 950 205 5 10 1 1 90 6 1
+pinnumber=17
+T 1000 0 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1400 0 1400 300 1 0 0
+{
+T 1400 0 5 10 0 0 0 0 1
+pintype=unknown
+T 1400 355 5 10 1 1 90 0 1
+pinlabel=GND
+T 1350 205 5 10 1 1 90 6 1
+pinnumber=13
+T 1400 0 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1800 0 1800 300 1 0 0
+{
+T 1800 0 5 10 0 0 0 0 1
+pintype=unknown
+T 1800 355 5 10 1 1 90 0 1
+pinlabel=PGND
+T 1750 205 5 10 1 1 90 6 1
+pinnumber=7
+T 1800 0 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1000 3500 1000 3200 1 0 0
+{
+T 1000 3500 5 10 0 0 0 0 1
+pintype=unknown
+T 1000 3145 5 10 1 1 90 6 1
+pinlabel=CPH
+T 950 3295 5 10 1 1 90 0 1
+pinnumber=11
+T 1000 3500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1400 3500 1400 3200 1 0 0
+{
+T 1400 3500 5 10 0 0 0 0 1
+pintype=unknown
+T 1400 3145 5 10 1 1 90 6 1
+pinlabel=CPL
+T 1350 3295 5 10 1 1 90 0 1
+pinnumber=12
+T 1400 3500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 1800 3500 1800 3200 1 0 0
+{
+T 1800 3500 5 10 0 0 0 0 1
+pintype=unknown
+T 1800 3145 5 10 1 1 90 6 1
+pinlabel=VCP
+T 1750 3295 5 10 1 1 90 0 1
+pinnumber=10
+T 1800 3500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2200 3500 2200 3200 1 0 0
+{
+T 2200 3500 5 10 0 0 0 0 1
+pintype=unknown
+T 2200 3145 5 10 1 1 90 6 1
+pinlabel=VM
+T 2150 3295 5 10 1 1 90 0 1
+pinnumber=9
+T 2200 3500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2800 2100 2500 2100 1 0 0
+{
+T 2800 2100 5 10 0 0 0 0 1
+pintype=unknown
+T 2445 2095 5 10 1 1 0 6 1
+pinlabel=OUT1
+T 2595 2145 5 10 1 1 0 0 1
+pinnumber=6
+T 2800 2100 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2800 1700 2500 1700 1 0 0
+{
+T 2800 1700 5 10 0 0 0 0 1
+pintype=unknown
+T 2445 1695 5 10 1 1 0 6 1
+pinlabel=OUT2
+T 2595 1745 5 10 1 1 0 0 1
+pinnumber=8
+T 2800 1700 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 1700 300 1700 1 0 0
+{
+T 0 1700 5 10 0 0 0 0 1
+pintype=unknown
+T 355 1695 5 10 1 1 0 0 1
+pinlabel=PH/IN2
+T 205 1745 5 10 1 1 0 6 1
+pinnumber=16
+T 0 1700 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 2100 300 2100 1 0 0
+{
+T 0 2100 5 10 0 0 0 0 1
+pintype=unknown
+T 355 2095 5 10 1 1 0 0 1
+pinlabel=EN/IN1
+T 205 2145 5 10 1 1 0 6 1
+pinnumber=15
+T 0 2100 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 1300 300 1300 1 0 0
+{
+T 0 1300 5 10 0 0 0 0 1
+pintype=unknown
+T 355 1295 5 10 1 1 0 0 1
+pinlabel=nFAULT
+T 205 1345 5 10 1 1 0 6 1
+pinnumber=2
+T 0 1300 5 10 0 0 0 0 1
+pinseq=0
+}
+P 0 2500 300 2500 1 0 0
+{
+T 0 2500 5 10 0 0 0 0 1
+pintype=unknown
+T 355 2495 5 10 1 1 0 0 1
+pinlabel=nSLEEP
+T 205 2545 5 10 1 1 0 6 1
+pinnumber=1
+T 0 2500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 600 3500 600 3200 1 0 0
+{
+T 600 3500 5 10 0 0 0 0 1
+pintype=unknown
+T 600 3145 5 10 1 1 90 6 1
+pinlabel=VREF
+T 550 3295 5 10 1 1 90 0 1
+pinnumber=3
+T 600 3500 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2800 1300 2500 1300 1 0 0
+{
+T 2800 1300 5 10 0 0 0 0 1
+pintype=unknown
+T 2445 1295 5 10 1 1 0 6 1
+pinlabel=PMODE
+T 2595 1345 5 10 1 1 0 0 1
+pinnumber=14
+T 2800 1300 5 10 0 0 0 0 1
+pinseq=0
+}
+P 2800 900 2500 900 1 0 0
+{
+T 2800 900 5 10 0 0 0 0 1
+pintype=unknown
+T 2445 895 5 10 1 1 0 6 1
+pinlabel=IMODE
+T 2595 945 5 10 1 1 0 0 1
+pinnumber=5
+T 2800 900 5 10 0 0 0 0 1
+pinseq=0
+}
+T 1000 1900 9 10 1 0 0 0 1
+DRV8876
+T -5 3295 8 10 1 1 0 0 1
+refdes=U?

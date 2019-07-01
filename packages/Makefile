@@ -123,11 +123,14 @@ FOOTPRINTS= \
 	M1040M.fp \
 	pts645.fp \
 	l102.fp \
+	l201.fp \
 	so-8ep.fp \
 	do-214ac.fp \
 	l8x8.fp \
 	c8x8.fp \
-	sk6812.fp
+	sk6812.fp \
+	VQFN-HR-12.fp \
+	wqfn-16.fp
 
 .5c.fp:
 	nickle $*.5c -o $@

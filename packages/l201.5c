@@ -1,0 +1,50 @@
+/*
+ * Copyright © 2019 Keith Packard <keithp@keithp.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ */
+
+load "footprint.5c"
+import Footprint;
+
+element_args();
+
+/* from the data sheet */
+real hole_size = 1.65;
+real pin_space = 4.60;
+
+/* space between rows on 2-row devices */
+real row_space = 5.71;
+
+real package_height = 10.79;
+real package_width = 19.10;
+
+/* we're guessing that 1-row devices have pins in the
+ * same place as 2-row devices, with nothing in the other
+ * row
+ */
+
+real pin_y_off = row_space / 2;
+
+
+/* made up */
+real copper = 0.75;
+
+element_start("l201");
+
+pin_mm_options(-pin_space, -pin_y_off, hole_size, copper, "1", "1", "square");
+pin_mm        (         0, -pin_y_off, hole_size, copper, "2", "2");
+pin_mm        (-pin_space,  pin_y_off, hole_size, copper, "4", "4");
+pin_mm        (         0,  pin_y_off, hole_size, copper, "5", "5");
+
+rect(-package_width / 2, -package_height / 2, package_width, package_height);
+
+element_end();
